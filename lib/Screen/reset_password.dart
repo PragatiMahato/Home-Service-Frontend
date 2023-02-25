@@ -17,7 +17,7 @@ class _ResetPWScreenState extends State<ResetPWScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: SizedBox(
         width: AppSize.getScreenWidth(context),
         height: AppSize.getScreenHeight(context),
         child: SafeArea(

@@ -33,16 +33,18 @@ class InputContainer extends StatelessWidget {
 class RoundedPasswordInput extends StatelessWidget {
   const RoundedPasswordInput({
     Key? key,
-    required this.hint,  this.icon
+    required this.hint,  this.icon, required this.controller
   }) : super(key: key);
 
   final String hint;
    final IconData? icon;
+   final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
     return InputContainer(
       child: TextField(
+        controller: controller,
         cursorColor: kPrimaryColor,
         obscureText: true,
         decoration: InputDecoration(

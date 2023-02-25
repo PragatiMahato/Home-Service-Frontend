@@ -5,9 +5,15 @@ import '../Constant/app_size.dart';
 import '../CustomWidget/button.dart';
 import 'reset_password.dart';
 
-class VerificationScreen extends StatelessWidget {
+class VerificationScreen extends StatefulWidget {
   const VerificationScreen({super.key});
 
+  @override
+  State<VerificationScreen> createState() => _VerificationScreenState();
+}
+
+class _VerificationScreenState extends State<VerificationScreen> {
+  late final TextEditingController codeController;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,6 +54,7 @@ class VerificationScreen extends StatelessWidget {
                     height: 62,
                     width: 56,
                     child: TextFormField(
+                      controller: codeController,
                       textAlign: TextAlign.center,
                       keyboardType: TextInputType.number,
                       inputFormatters: [
@@ -65,6 +72,7 @@ class VerificationScreen extends StatelessWidget {
                     height: 62,
                     width: 56,
                     child: TextFormField(
+                      controller: codeController,
                       textAlign: TextAlign.center,
                       keyboardType: TextInputType.number,
                       inputFormatters: [
@@ -82,6 +90,7 @@ class VerificationScreen extends StatelessWidget {
                     height: 62,
                     width: 56,
                     child: TextFormField(
+                      controller: codeController,
                       textAlign: TextAlign.center,
                       keyboardType: TextInputType.number,
                       inputFormatters: [
@@ -99,6 +108,7 @@ class VerificationScreen extends StatelessWidget {
                     height: 62,
                     width: 56,
                     child: TextFormField(
+                      controller: codeController,
                       textAlign: TextAlign.center,
                       keyboardType: TextInputType.number,
                       inputFormatters: [
@@ -117,11 +127,14 @@ class VerificationScreen extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              
-              RoundedButton(callback: () { 
-                 Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => (  const ResetPWScreen())));
-               }, title: 'Continue',borderRadius: 10,)
+              RoundedButton(
+                callback: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => (const ResetPWScreen())));
+                },
+                title: 'Continue',
+                borderRadius: 10,
+              )
             ],
           ),
         ),

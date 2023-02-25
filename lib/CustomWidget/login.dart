@@ -1,13 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../Screen/foget_pw.dart';
-import '../Screen/home.dart';
+import '../services/firebase_auth_methods.dart';
 import 'button.dart';
 import 'input_fielda.dart';
 import 'socialmedia_icons.dart';
 
-
-class LoginForm extends StatelessWidget {
+class LoginForm extends StatefulWidget {
   const LoginForm({
     Key? key,
     required this.isLogin,
@@ -22,56 +22,97 @@ class LoginForm extends StatelessWidget {
   final double defaultLoginSize;
 
   @override
+  State<LoginForm> createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<LoginForm> {
+  late final TextEditingController _emailcontroller;
+  late final TextEditingController _passwordcontroller;
+
+  @override
+  void initState() {
+    _emailcontroller = TextEditingController();
+    _passwordcontroller = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _emailcontroller.dispose();
+    _passwordcontroller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return AnimatedOpacity(
-      opacity: isLogin ? 1.0 : 0.0,
-      duration: animationDuration * 4,
+      opacity: widget.isLogin ? 1.0 : 0.0,
+      duration: widget.animationDuration * 4,
       child: Align(
         alignment: Alignment.center,
         child: SizedBox(
-          width: size.width,
-          height: defaultLoginSize,
+          width: widget.size.width,
+          height: widget.defaultLoginSize,
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(height: 10,),
+                const SizedBox(
+                  height: 10,
+                ),
                 const Text(
                   'Welcome Back',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w800,
-                    fontSize: 27
-                  ),
+                  style: TextStyle(fontWeight: FontWeight.w800, fontSize: 27),
                 ),
-
                 const SizedBox(height: 40),
-
                 Image.asset('assets/images/login.png'),
-
                 const SizedBox(height: 70),
-
-                const RoundedPasswordInput(hint: 'Username',icon: Icons.mail,),
-
-                const RoundedPasswordInput(hint: 'Password'),
-                Container(margin: const EdgeInsets.only(left: 165,),
-                  child: TextButton(onPressed: (){
-                    Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => (  ChangePwScreen())));
-                  }, child: const Text("Forget Password?",style: TextStyle(color: Colors.black),)),
+                RoundedPasswordInput(
+                  hint: 'Username',
+                  icon: Icons.mail,
+                  controller: _emailcontroller,
                 ),
-                 const SizedBox(height: 15),
-
-                 RoundedButton(title: 'LOGIN',callback: (){
-                   Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => (const HomePage())));
-                 },),
-const SizedBox(height: 18,),
-const SocialIcons(),
+                RoundedPasswordInput(
+                  hint: 'Password',
+                  controller: _passwordcontroller,
+                ),
+                Container(
+                  margin: const EdgeInsets.only(
+                    left: 165,
+                  ),
+                  child: TextButton(
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => (ChangePwScreen())));
+                      },
+                      child: const Text(
+                        "Forget Password?",
+                        style: TextStyle(color: Colors.black),
+                      )),
+                ),
+                const SizedBox(height: 15),
+                RoundedButton(
+                  title: 'LOGIN',
+                  callback: () {
+                    loginUser();
+                  },
+                ),
+                const SizedBox(
+                  height: 18,
+                ),
+                const SocialIcons(),
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  void loginUser() {
+    FirebaseAuthMethod(FirebaseAuth.instance).loginWithEmail(
+        email: _emailcontroller.text,
+        password: _passwordcontroller.text,
+        context: context);
   }
 }

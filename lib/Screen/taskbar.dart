@@ -145,6 +145,7 @@ class ServicesCard extends StatelessWidget {
   });
   final String name;
   final String count;
+  // ignore: prefer_typing_uninitialized_variables
   final  imageShape;
 
   @override

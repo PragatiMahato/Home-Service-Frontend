@@ -88,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen>
               size: size,
               defaultLoginSize: defaultLoginSize),          
 
-          // Register Container
+          // // Register Container
           AnimatedBuilder(
             animation: animationController!,
             builder: (context, child) {

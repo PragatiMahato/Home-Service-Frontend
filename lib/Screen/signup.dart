@@ -1,6 +1,8 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: avoid_print, unused_local_variable
 
-import 'login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:fyp/services/firebase_auth_methods.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -17,6 +19,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   void initState() {
+    _emailcontroller = TextEditingController();
+    _passwordcontroller = TextEditingController();
     super.initState();
   }
 
@@ -146,9 +150,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           TextButton(
                             onPressed: () {
-                              Navigator.pop(context);
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => (const LoginScreen())));
+                              // Navigator.pop(context);
+                              // Navigator.of(context).push(MaterialPageRoute(
+                              //     builder: (context) => (const LoginScreen())));
+                              // signUpUser();
                             },
                             child: const Text(
                               "Login",
@@ -162,23 +167,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ),
                     TextButton(
-                      onPressed: () async{
-
-//                         try {
-
-//   final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-//     email: _emailcontroller.text,
-//     password: _passwordcontroller.text,
-//   );
-// } on FirebaseAuthException catch (e) {
-//   if (e.code == 'weak-password') {
-//     print('The password provided is too weak.');
-//   } else if (e.code == 'email-already-in-use') {
-//     print('The account already exists for that email.');
-//   }
-// } catch (e) {
-//   print(e);
-// }
+                      onPressed: () async {
+                        signUpUser();
                       },
                       child: const Text(
                         "Sign up",
@@ -196,9 +186,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
         )));
   }
 
-
-  
+  void signUpUser() async {
+    FirebaseAuthMethod(FirebaseAuth.instance).signUpWithEmail(
+        email: _emailcontroller.text,
+        password: _passwordcontroller.text,
+        context: context);
+  }
 }
-
-
-

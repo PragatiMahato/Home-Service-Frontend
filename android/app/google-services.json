@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "856087418354",
+    "project_id": "homeservice-bba23",
+    "storage_bucket": "homeservice-bba23.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:856087418354:android:f60722330612270168476b",
+        "android_client_info": {
+          "package_name": "com.example.fyp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "856087418354-k6iapqkvvtjqoqal82eh3hqjk6pmuhm8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdMgHyEEvU1FFER8GmXrM3yV-MtOGSdc0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "856087418354-k6iapqkvvtjqoqal82eh3hqjk6pmuhm8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "856087418354-9jc878q279t74j472m98a921qrih6vup.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.fyp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
