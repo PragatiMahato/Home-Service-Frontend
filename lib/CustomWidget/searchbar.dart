@@ -12,7 +12,7 @@ class SearchBox extends StatelessWidget {
     return const TextField(
       decoration: InputDecoration(
         hintText: "Search",hintStyle: TextStyle(color: kPrimaryColor),
-        suffixIcon: Icon(Icons.search,color: kPrimaryColor,size: 25,),
+        suffixIcon: Icon(Icons.search,color: kPrimaryColor,size: 20,),
         enabledBorder: InputBorder.none,
         focusedBorder: InputBorder.none
       ),

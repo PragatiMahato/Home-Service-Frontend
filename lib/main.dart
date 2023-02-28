@@ -1,7 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import 'Screen/login.dart';
+import 'Modal/service_modal.dart';
+import 'Screen/profile.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -18,12 +20,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        debugShowCheckedModeBanner: false,
-        home: const LoginScreen());
+    return ChangeNotifierProvider(
+      create: (context) => ServicesNotifier(),
+      child: MaterialApp(
+          title: 'Flutter Demo',
+          themeMode: ThemeMode.system,
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          debugShowCheckedModeBanner: false,
+          home: const ProfileScreen()),
+    );
   }
 }

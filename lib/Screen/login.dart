@@ -7,7 +7,6 @@ import '../CustomWidget/button.dart';
 import '../CustomWidget/login.dart';
 import '../CustomWidget/signup.dart';
 
-
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -86,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen>
               isLogin: isLogin,
               animationDuration: animationDuration,
               size: size,
-              defaultLoginSize: defaultLoginSize),          
+              defaultLoginSize: defaultLoginSize),
 
           // // Register Container
           AnimatedBuilder(
@@ -107,8 +106,6 @@ class _LoginScreenState extends State<LoginScreen>
               animationDuration: animationDuration,
               size: size,
               defaultLoginSize: defaultRegisterSize),
-
-
         ],
       ),
     );

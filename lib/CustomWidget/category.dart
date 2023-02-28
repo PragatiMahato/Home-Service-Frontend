@@ -14,33 +14,31 @@ class Category extends StatelessWidget {
   final String? buttonText;
   @override
   Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 14),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              text,
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w700,
-                color: textColor,
-              ),
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 14),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            text,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w700,
+              color: textColor,
             ),
-            Container(height: 30,decoration: BoxDecoration(color: kPrimaryColor,borderRadius: BorderRadius.circular(13)),
-              child: TextButton(
-                  onPressed: press,
-                  child:  Text(
-                    buttonText!,
-                    style: const TextStyle(
-                        color: backgroundWhite,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600),
-                  )),
-            )
-          ],
-        ),
+          ),
+          Container(height: 30,decoration: BoxDecoration(color: kPrimaryColor,borderRadius: BorderRadius.circular(13)),
+            child: TextButton(
+                onPressed: press,
+                child:  Text(
+                  buttonText!,
+                  style: const TextStyle(
+                      color: backgroundWhite,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600),
+                )),
+          )
+        ],
       ),
     );
   }

@@ -1,19 +1,41 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../Constant/app_size.dart';
 import '../CustomWidget/button.dart';
-import 'verification.dart';
+import '../services/firebase_auth_methods.dart';
 
-class ChangePwScreen extends StatelessWidget {
-  ChangePwScreen({super.key});
-  final TextEditingController emailController = TextEditingController();
+class ChangePwScreen extends StatefulWidget {
+  const ChangePwScreen({super.key});
+
+  @override
+  State<ChangePwScreen> createState() => _ChangePwScreenState();
+}
+
+class _ChangePwScreenState extends State<ChangePwScreen> {
+  late final TextEditingController _emailcontroller;
+
+  @override
+  void initState() {
+    _emailcontroller = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _emailcontroller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        iconTheme: const IconThemeData(),
+      ),
       body: SizedBox(
-        width: AppSize.s10*50,
-        height: AppSize.s30*14,
+        width: AppSize.s10 * 50,
+        height: AppSize.s30 * 14,
         child: SafeArea(
           child: Container(
             padding: const EdgeInsets.symmetric(
@@ -36,7 +58,7 @@ class ChangePwScreen extends StatelessWidget {
                 ),
                 const Spacer(flex: 2),
                 TextFormField(
-                  controller: emailController,
+                  controller: _emailcontroller,
                   decoration: const InputDecoration(
                       hintText: "Email",
                       suffixIcon: Icon(Icons.email_outlined)),
@@ -44,8 +66,7 @@ class ChangePwScreen extends StatelessWidget {
                 const Spacer(),
                 RoundedButton(
                   callback: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => (const VerificationScreen())));
+                    passwordReset();
                   },
                   title: 'Continue',
                   borderRadius: 10,
@@ -57,4 +78,10 @@ class ChangePwScreen extends StatelessWidget {
       ),
     );
   }
+
+  void passwordReset() async{
+   await FirebaseAuthMethod(FirebaseAuth.instance)
+        .resetPassword(email: _emailcontroller.text, context: context);
+  }
+  
 }

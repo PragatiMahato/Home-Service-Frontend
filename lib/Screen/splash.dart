@@ -3,8 +3,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-
-import 'landing.dart';
+import 'package:fyp/Screen/login.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -14,12 +13,11 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   @override
   void initState() {
     Timer(const Duration(seconds: 5), () {
       Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) =>  const LandingScreen(),
+        builder: (context) => const LoginScreen(),
       ));
     });
     super.initState();
@@ -38,7 +36,9 @@ class _SplashScreenState extends State<SplashScreen> {
               )),
           Center(
             child: Container(
-                margin: const EdgeInsets.only(top: 170,),
+                margin: const EdgeInsets.only(
+                  top: 170,
+                ),
                 child: const Text(
                   "Home Care",
                   style: TextStyle(

@@ -24,13 +24,18 @@ class RegisterForm extends StatefulWidget {
 }
 
 class _RegisterFormState extends State<RegisterForm> {
+    final _formkey = GlobalKey<FormState>();
   late final TextEditingController _emailcontroller;
   late final TextEditingController _passwordcontroller;
+  late final TextEditingController _usernamecontroller;
+  late final TextEditingController _callcontroller;
 
   @override
   void initState() {
     _emailcontroller = TextEditingController();
     _passwordcontroller = TextEditingController();
+    _usernamecontroller = TextEditingController();
+    _callcontroller = TextEditingController();
     super.initState();
   }
 
@@ -47,38 +52,53 @@ class _RegisterFormState extends State<RegisterForm> {
             width: widget.size.width,
             height: widget.defaultLoginSize,
             child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(height: 10),
-                  const Text(
-                    'Welcome',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-                  ),
-                  const SizedBox(height: 40),
-                  Image.asset('assets/images/login.png'),
-                  const SizedBox(height: 40),
-                  // const RoundedPasswordInput(
-                  //   hint: 'Username',
-                  //   icon: Icons.mail,
-                  // ),
-                   RoundedPasswordInput(
-                    hint: 'email',
-                    controller: _emailcontroller,
-                    icon: Icons.person,
-                  ),
-                   RoundedPasswordInput(hint: 'Password',controller: _passwordcontroller,),
-                  // const RoundedPasswordInput(hint: 'Confirm Password'),
-                  const SizedBox(height: 10),
-                  RoundedButton(
-                    title: 'SIGN UP',
-                    callback: () async{
-                      signUpUser();
-                    },
-                  ),
-                  const SizedBox(height: 10),
-                ],
+              child: Form(
+                key: _formkey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(height: 10),
+                    const Text(
+                      'Welcome',
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                    ),
+                    const SizedBox(height: 40),
+                    Image.asset('assets/images/login.png'),
+                    const SizedBox(height: 40),
+                    RoundedInput(
+                      hint: 'Username',
+                      icon: Icons.person,
+                      controller: _usernamecontroller,
+                    ),
+                    RoundedInput(
+                      hint: 'email',
+                      controller: _emailcontroller,
+                      icon: Icons.person,
+                    ),
+                    RoundedInput(
+                      hint: 'phone',
+                      controller: _callcontroller,
+                      icon: Icons.call,
+                    ),
+                    RoundedPasswordInput(
+                      hint: 'Password',
+                      controller: _passwordcontroller,
+                    ),
+                    RoundedPasswordInput(
+                      hint: 'Confirm Password',
+                      controller: _passwordcontroller,
+                    ),
+                    const SizedBox(height: 10),
+                    RoundedButton(
+                      title: 'SIGN UP',
+                      callback: () async {
+                        signUpUser();
+                      },
+                    ),
+                    const SizedBox(height: 10),
+                  ],
+                ),
               ),
             ),
           ),
@@ -87,10 +107,13 @@ class _RegisterFormState extends State<RegisterForm> {
     );
   }
 
-  void signUpUser() async {
+
+  void signUpUser()  {
     FirebaseAuthMethod(FirebaseAuth.instance).signUpWithEmail(
         email: _emailcontroller.text,
         password: _passwordcontroller.text,
-        context: context);
+        context: context, phone: _callcontroller.text,userName: _usernamecontroller.text);
   }
+
 }
+

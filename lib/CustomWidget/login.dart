@@ -5,7 +5,6 @@ import '../Screen/foget_pw.dart';
 import '../services/firebase_auth_methods.dart';
 import 'button.dart';
 import 'input_fielda.dart';
-import 'socialmedia_icons.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({
@@ -67,9 +66,8 @@ class _LoginFormState extends State<LoginForm> {
                 const SizedBox(height: 40),
                 Image.asset('assets/images/login.png'),
                 const SizedBox(height: 70),
-                RoundedPasswordInput(
-                  hint: 'Username',
-                  icon: Icons.mail,
+                RoundedInput(
+                  hint: 'email',
                   controller: _emailcontroller,
                 ),
                 RoundedPasswordInput(
@@ -83,7 +81,7 @@ class _LoginFormState extends State<LoginForm> {
                   child: TextButton(
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => (ChangePwScreen())));
+                            builder: (context) => ( const ChangePwScreen())));
                       },
                       child: const Text(
                         "Forget Password?",
@@ -100,7 +98,7 @@ class _LoginFormState extends State<LoginForm> {
                 const SizedBox(
                   height: 18,
                 ),
-                const SocialIcons(),
+                // const SocialIcons(),
               ],
             ),
           ),

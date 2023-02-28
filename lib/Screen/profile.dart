@@ -70,7 +70,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 picon: Icon(Icons.location_on),
               )
             ],
-          )
+          ),
+          
         ],
       ),
     );
