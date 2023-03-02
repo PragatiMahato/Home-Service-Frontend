@@ -6,7 +6,7 @@ import '../Constant/colors.dart';
 class RoundedButton extends StatelessWidget {
   const RoundedButton({
     Key? key,
-    required this.title, required this.callback, this.bgcolor, this.borderRadius,
+required this.callback, this.bgcolor, this.borderRadius, required this.title,
     
   }) : super(key: key);
 

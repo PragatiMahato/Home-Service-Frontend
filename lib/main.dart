@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'Modal/service_modal.dart';
-import 'Screen/profile.dart';
+import 'Screen/login.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -25,11 +25,9 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
           title: 'Flutter Demo',
           themeMode: ThemeMode.system,
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-          ),
+          theme: ThemeData.light(),
           debugShowCheckedModeBanner: false,
-          home: const ProfileScreen()),
+          home: const LoginScreen()),
     );
   }
 }

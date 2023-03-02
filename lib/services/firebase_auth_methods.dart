@@ -12,11 +12,7 @@ class FirebaseAuthMethod {
   late final FirebaseAuth _auth;
   FirebaseAuthMethod(this._auth);
   User get user => _auth.currentUser!;
-  // late final TextEditingController _emailcontroller;
-  // late final TextEditingController _passwordcontroller;
-  // late final TextEditingController _usernamecontroller;
-  // late final TextEditingController _callcontroller;
-
+ 
   Future<void> signUpWithEmail({
     required String email,
     required String password,
@@ -72,7 +68,7 @@ class FirebaseAuthMethod {
       );
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) {
-        return const HomePage();
+        return  const HomePage();
       }), (route) => false);
       // if (!user.emailVerified) {
       //   await sendEmailVerification(context);
@@ -93,4 +89,8 @@ class FirebaseAuthMethod {
       showSnackBar(context, e.message!);
     }
   }
+
+  
+
 }
+

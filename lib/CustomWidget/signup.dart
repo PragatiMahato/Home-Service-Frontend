@@ -85,10 +85,6 @@ class _RegisterFormState extends State<RegisterForm> {
                       hint: 'Password',
                       controller: _passwordcontroller,
                     ),
-                    RoundedPasswordInput(
-                      hint: 'Confirm Password',
-                      controller: _passwordcontroller,
-                    ),
                     const SizedBox(height: 10),
                     RoundedButton(
                       title: 'SIGN UP',

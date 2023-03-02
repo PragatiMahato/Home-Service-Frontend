@@ -48,6 +48,9 @@ dependencies:
   open_street_map_search_and_pick: ^0.0.16
   location_service: ^1.0.2
   provider: ^6.0.5
+  dependencies:
+  geolocator: ^9.0.2
+  permission_handler: ^10.2.0
 
 dev_dependencies:
   flutter_test:

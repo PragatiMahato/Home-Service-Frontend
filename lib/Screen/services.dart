@@ -10,14 +10,10 @@ import '../CustomWidget/category.dart';
 import '../CustomWidget/home_page_header.dart';
 import '../Modal/service_modal.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class HomePage extends StatelessWidget {
+   const HomePage({super.key, this.user_name});
+  final String? user_name;
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -28,7 +24,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: kPrimaryColor,
         elevation: 0,
         actions: const [Icon(Icons.more_vert)],
-        title: const Text("Home Services"),
+        title:  Text(user_name!),
       ),
       body: Consumer<ServicesNotifier>(
           builder: (context, ServicesNotifier, child) {
