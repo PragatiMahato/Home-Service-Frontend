@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../Constant/app_size.dart';
 import '../Constant/colors.dart';
@@ -26,56 +27,116 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
       body: Column(
         children: [
-          Align(
-            alignment: Alignment.topCenter,
-            child: Container(
-              color: kPrimaryColor,
-              width: double.infinity,
-              height: AppSize.s30 * 7.5,
-              padding: AppSize.globalSymetricpadding * 2,
-              child: Column(
-                children: [
-                  ClipRRect(
-                      borderRadius: BorderRadius.circular(55),
-                      child: Image.asset(
-                        'assets/images/pp.png',
-                        height: 110,
-                      )),
-                  const SizedBox(
-                    height: AppSize.s10,
-                  ),
-                  const Text(
-                    "Pragati Mahato",
-                    style: TextStyle(
-                        fontSize: 19,
-                        fontWeight: FontWeight.w700,
-                        color: backgroundWhite),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          const ProfileImage(),
           Column(
-            children: const[
+            children: const [
               ProfileRow(
                 name: 'Name',
-                picon:  Icon(Icons.person),
+                picon: Icon(Icons.person),
               ),
-               ProfileRow(
+              ProfileRow(
                 name: 'Phone',
                 picon: Icon(Icons.call),
               ),
-               ProfileRow(
+              ProfileRow(
                 name: 'Address',
                 picon: Icon(Icons.location_on),
               )
             ],
           ),
-          
-          
         ],
       ),
     );
+  }
+}
+
+class ProfileImage extends StatelessWidget {
+  const ProfileImage({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        const CircleAvatar(
+          radius: 80,
+          backgroundImage: AssetImage("assets/images/pp.png"),
+        ),
+        Positioned(
+            bottom: 2,
+            right: 20,
+            child: InkWell(
+                onTap: () {
+                  showModalBottomSheet(
+                      context: context,
+                      builder: ((builder) => const BottomSheet()));
+                },
+                child: const Icon(
+                  Icons.camera_alt,
+                  color: kPrimaryColor,
+                  size: 39,
+                )))
+      ],
+    );
+  }
+}
+
+class BottomSheet extends StatefulWidget {
+  const BottomSheet({super.key});
+
+  @override
+  State<BottomSheet> createState() => _BottomSheetState();
+}
+
+class _BottomSheetState extends State<BottomSheet> {
+  late PickedFile imageFile;
+  final ImagePicker _picker = ImagePicker();
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: AppSize.getScreenWidth(context),
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      height: AppSize.getScreenHeight(context) * 0.15,
+      child: Column(children: [
+        const Text(
+          "Choose image from",
+          style: TextStyle(fontSize: 24),
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+        Container(
+          margin: const EdgeInsets.only(left: AppSize.s30 * 2),
+          child: Row(
+            children: [
+              TextButton.icon(
+                  onPressed: () {
+                    takePhoto(ImageSource.camera);
+                  },
+                  icon: const Icon(Icons.camera),
+                  label: const Text("Camera")),
+              const SizedBox(
+                width: 20,
+              ),
+              TextButton.icon(
+                  onPressed: () {
+                    takePhoto(ImageSource.gallery);
+                  },
+                  icon: const Icon(Icons.image),
+                  label: const Text("from Gallery"))
+            ],
+          ),
+        )
+      ]),
+    );
+  }
+
+  void takePhoto(ImageSource source) async {
+    final pickedFile = await _picker.getImage(source: source);
+    setState(() {
+      imageFile = pickedFile!;
+    });
   }
 }
 
@@ -83,7 +144,8 @@ class ProfileRow extends StatelessWidget {
   const ProfileRow({
     super.key,
     required this.name,
-    required this.picon, this.onpress,
+    required this.picon,
+    this.onpress,
   });
   final String name;
   final Icon picon;
@@ -112,7 +174,12 @@ class ProfileRow extends StatelessWidget {
               ),
             ],
           ),
-          IconButton(onPressed: onpress, icon: const Icon(Icons.edit,color: Colors.black,))
+          IconButton(
+              onPressed: onpress,
+              icon: const Icon(
+                Icons.edit,
+                color: Colors.black,
+              ))
         ],
       ),
     );

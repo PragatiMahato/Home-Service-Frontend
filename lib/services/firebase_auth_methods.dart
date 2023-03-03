@@ -3,10 +3,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fyp/Screen/services.dart';
 
 import '../CustomWidget/showsneakbar.dart';
 import '../Screen/login.dart';
+import '../Screen/services.dart';
 
 class FirebaseAuthMethod {
   late final FirebaseAuth _auth;
@@ -68,7 +68,7 @@ class FirebaseAuthMethod {
       );
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) {
-        return  const HomePage();
+        return   HomePage();
       }), (route) => false);
       // if (!user.emailVerified) {
       //   await sendEmailVerification(context);

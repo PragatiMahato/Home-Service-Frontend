@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'Modal/service_modal.dart';
-import 'Screen/login.dart';
+import 'Screen/booking.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
           themeMode: ThemeMode.system,
           theme: ThemeData.light(),
           debugShowCheckedModeBanner: false,
-          home: const LoginScreen()),
+          home: Booking()),
     );
   }
 }

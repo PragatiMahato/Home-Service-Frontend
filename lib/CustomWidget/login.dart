@@ -81,7 +81,7 @@ class _LoginFormState extends State<LoginForm> {
                   child: TextButton(
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => ( const ChangePwScreen())));
+                            builder: (context) => (const ChangePwScreen())));
                       },
                       child: const Text(
                         "Forget Password?",
@@ -92,6 +92,8 @@ class _LoginFormState extends State<LoginForm> {
                 RoundedButton(
                   title: 'LOGIN',
                   callback: () {
+                    // _emailcontroller.clear;
+                    // _passwordcontroller.clear;
                     loginUser();
                   },
                 ),

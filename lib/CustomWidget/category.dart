@@ -7,7 +7,7 @@ import '../Constant/colors.dart';
 class Category extends StatelessWidget {
   const Category({
     super.key,
-    required this.text, required this.press,  required this.buttonText,
+    required this.text, required this.press,   this.buttonText,
   });
   final String text;
   final Callback? press;

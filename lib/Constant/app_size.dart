@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class AppSize {
-
   static double getScreenWidth(BuildContext context) {
     return MediaQuery.of(context).size.width;
   }
@@ -18,3 +17,5 @@ class AppSize {
   static const EdgeInsets globalSymetricmargin =
       EdgeInsets.symmetric(horizontal: 30);
 }
+
+

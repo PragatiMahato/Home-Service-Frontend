@@ -2,7 +2,7 @@ name: fyp
 description: A new Flutter project.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.19.2 <3.0.0'
+  sdk: ">=2.19.2 <3.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -31,12 +31,9 @@ dependencies:
   flutter:
     sdk: flutter
 
-
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  custom_navigation_bar: ^0.8.2
-  curved_navigation_bar: ^1.0.3
   snippet_coder_utils: ^1.0.13
   form_field_validator: ^1.1.0
   get: ^4.6.5
@@ -48,9 +45,8 @@ dependencies:
   open_street_map_search_and_pick: ^0.0.16
   location_service: ^1.0.2
   provider: ^6.0.5
-  dependencies:
-  geolocator: ^9.0.2
-  permission_handler: ^10.2.0
+  image_picker: ^0.8.6+4
+  motion_tab_bar_v2: ^0.2.6
 
 dev_dependencies:
   flutter_test:
@@ -68,7 +64,6 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
