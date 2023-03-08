@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:motion_tab_bar_v2/motion-tab-bar.dart';
 
 import '../Constant/colors.dart';
-import 'profile.dart';
 import 'services.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -79,7 +78,7 @@ class _BottomNavBarState extends State<BottomNavBar>
           const Center(child: HomePage()),
           const Center(child: HomePage()),
           const Center(
-            child: ProfileScreen(),
+            // child: ProfileScreen(),
           ),
         ],
       ),

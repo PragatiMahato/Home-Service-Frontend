@@ -3,7 +3,6 @@
 // import '../Constant/colors.dart';
 // import 'searchbar.dart';
 
-
 // class HomePageHeader extends StatelessWidget {
 //   const HomePageHeader({
 //     super.key,
@@ -54,23 +53,22 @@
 //   }
 // }
 
-
 import 'package:flutter/material.dart';
 
 import '../Constant/colors.dart';
 import 'searchbar.dart';
 
-
 class HomePageHeader extends StatelessWidget {
   const HomePageHeader({
     super.key,
-    required this.size,
+
   });
 
-  final Size size;
+
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Column(
       children: [
         Stack(
@@ -86,10 +84,8 @@ class HomePageHeader extends StatelessWidget {
             Positioned(
                 child: Container(
               alignment: Alignment.center,
-              margin:
-                  const EdgeInsets.symmetric(horizontal: 35, vertical: 84),
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 25, vertical: 4),
+              margin: const EdgeInsets.symmetric(horizontal: 35, vertical: 84),
+              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 4),
               height: 60,
               decoration: BoxDecoration(
                   color: backgroundWhite,

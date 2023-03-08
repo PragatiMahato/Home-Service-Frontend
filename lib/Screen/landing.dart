@@ -13,7 +13,7 @@ class LandingScreen extends StatelessWidget {
     return Scaffold(
         body: SizedBox(
       width: AppSize.getScreenWidth(context),
-      height: AppSize.getScreenHeight(context),
+      height: AppSize.s30*13,
       child: Stack(
         children: [
           Align(
@@ -22,7 +22,7 @@ class LandingScreen extends StatelessWidget {
               clipper: CustomClipperAppBar(),
               child: Container(
                 width: double.infinity,
-                height: AppSize.getScreenHeight(context) * 0.47,
+                height: AppSize.s30* 0.87,
                 decoration: ShapeDecoration(
                   color: const Color(0XFF5C519A),
                   shape: RoundedRectangleBorder(
@@ -42,7 +42,7 @@ class LandingScreen extends StatelessWidget {
             child: Container(
               margin: const EdgeInsets.only(bottom: 40),
               width: double.infinity,
-              height: AppSize.getScreenHeight(context) * 0.3,
+              height: AppSize.s10 * 0.9,
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: Column(
                 children: [

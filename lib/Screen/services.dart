@@ -16,7 +16,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    // Size size = MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: backgroundWhite,
         drawer: const Navbar(),
@@ -33,7 +33,7 @@ class HomePage extends StatelessWidget {
                 height: AppSize.getScreenHeight(context),
                 child: Column(
                   children: [
-                    HomePageHeader(size: size),
+                    const HomePageHeader(),
                     Category(
                       text: 'Our Services',
                       buttonText: 'More',
@@ -158,7 +158,8 @@ class HomePage extends StatelessWidget {
                                           },
                                           child: const Text(
                                             "Book Now",
-                                            style: TextStyle(fontSize: 13,
+                                            style: TextStyle(
+                                                fontSize: 13,
                                                 color: backgroundWhite),
                                           ))),
                                   IconButton(
@@ -200,26 +201,35 @@ class Category_card extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 18),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(13),
-            color: const Color.fromARGB(255, 232, 225, 255)),
-        child: Row(
-          children: [
-            Image.asset(
-              categoryImg,
-              height: 35,
-            ),
-            const SizedBox(
-              width: 15,
-            ),
-            Text(
-              categoryText,
-              style: const TextStyle(
-                  fontSize: 15, fontWeight: FontWeight.w600, color: kTextColor),
-            ),
-          ],
+      child: GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+            return const HomePage();
+          }));
+        },
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(13),
+              color: const Color.fromARGB(255, 232, 225, 255)),
+          child: Row(
+            children: [
+              Image.asset(
+                categoryImg,
+                height: 35,
+              ),
+              const SizedBox(
+                width: 15,
+              ),
+              Text(
+                categoryText,
+                style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                    color: kTextColor),
+              ),
+            ],
+          ),
         ),
       ),
     );

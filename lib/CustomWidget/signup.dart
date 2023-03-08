@@ -1,7 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
+// ignore_for_file: use_build_context_synchronously
 
-import '../services/firebase_auth_methods.dart';
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
 import 'button.dart';
 import 'input_fielda.dart';
 
@@ -24,7 +27,73 @@ class RegisterForm extends StatefulWidget {
 }
 
 class _RegisterFormState extends State<RegisterForm> {
-    final _formkey = GlobalKey<FormState>();
+  final _formkey = GlobalKey<FormState>();
+
+  void _signUp() async {
+    const url = "http://192.168.1.9:3000/signUp";
+    final email = _emailcontroller.text;
+    final password = _passwordcontroller.text;
+
+    final body = jsonEncode({'email': email, 'password': password});
+
+    final resposne = await http.post(
+      Uri.parse(url),
+      headers: {'Content-Type': 'application/json'},
+      body: body,
+    );
+    print(resposne.body);
+    if (resposne.statusCode == 201) {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: const Text("success"),
+              content: const Text("your account has been created"),
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text("Ok"))
+              ],
+            );
+          });
+    } else if (resposne.statusCode == 409) {
+      final message = jsonDecode(resposne.body)['message'];
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: const Text("error"),
+              content: const Text("Error occured"),
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text("Ok"))
+              ],
+            );
+          });
+    }
+  }
+
+  // Future save() async {
+  //   var res = await http.post("http://localhost:3000//signUp" as Uri,
+  //       headers: <String, String>{
+  //         'Context-Type': 'application/json;charSet=UTF-8'
+  //       },
+  //       body: <String, String>{
+  //         'email': user.email,
+  //         'password': user.password
+  //       });
+  //   debugPrint(res.body);
+  //   Navigator.push(
+  //       context, MaterialPageRoute(builder: (context) => const LoginScreen()));
+  // }
+
+  // Usermodel user = Usermodel(email: '', password: '');
+
   late final TextEditingController _emailcontroller;
   late final TextEditingController _passwordcontroller;
   late final TextEditingController _usernamecontroller;
@@ -61,7 +130,8 @@ class _RegisterFormState extends State<RegisterForm> {
                     const SizedBox(height: 10),
                     const Text(
                       'Welcome',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                     ),
                     const SizedBox(height: 40),
                     Image.asset('assets/images/login.png'),
@@ -88,9 +158,7 @@ class _RegisterFormState extends State<RegisterForm> {
                     const SizedBox(height: 10),
                     RoundedButton(
                       title: 'SIGN UP',
-                      callback: () async {
-                        signUpUser();
-                      },
+                      callback: () {},
                     ),
                     const SizedBox(height: 10),
                   ],
@@ -102,14 +170,4 @@ class _RegisterFormState extends State<RegisterForm> {
       ),
     );
   }
-
-
-  void signUpUser()  {
-    FirebaseAuthMethod(FirebaseAuth.instance).signUpWithEmail(
-        email: _emailcontroller.text,
-        password: _passwordcontroller.text,
-        context: context, phone: _callcontroller.text,userName: _usernamecontroller.text);
-  }
-
 }
-

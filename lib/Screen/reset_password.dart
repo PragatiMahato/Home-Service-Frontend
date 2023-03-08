@@ -19,7 +19,7 @@ class _ResetPWScreenState extends State<ResetPWScreen> {
     return Scaffold(
       body: SizedBox(
         width: AppSize.getScreenWidth(context),
-        height: AppSize.getScreenHeight(context),
+        // height: AppSize.getScreenHeight(context),
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 40),
@@ -28,7 +28,13 @@ class _ResetPWScreenState extends State<ResetPWScreen> {
                 const SizedBox(
                   height: 40,
                 ),
-                const Text("Reset Password",style: TextStyle(fontSize: 30,color: Color.fromARGB(255, 95, 95, 95),fontWeight: FontWeight.w600),),
+                const Text(
+                  "Reset Password",
+                  style: TextStyle(
+                      fontSize: 30,
+                      color: Color.fromARGB(255, 95, 95, 95),
+                      fontWeight: FontWeight.w600),
+                ),
                 const SizedBox(
                   height: 20,
                 ),
@@ -46,8 +52,9 @@ class _ResetPWScreenState extends State<ResetPWScreen> {
                       hintText: 'Password',
                       hintStyle: const TextStyle(fontSize: 17),
                       enabledBorder: const UnderlineInputBorder(
-                        borderSide:
-                            BorderSide(width: 2, color: Color.fromARGB(255, 178, 178, 178)),
+                        borderSide: BorderSide(
+                            width: 2,
+                            color: Color.fromARGB(255, 178, 178, 178)),
                       ),
                       filled: true,
                       contentPadding: const EdgeInsets.all(16),
@@ -73,8 +80,9 @@ class _ResetPWScreenState extends State<ResetPWScreen> {
                       hintText: ' Confirm Password',
                       hintStyle: const TextStyle(fontSize: 17),
                       enabledBorder: const UnderlineInputBorder(
-                        borderSide:
-                            BorderSide(width: 2, color: Color.fromARGB(255, 178, 178, 178)),
+                        borderSide: BorderSide(
+                            width: 2,
+                            color: Color.fromARGB(255, 178, 178, 178)),
                       ),
                       filled: true,
                       contentPadding: const EdgeInsets.all(16),
@@ -93,11 +101,14 @@ class _ResetPWScreenState extends State<ResetPWScreen> {
                 const SizedBox(
                   height: 60,
                 ),
-                
-                RoundedButton(callback: () { 
-                   Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => (   HomePage())));
-                 }, title: 'Continue',borderRadius: 10,)
+                RoundedButton(
+                  callback: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => (const HomePage())));
+                  },
+                  title: 'Continue',
+                  borderRadius: 10,
+                )
               ],
             ),
           ),

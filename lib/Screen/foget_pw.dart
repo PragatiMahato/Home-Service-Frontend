@@ -1,9 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../Constant/app_size.dart';
 import '../CustomWidget/button.dart';
-import '../services/firebase_auth_methods.dart';
+
 
 class ChangePwScreen extends StatefulWidget {
   const ChangePwScreen({super.key});
@@ -66,7 +65,7 @@ class _ChangePwScreenState extends State<ChangePwScreen> {
                 const Spacer(),
                 RoundedButton(
                   callback: () {
-                    passwordReset();
+                   
                   },
                   title: 'Continue',
                   borderRadius: 10,
@@ -79,9 +78,5 @@ class _ChangePwScreenState extends State<ChangePwScreen> {
     );
   }
 
-  void passwordReset() async{
-   await FirebaseAuthMethod(FirebaseAuth.instance)
-        .resetPassword(email: _emailcontroller.text, context: context);
-  }
   
 }

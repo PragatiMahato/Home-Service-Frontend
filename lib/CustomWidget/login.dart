@@ -1,8 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../Screen/foget_pw.dart';
-import '../services/firebase_auth_methods.dart';
 import 'button.dart';
 import 'input_fielda.dart';
 
@@ -27,6 +25,8 @@ class LoginForm extends StatefulWidget {
 class _LoginFormState extends State<LoginForm> {
   late final TextEditingController _emailcontroller;
   late final TextEditingController _passwordcontroller;
+    final _formkey = GlobalKey<FormState>();
+    
 
   @override
   void initState() {
@@ -94,7 +94,7 @@ class _LoginFormState extends State<LoginForm> {
                   callback: () {
                     // _emailcontroller.clear;
                     // _passwordcontroller.clear;
-                    loginUser();
+                  
                   },
                 ),
                 const SizedBox(
@@ -109,10 +109,5 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 
-  void loginUser() {
-    FirebaseAuthMethod(FirebaseAuth.instance).loginWithEmail(
-        email: _emailcontroller.text,
-        password: _passwordcontroller.text,
-        context: context);
-  }
+  
 }

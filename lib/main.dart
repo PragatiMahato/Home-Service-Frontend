@@ -1,16 +1,11 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'Constant/colors.dart';
 import 'Modal/service_modal.dart';
-import 'Screen/booking.dart';
-import 'firebase_options.dart';
+import 'Screen/services.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
   runApp(const MyApp());
 }
 
@@ -25,9 +20,12 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
           title: 'Flutter Demo',
           themeMode: ThemeMode.system,
-          theme: ThemeData.light(),
+          theme: ThemeData(
+            primarySwatch: Colors.purple,
+            appBarTheme: const AppBarTheme(color: kPrimaryColor),
+          ),
           debugShowCheckedModeBanner: false,
-          home: Booking()),
+          home: const HomePage()),
     );
   }
 }

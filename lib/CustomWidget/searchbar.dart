@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../Constant/colors.dart';
-import '../Screen/profile.dart';
 
 class SearchBox extends StatelessWidget {
   const SearchBox({
@@ -12,10 +11,10 @@ class SearchBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-         Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const ProfileScreen()),
-            );
+        //  Navigator.push(
+        //       context,
+        //       MaterialPageRoute(builder: (context) => const ProfileScreen()),
+        //     );
       },
       child: const TextField(
         decoration: InputDecoration(

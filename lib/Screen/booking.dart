@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../Constant/app_size.dart';
 import '../Constant/colors.dart';
+import 'googlemap.dart';
+
+const List<String> list = <String>[
+  'Esewa',
+  'Khalti',
+];
 
 class Booking extends StatefulWidget {
   const Booking({super.key});
@@ -38,8 +44,8 @@ class _BookingState extends State<Booking> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              padding: const EdgeInsets.only(top: 70),
-              height: AppSize.getScreenHeight(context) * 0.3,
+              padding: const EdgeInsets.only(top: 60),
+              height: AppSize.getScreenHeight(context) * 0.27,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -59,14 +65,14 @@ class _BookingState extends State<Booking> {
                   ),
                   Image.asset(
                     "assets/images/cleaning.png",
-                    height: 170,
+                    height: 155,
                     fit: BoxFit.cover,
                   ),
                 ],
               ),
             ),
             Container(
-                height: AppSize.getScreenHeight(context) * 0.7,
+                height: AppSize.getScreenHeight(context) * 0.85,
                 decoration: const BoxDecoration(
                     color: backgroundWhite,
                     borderRadius: BorderRadius.only(
@@ -181,12 +187,18 @@ class _BookingState extends State<Booking> {
                       ),
                       margin: const EdgeInsets.only(left: 30, right: 30),
                       padding: AppSize.globalSymetricpadding * 0.2,
-                      child: const TextField(
+                      child: TextField(
                         decoration: InputDecoration(
-                          hintText: 'Location',
-                          border: InputBorder.none,
-                          suffixIcon: Icon(Icons.location_on),
-                        ),
+                            hintText: 'Location',
+                            border: InputBorder.none,
+                            suffixIcon: IconButton(
+                                onPressed: () {
+                                  Navigator.of(context).push(
+                                      MaterialPageRoute(builder: (context) {
+                                    return const MapSample();
+                                  }));
+                                },
+                                icon: const Icon(Icons.location_on))),
                       ),
                     ),
                     Container(
@@ -207,10 +219,29 @@ class _BookingState extends State<Booking> {
                             Text("Rs.200"),
                           ],
                         )),
-                    Center(
-                        child: Container(
+                    Container(
+                        margin: const EdgeInsets.only(
+                            top: AppSize.s30,
+                            left: AppSize.s20 * 3,
+                            bottom: AppSize.s30),
+                        height: 50,
+                        width: AppSize.getScreenWidth(context) * 0.7,
+                        decoration: BoxDecoration(
+                            border: Border.all(color: kPrimaryColor),
+                            borderRadius: BorderRadius.circular(10)),
+                        child: TextButton(
+                            onPressed: () {},
+                            child: const Text(
+                              "Make Payayment",
+                              style:
+                                  TextStyle(color: kPrimaryColor, fontSize: 18),
+                            ))),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Container(
                             height: 50,
-                            width: AppSize.getScreenWidth(context) * 0.45,
+                            width: AppSize.getScreenWidth(context) * 0.4,
                             decoration: BoxDecoration(
                                 color: kPrimaryColor,
                                 borderRadius: BorderRadius.circular(10)),
@@ -220,7 +251,22 @@ class _BookingState extends State<Booking> {
                                   "Confirm Booking",
                                   style: TextStyle(
                                       color: backgroundWhite, fontSize: 18),
-                                ))))
+                                ))),
+                        Container(
+                            height: 50,
+                            width: AppSize.getScreenWidth(context) * 0.35,
+                            decoration: BoxDecoration(
+                                color: kPrimaryColor,
+                                borderRadius: BorderRadius.circular(10)),
+                            child: TextButton(
+                                onPressed: () {},
+                                child: const Text(
+                                  "Cancel",
+                                  style: TextStyle(
+                                      color: backgroundWhite, fontSize: 18),
+                                ))),
+                      ],
+                    )
                   ],
                 ))
           ],
