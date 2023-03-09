@@ -30,7 +30,7 @@ class _RegisterFormState extends State<RegisterForm> {
   final _formkey = GlobalKey<FormState>();
 
   void _signUp() async {
-    const url = "http://192.168.1.9:3000/signUp";
+    const url = "http://localhost:3000/signup";
     final email = _emailcontroller.text;
     final password = _passwordcontroller.text;
 
@@ -42,7 +42,8 @@ class _RegisterFormState extends State<RegisterForm> {
       body: body,
     );
     print(resposne.body);
-    if (resposne.statusCode == 201) {
+    print(resposne.statusCode);
+    if (resposne.statusCode == 200) {
       showDialog(
           context: context,
           builder: (context) {
@@ -59,13 +60,12 @@ class _RegisterFormState extends State<RegisterForm> {
             );
           });
     } else if (resposne.statusCode == 409) {
-      final message = jsonDecode(resposne.body)['message'];
       showDialog(
           context: context,
           builder: (context) {
             return AlertDialog(
               title: const Text("error"),
-              content: const Text("Error occured"),
+              content: const Text("Failed to sign up"),
               actions: [
                 TextButton(
                     onPressed: () {
@@ -77,22 +77,6 @@ class _RegisterFormState extends State<RegisterForm> {
           });
     }
   }
-
-  // Future save() async {
-  //   var res = await http.post("http://localhost:3000//signUp" as Uri,
-  //       headers: <String, String>{
-  //         'Context-Type': 'application/json;charSet=UTF-8'
-  //       },
-  //       body: <String, String>{
-  //         'email': user.email,
-  //         'password': user.password
-  //       });
-  //   debugPrint(res.body);
-  //   Navigator.push(
-  //       context, MaterialPageRoute(builder: (context) => const LoginScreen()));
-  // }
-
-  // Usermodel user = Usermodel(email: '', password: '');
 
   late final TextEditingController _emailcontroller;
   late final TextEditingController _passwordcontroller;
@@ -158,7 +142,9 @@ class _RegisterFormState extends State<RegisterForm> {
                     const SizedBox(height: 10),
                     RoundedButton(
                       title: 'SIGN UP',
-                      callback: () {},
+                      callback: () {
+                        _signUp();
+                      },
                     ),
                     const SizedBox(height: 10),
                   ],

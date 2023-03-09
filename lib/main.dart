@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'Constant/colors.dart';
 import 'Modal/service_modal.dart';
-import 'Screen/services.dart';
+import 'Screen/login.dart';
 
 void main() async {
   runApp(const MyApp());
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
             appBarTheme: const AppBarTheme(color: kPrimaryColor),
           ),
           debugShowCheckedModeBanner: false,
-          home: const HomePage()),
+          home: const LoginScreen()),
     );
   }
 }

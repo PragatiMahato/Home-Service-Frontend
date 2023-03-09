@@ -1,8 +1,11 @@
-// // ignore_for_file: avoid_print, unused_local_variable
+// // ignore_for_file: avoid_print, unused_local_variable, use_build_context_synchronously
 
-// import 'package:firebase_auth/firebase_auth.dart';
+// import 'dart:convert';
+
 // import 'package:flutter/material.dart';
-// import 'package:fyp/services/firebase_auth_methods.dart';
+// import 'package:http/http.dart' as http;
+
+// import 'login.dart';
 
 // class SignUpScreen extends StatefulWidget {
 //   const SignUpScreen({super.key});
@@ -16,6 +19,55 @@
 
 //   late final TextEditingController _emailcontroller;
 //   late final TextEditingController _passwordcontroller;
+
+//   void _signUp() async {
+//     const url = "http://localhost:3000/signup";
+//     final email = _emailcontroller.text;
+//     final password = _passwordcontroller.text;
+
+//     final body = jsonEncode({'email': email, 'password': password});
+
+//     final resposne = await http.post(
+//       Uri.parse(url),
+//       headers: {'Content-Type': 'application/json'},
+//       body: body,
+//     );
+//     print(resposne.body);
+//     print(resposne.statusCode);
+//     if (resposne.statusCode == 200) {
+//       showDialog(
+//           context: context,
+//           builder: (context) {
+//             return AlertDialog(
+//               title: const Text("success"),
+//               content: const Text("your account has been created"),
+//               actions: [
+//                 TextButton(
+//                     onPressed: () {
+//                       Navigator.pop(context);
+//                     },
+//                     child: const Text("Ok"))
+//               ],
+//             );
+//           });
+//     } else if (resposne.statusCode == 409) {
+//       showDialog(
+//           context: context,
+//           builder: (context) {
+//             return AlertDialog(
+//               title: const Text("error"),
+//               content: const Text("Failed to sign up"),
+//               actions: [
+//                 TextButton(
+//                     onPressed: () {
+//                       Navigator.pop(context);
+//                     },
+//                     child: const Text("Ok"))
+//               ],
+//             );
+//           });
+//     }
+//   }
 
 //   @override
 //   void initState() {
@@ -150,10 +202,9 @@
 //                           ),
 //                           TextButton(
 //                             onPressed: () {
-//                               // Navigator.pop(context);
-//                               // Navigator.of(context).push(MaterialPageRoute(
-//                               //     builder: (context) => (const LoginScreen())));
-//                               // signUpUser();
+//                               Navigator.pop(context);
+//                               Navigator.of(context).push(MaterialPageRoute(
+//                                   builder: (context) => (const LoginScreen())));
 //                             },
 //                             child: const Text(
 //                               "Login",
@@ -168,7 +219,7 @@
 //                     ),
 //                     TextButton(
 //                       onPressed: () async {
-//                         signUpUser();
+//                         _signUp();
 //                       },
 //                       child: const Text(
 //                         "Sign up",
@@ -184,12 +235,5 @@
 //             ),
 //           ],
 //         )));
-//   }
-
-//  void signUpUser() async {
-//     FirebaseAuthMethod(FirebaseAuth.instance).signUpWithEmail(
-//         email: _emailcontroller.text,
-//         password: _passwordcontroller.text,
-//         context: context);
 //   }
 // }

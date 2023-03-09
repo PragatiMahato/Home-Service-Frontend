@@ -1,0 +1,123 @@
+{
+    "services": [
+    {
+    "id": "1",
+    "name": "Plumbing",
+    "type": "Repair",
+    "description": "Fix leaky faucets and pipes",
+    "image": "https://wallpapercave.com/wp/wp4722810.jpg",
+    "price": 50
+    },
+
+    {
+    "id": "2",
+    "name": "Floor Cleaning",
+    "type": "Cleaning",
+    "description": "Deep clean your home from top to bottom",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUsnK6RmMqJo-E4eXC6HL1wwqhO2TFrsDOYw&usqp=CAU",
+    "price": 100
+    },
+
+    {
+    "id": "3",
+    "name": "Lawn Care",
+    "type": "Gareding",
+    "description": "Mow, trim, and maintain your lawn",
+    "image": "https://www.google.com/imgres?imgurl=https%3A%2F%2Fcdn.pixabay.com%2Fphoto%2F2017%2F03%2F08%2F19%2F40%2Flawn-mower-2127637__340.jpg&imgrefurl=https%3A%2F%2Fpixabay.com%2Fimages%2Fsearch%2Flawn%2520mower%2F&tbnid=ak9FqXOPZtk7sM&vet=12ahUKEwj6oJSbic_9AhUSMrcAHXB-CtYQMygIegUIARDNAQ..i&docid=1p6u08HXvwMHmM&w=510&h=340&q=lawn%20care%20images%20hd&ved=2ahUKEwj6oJSbic_9AhUSMrcAHXB-CtYQMygIegUIARDNAQ",
+    "price": 75
+    },
+
+    {
+        "id": "4",
+        "name": "Bathroom Cleaning",
+        "type": "Cleaning",
+        "description": "Mow, trim, and maintain your lawn",
+        "image": "https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.shutterstock.com%2Fimage-photo%2Fbeautiful-young-woman-cleaning-bathroom-260nw-1537141520.jpg&imgrefurl=https%3A%2F%2Fwww.shutterstock.com%2Fsearch%2Fbathroom-cleaning&tbnid=SNQbUE0qF_UIWM&vet=12ahUKEwiF253_ic_9AhVeK7cAHchkBVkQMygDegUIARDKAQ..i&docid=9pHOMBDm7avE7M&w=390&h=280&q=Bathroom%20cleaning%20images%20hd&ved=2ahUKEwiF253_ic_9AhVeK7cAHchkBVkQMygDegUIARDKAQ",
+        "price": 100 
+    },
+
+    {
+        "id": "5",
+        "name": "Clothes washing",
+        "type": "Washing",
+        "description": "Mow, trim, and maintain your lawn",
+        "image": "https://www.google.com/imgres?imgurl=https%3A%2F%2Fmedia.istockphoto.com%2Fid%2F1017857886%2Fphoto%2Fwoman-hand-washing-knitted-woolen-laundry-in-grey-plastic-basin-lot-of-soap-white-detergent.jpg%3Fs%3D612x612%26w%3D0%26k%3D20%26c%3DU2ioBEmypA1c0SpTmXWbFb2W05Yw9Y9YCFhyDA_crXE%3D&imgrefurl=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fhand-wash-clothes&tbnid=D28OB17t81St0M&vet=12ahUKEwi7keW-is_9AhUc2nMBHb28CGcQMygJegUIARDSAQ..i&docid=KJF_wCzHIFhazM&w=612&h=408&q=clothes%20washiong%20images%20hd&ved=2ahUKEwi7keW-is_9AhUc2nMBHb28CGcQMygJegUIARDSAQ",
+        "price": 90 
+    },
+
+    {
+        "id": "6",
+        "name": "Professional Cook",
+        "type": "Cook",
+        "description": "Mow, trim, and maintain your lawn",
+        "image": "https://www.google.com/url?sa=i&url=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Fchef&psig=AOvVaw39cEMPTd8tlynW6P2arbJT&ust=1678459473817000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCNDxxPeKz_0CFQAAAAAdAAAAABAE",
+        "price": 120 
+    },
+
+    {
+        "id": "7",
+        "name": "Portrait Painting",
+        "type": "Painting",
+        "description": "Representation a particular person in your painting",
+        "image": "https://www.google.com/imgres?imgurl=https%3A%2F%2Fmymodernmet.com%2Fwp%2Fwp-content%2Fuploads%2F2019%2F03%2Fportrait-painting-tips-thumbnail.jpg&imgrefurl=https%3A%2F%2Fmymodernmet.com%2Fportrait-painting-tips%2F&tbnid=XmowD2azEHgZrM&vet=12ahUKEwiA9878jM_9AhWQLbcAHTseB8gQMygBegUIARDfAQ..i&docid=ReR8lfAtzcoFlM&w=1200&h=628&q=Portrait%20painter&ved=2ahUKEwiA9878jM_9AhWQLbcAHTseB8gQMygBegUIARDfAQ",
+        "price":  160
+    },
+
+    {
+        "id": "8",
+        "name": "Ac repair",
+        "type": "Repair",
+        "description": "Fix your Ac and stays cooler longer",
+        "image": "https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.serviceonwheel.com%2Fuploads%2Fservice%2F748141670401655.jpg&imgrefurl=https%3A%2F%2Fwww.serviceonwheel.com%2Fbhopal%2Fservice%2Fair-conditioner.html&tbnid=N6RlgHZhrkCLBM&vet=12ahUKEwiKsvzojc_9AhXr0XMBHf9dD0IQMygHegUIARDvAQ..i&docid=6H1CDAZNKbiEhM&w=1024&h=750&q=ac%20repair&hl=en&ved=2ahUKEwiKsvzojc_9AhXr0XMBHf9dD0IQMygHegUIARDvAQ",
+        "price":  300
+    },
+
+    {
+        "id": "9",
+        "name": "Nail Art",
+        "type": "Beautician",
+        "description": "Get best nail art and care services",
+        "image": "https://www.google.com/imgres?imgurl=https%3A%2F%2Fmedia.istockphoto.com%2Fid%2F153425390%2Fphoto%2Fwoman-in-a-nail-salon-receiving-a-manicure.jpg%3Fs%3D612x612%26w%3D0%26k%3D20%26c%3Dm72RBkODRacE4OqjK1XmiPe9X7UNDOEw8lt1gXzBvFU%3D&imgrefurl=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fbeauty-salon-nails&tbnid=ZVhDSxQMNuMF_M&vet=12ahUKEwikpL3Mjs_9AhWS-nMBHWguCcUQMygAegUIARDFAQ..i&docid=V939TVmRPrDMsM&w=612&h=408&q=nail%20Beautician&hl=en&ved=2ahUKEwikpL3Mjs_9AhWS-nMBHWguCcUQMygAegUIARDFAQ",
+        "price": 350 
+    },
+
+    {
+        "id": "10",
+        "name": "Car driver",
+        "type": "Driver",
+        "description": "Get a professional part time or full time driver",
+        "image": "https://www.google.com/imgres?imgurl=https%3A%2F%2Fwuling.id%2Fwp-content%2Fuploads%2F2019%2F11%2FWuling-artikel-2-pengendara-pemula.jpg&imgrefurl=https%3A%2F%2Fwuling.id%2Fen%2Fblog%2Flifestyle%2Fcar-driving-tips-for-a-beginner&tbnid=fd3xXjyNE9ii1M&vet=12ahUKEwi0pKOZj8_9AhUfitgFHeMuC84QMygDegUIARDnAQ..i&docid=UCUR9pgBaFawhM&w=1440&h=820&q=car%20driver&hl=en&ved=2ahUKEwi0pKOZj8_9AhUfitgFHeMuC84QMygDegUIARDnAQ",
+        "price": 100 
+    },
+
+    {
+        "id": "11",
+        "name": "Landscape Painting",
+        "type": "Painting",
+        "description": "Add the depiction of natural scenery in your wall painting",
+        "image": "https://www.google.com/imgres?imgurl=https%3A%2F%2Fmymodernmet.com%2Fwp%2Fwp-content%2Fuploads%2F2021%2F08%2Fcourtney-myers-tanzania-painting-7.jpg&imgrefurl=https%3A%2F%2Fmymodernmet.com%2Fcourtney-myers-countries-oil-paintings%2F&tbnid=4BDnlFBWMS1n_M&vet=12ahUKEwjnyrXjjM_9AhXTjeYKHRJxBXYQMygLegUIARD6AQ..i&docid=xDtA6Cd1YnfA0M&w=1200&h=1226&q=landscape%20painter&ved=2ahUKEwjnyrXjjM_9AhXTjeYKHRJxBXYQMygLegUIARD6AQ",
+        "price": 150
+    },
+
+
+    {
+        "id": "12",
+        "name": "Wedding decorators",
+        "type": "Decoration",
+        "description": "Make your weeding memorable with best decoration",
+        "image": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.weddingbazaar.com%2Fwedding-decorators-in-chennai&psig=AOvVaw0ybTPEQuPKQZingU27oni3&ust=1678460934914000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCLDakLCQz_0CFQAAAAAdAAAAABAm",
+        "price": 500 
+    },
+
+
+    {
+        "id": "13",
+        "name": "Interior decorator",
+        "type": "Decoration",
+        "description": "Get a interior designer and increase the value of your home",
+        "image": "https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.designtoreflect.com%2Fwp-content%2Fuploads%2FLiving-Room-In-Luxury-Home-.jpg&imgrefurl=https%3A%2F%2Fwww.designtoreflect.com%2Fprofessional-interior-decorator%2F&tbnid=qsW2uoWuRcDdEM&vet=10CAIQxiAoAGoXChMI4Nrs1ZDP_QIVAAAAAB0AAAAAEAc..i&docid=qjd5spRvpvvgEM&w=800&h=533&itg=1&q=interior%20decorator&hl=en&ved=0CAIQxiAoAGoXChMI4Nrs1ZDP_QIVAAAAAB0AAAAAEAc",
+        "price":  500
+    }
+
+    ]
+    }
