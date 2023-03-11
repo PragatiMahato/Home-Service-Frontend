@@ -31,7 +31,6 @@ class LoginForm extends StatefulWidget {
 class _LoginFormState extends State<LoginForm> {
   late final TextEditingController _emailcontroller;
   late final TextEditingController _passwordcontroller;
-  final _formkey = GlobalKey<FormState>();
   Future _logIn() async {
     const url = "http://localhost:3000/logIn";
     final email = _emailcontroller.text;

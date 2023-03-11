@@ -187,6 +187,13 @@ class HomePage extends StatelessWidget {
   }
 }
 
+// Future<List<ServiceModel>> ReadJsonData() async {
+//   final jsondata = await rootBundle.loadString('jsonfile/api.json');
+//   final list = json.decode(jsondata) as List<dynamic>;
+
+//   return list.map((e) => ServiceModel.fromJson(e)).toList();
+// }
+
 // ignore: camel_case_types
 class Category_card extends StatelessWidget {
   const Category_card({

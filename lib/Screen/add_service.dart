@@ -1,6 +1,5 @@
 // ignore_for_file: implementation_imports
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fyp/Constant/colors.dart';
 import 'package:fyp/CustomWidget/button.dart';
@@ -50,7 +49,7 @@ class _AddServiceState extends State<AddService> {
               onPressed: () {
                 Navigator.of(context)
                     .push(MaterialPageRoute(builder: (context) {
-                  return   const HomePage();
+                  return const HomePage();
                 }));
               },
             );
@@ -99,29 +98,21 @@ class _AddServiceState extends State<AddService> {
               ),
             ),
           ),
-         RoundedButton(title: "Add", callback: (){
-          Services service = Services(
-                      title: _titleController.text,
-                      name: _titleController.text,
-                      price: _priceController.text,
-                      id: DateTime.now().microsecondsSinceEpoch);
-                  Provider.of<ServicesNotifier>(context, listen: false)
-                      .addNote(service);
-                  Navigator.pop(context);
-                  Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (context) {
-                    return   const HomePage();
-                  }), (route) => false);
-                  final users = <String, dynamic>{
-                    'Title': _titleController.text,
-                    'Name': _nameController.text,
-                    'Price': _priceController.text,
-                  };
-                  FirebaseFirestore.instance
-                      .collection('Services')
-                      .doc()
-                      .set(users);
-         })
+          RoundedButton(
+              title: "Add",
+              callback: () {
+                Services service = Services(
+                    title: _titleController.text,
+                    name: _titleController.text,
+                    price: _priceController.text,
+                    id: DateTime.now().microsecondsSinceEpoch);
+                Provider.of<ServicesNotifier>(context, listen: false)
+                    .addNote(service);
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) {
+                  return const HomePage();
+                }));
+              })
         ],
       ),
     );
