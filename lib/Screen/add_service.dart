@@ -4,9 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:fyp/Constant/colors.dart';
 import 'package:fyp/CustomWidget/button.dart';
 import 'package:fyp/Screen/services.dart';
-import 'package:provider/provider.dart';
-
-import '../Modal/service_modal.dart';
 
 class AddService extends StatefulWidget {
   const AddService({super.key});
@@ -101,17 +98,17 @@ class _AddServiceState extends State<AddService> {
           RoundedButton(
               title: "Add",
               callback: () {
-                Services service = Services(
-                    title: _titleController.text,
-                    name: _titleController.text,
-                    price: _priceController.text,
-                    id: DateTime.now().microsecondsSinceEpoch);
-                Provider.of<ServicesNotifier>(context, listen: false)
-                    .addNote(service);
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) {
-                  return const HomePage();
-                }));
+                // Services service = Services(
+                //     title: _titleController.text,
+                //     name: _titleController.text,
+                //     price: _priceController.text,
+                //     id: DateTime.now().microsecondsSinceEpoch);
+                // Provider.of<ServicesNotifier>(context, listen: false)
+                //     .addNote(service);
+                // Navigator.of(context)
+                //     .push(MaterialPageRoute(builder: (context) {
+                //   return const HomePage();
+                // }));
               })
         ],
       ),

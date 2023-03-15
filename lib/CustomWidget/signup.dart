@@ -1,10 +1,10 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
+import '../Network/api_response.dart';
+import '../Provider/signup_provider.dart';
 import 'button.dart';
 import 'input_fielda.dart';
 
@@ -28,68 +28,38 @@ class RegisterForm extends StatefulWidget {
 
 class _RegisterFormState extends State<RegisterForm> {
   final _formkey = GlobalKey<FormState>();
-
-  void _signUp() async {
-    const url = "http://localhost:3000/signup";
-    final email = _emailcontroller.text;
-    final password = _passwordcontroller.text;
-
-    final body = jsonEncode({'email': email, 'password': password});
-
-    final resposne = await http.post(
-      Uri.parse(url),
-      headers: {'Content-Type': 'application/json'},
-      body: body,
-    );
-    print(resposne.body);
-    print(resposne.statusCode);
-    if (resposne.statusCode == 200) {
-      showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: const Text("success"),
-              content: const Text("your account has been created"),
-              actions: [
-                TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Text("Ok"))
-              ],
-            );
-          });
-    } else if (resposne.statusCode == 409) {
-      showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: const Text("error"),
-              content: const Text("Failed to sign up"),
-              actions: [
-                TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Text("Ok"))
-              ],
-            );
-          });
-    }
-  }
-
   late final TextEditingController _emailcontroller;
-  late final TextEditingController _passwordcontroller;
   late final TextEditingController _usernamecontroller;
-  late final TextEditingController _callcontroller;
+  late final TextEditingController _passwordcontroller;
+
+  late final SignUpProvider signUpProvider;
 
   @override
   void initState() {
+    super.initState();
     _emailcontroller = TextEditingController();
     _passwordcontroller = TextEditingController();
     _usernamecontroller = TextEditingController();
-    _callcontroller = TextEditingController();
-    super.initState();
+    signUpProvider = context.read<SignUpProvider>();
+    signUpProvider.addListener(signUpListner);
+  }
+
+  void signUpListner() {
+    if (signUpProvider.apiResponse.status == Status.error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(signUpProvider.apiResponse.error.toString())));
+    } else if (signUpProvider.apiResponse.status == Status.success) {
+      Navigator.of(context).pop();
+    }
+  }
+
+  @override
+  void dispose() {
+    _emailcontroller.dispose();
+    _passwordcontroller.dispose();
+    _usernamecontroller.dispose();
+    signUpProvider.removeListener(signUpListner);
+    super.dispose();
   }
 
   @override
@@ -117,8 +87,8 @@ class _RegisterFormState extends State<RegisterForm> {
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                     ),
-                    const SizedBox(height: 40),
-                    Image.asset('assets/images/login.png'),
+                    // const SizedBox(height: 40),
+                    // Image.asset('assets/images/login.png'),
                     const SizedBox(height: 40),
                     RoundedInput(
                       hint: 'Username',
@@ -130,11 +100,11 @@ class _RegisterFormState extends State<RegisterForm> {
                       controller: _emailcontroller,
                       icon: Icons.person,
                     ),
-                    RoundedInput(
-                      hint: 'phone',
-                      controller: _callcontroller,
-                      icon: Icons.call,
-                    ),
+                    // RoundedInput(
+                    //   hint: 'phone',
+                    //   controller: _callcontroller,
+                    //   icon: Icons.call,
+                    // ),
                     RoundedPasswordInput(
                       hint: 'Password',
                       controller: _passwordcontroller,
@@ -143,7 +113,10 @@ class _RegisterFormState extends State<RegisterForm> {
                     RoundedButton(
                       title: 'SIGN UP',
                       callback: () {
-                        _signUp();
+                        context.read<SignUpProvider>().signUp(
+                              email: _emailcontroller.text,
+                              password: _passwordcontroller.text,
+                            );
                       },
                     ),
                     const SizedBox(height: 10),

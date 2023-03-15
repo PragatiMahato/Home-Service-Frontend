@@ -1,12 +1,9 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:fyp/Constant/colors.dart';
 
 import '../Screen/foget_pw.dart';
-import '../Screen/services.dart';
 import 'button.dart';
 import 'input_fielda.dart';
 
@@ -31,76 +28,6 @@ class LoginForm extends StatefulWidget {
 class _LoginFormState extends State<LoginForm> {
   late final TextEditingController _emailcontroller;
   late final TextEditingController _passwordcontroller;
-  Future _logIn() async {
-    const url = "http://localhost:3000/logIn";
-    final email = _emailcontroller.text;
-    final password = _passwordcontroller.text;
-    final body = jsonEncode({
-      'email': email,
-      'password': password,
-    });
-    final response = await http.post(Uri.parse(url),
-        headers: {'Content-Type': 'application/json'}, body: body);
-    debugPrint(response.body);
-    if (response.statusCode == 200) {
-      final user = jsonDecode(response.body)['user'];
-      showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-                title: const Text("Success"),
-                content: Text("Logged in as ${user['username']}"),
-                actions: [
-                  TextButton(
-                      onPressed: () => Navigator.pop(context),
-                      child: const Text("Ok"))
-                ],
-              ));
-    } else if (response.statusCode == 401) {
-      final message = jsonDecode(response.body)['message'];
-      showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-                title: const Text("Error"),
-                content: Text(message),
-                actions: [
-                  TextButton(
-                      onPressed: () => Navigator.pop(context),
-                      child: const Text("Ok"))
-                ],
-              ));
-    } else if (response.statusCode == 404) {
-      final message = jsonDecode(response.body)['message'];
-      showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-                title: const Text("Error"),
-                content: Text(message),
-                actions: [
-                  TextButton(
-                      onPressed: () => Navigator.pop(context),
-                      child: const Text("Ok"))
-                ],
-              ));
-    } else {
-      final message = jsonDecode(response.body)['message'];
-      print('Error occurred: $message');
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text("Error"),
-          content: Text(message),
-          actions: [
-            TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text("Ok"))
-          ],
-        ),
-      );
-    }
-
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const HomePage()));
-  }
 
   @override
   void initState() {
@@ -137,8 +64,9 @@ class _LoginFormState extends State<LoginForm> {
                   'Welcome Back',
                   style: TextStyle(fontWeight: FontWeight.w800, fontSize: 27),
                 ),
-                const SizedBox(height: 40),
-                Image.asset('assets/images/login.png'),
+                // const SizedBox(height: 40),
+                // Image.asset('assets/images/logo.png'),
+                Text("Login",style: TextStyle(color: kPrimaryColor),),
                 const SizedBox(height: 70),
                 RoundedInput(
                   hint: 'email',
@@ -166,7 +94,7 @@ class _LoginFormState extends State<LoginForm> {
                 RoundedButton(
                   title: 'LOGIN',
                   callback: () {
-                    _logIn();
+                    
                   },
                 ),
                 const SizedBox(

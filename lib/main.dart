@@ -2,21 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'Constant/colors.dart';
-import 'Modal/service_modal.dart';
+import 'Network/http_client.dart';
+import 'Provider/signup_provider.dart';
 import 'Screen/splash.dart';
+import 'services/authservice.dart';
 
 void main() async {
-  runApp(const MyApp());
+  final HomeServiceHttpClient httpClient = HomeServiceHttpClient();
+  final AuthService authService = AuthService(client: httpClient);
+  runApp(MyApp(authService: authService));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+   const MyApp({super.key, required this.authService});
+  final AuthService authService;
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => ServicesNotifier(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<SignUpProvider>(create: (context) => SignUpProvider(authService: authService))
+      ],
       child: MaterialApp(
           title: 'Flutter Demo',
           themeMode: ThemeMode.system,
@@ -25,7 +31,7 @@ class MyApp extends StatelessWidget {
             appBarTheme: const AppBarTheme(color: kPrimaryColor),
           ),
           debugShowCheckedModeBanner: false,
-          home:  const SplashScreen()),
+          home: const SplashScreen()),
     );
   }
 }
