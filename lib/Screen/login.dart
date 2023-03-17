@@ -117,12 +117,12 @@ class _LoginScreenState extends State<LoginScreen>
       child: Container(
         width: double.infinity,
         height: containerSize.value,
-        decoration: const BoxDecoration(
+        decoration:  const BoxDecoration(
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(100),
               topRight: Radius.circular(100),
             ),
-            color: kbgcolor),
+            color: Color.fromARGB(255, 229, 229, 229)),
         alignment: Alignment.center,
         child: GestureDetector(
           onTap: !isLogin
