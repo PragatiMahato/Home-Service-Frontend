@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
             appBarTheme: const AppBarTheme(color: kPrimaryColor),
           ),
           debugShowCheckedModeBanner: false,
-          home:   UsersScreen()),
+          home:   MyData(UserId: userid,)),
     );
   }
 }
