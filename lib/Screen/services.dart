@@ -88,7 +88,7 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 15),
-                    Expanded(child: PostListScreen()),
+                    const Expanded(child: PostListScreen()),
                   ],
                 ),
               ),

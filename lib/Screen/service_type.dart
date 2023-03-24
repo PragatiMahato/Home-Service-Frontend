@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -46,76 +48,73 @@ class _ServiceTypeState extends State<ServiceType> {
         itemCount: _posts.length,
         itemBuilder: (context, index) {
           final post = _posts[index];
-          return Container(
-            // color: Color.fromARGB(255, 237, 234, 255),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                  return const HomePage();
-                }));
-              },
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: AppSize.s20,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Image.asset(
-                          "assets/images/ac.png",
-                          height: 100,
-                          width: 100,
-                        ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                  top: AppSize.s30,
-                                ),
-                                child: Text(
-                                  post['type'],
-                                  style: const TextStyle(
-                                      fontSize: 22, fontWeight: FontWeight.w600),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                post['description'],
-                                style: const TextStyle(fontSize: 16),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                                
-                              ),
-                                  Container(margin: EdgeInsets.only(left: AppSize.s30*7,bottom: AppSize.s20),
-                                      height: 30,
-                                      
-                                      decoration: BoxDecoration(
-                                          color: Colors.green,
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      child: TextButton(
-                                          onPressed: () {},
-                                          child: const Text(
-                                            "Book Now",
-                                            style:
-                                                TextStyle(color: backgroundWhite),
-                                          ))),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
+          return GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                return const HomePage();
+              }));
+            },
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: AppSize.s20,
                   ),
-                ],
-              ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Image.asset(
+                        "assets/images/ac.png",
+                        height: 100,
+                        width: 100,
+                      ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: AppSize.s30,
+                              ),
+                              child: Text(
+                                post['type'],
+                                style: const TextStyle(
+                                    fontSize: 22, fontWeight: FontWeight.w600),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              post['description'],
+                              style: const TextStyle(fontSize: 16),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                              
+                            ),
+                                Container(margin: const EdgeInsets.only(left: AppSize.s30*7,bottom: AppSize.s20),
+                                    height: 30,
+                                    
+                                    decoration: BoxDecoration(
+                                        color: Colors.green,
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    child: TextButton(
+                                        onPressed: () {},
+                                        child: const Text(
+                                          "Book Now",
+                                          style:
+                                              TextStyle(color: backgroundWhite),
+                                        ))),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ],
             ),
           );
         },

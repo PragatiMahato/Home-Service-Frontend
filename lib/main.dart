@@ -5,7 +5,7 @@ import 'Constant/colors.dart';
 import 'Network/http_client.dart';
 import 'Provider/login_provider.dart';
 import 'Provider/signup_provider.dart';
-import 'Screen/services.dart';
+import 'Screen/search.dart';
 import 'services/authservice.dart';
 
 void main() async {
@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
             appBarTheme: const AppBarTheme(color: kPrimaryColor),
           ),
           debugShowCheckedModeBanner: false,
-          home: HomePage()),
+          home:  SearchScreen()),
     );
   }
 }

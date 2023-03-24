@@ -52,7 +52,7 @@ class _RegisterFormState extends State<RegisterForm> {
           SnackBar(content: Text(signUpProvider.apiResponse.error.toString())));
     } else if (signUpProvider.apiResponse.status == Status.success) {
       Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-        return LoginScreen();
+        return const LoginScreen();
       }));
     }
   }
