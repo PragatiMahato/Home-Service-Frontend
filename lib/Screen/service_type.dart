@@ -6,16 +6,16 @@ import 'package:http/http.dart' as http;
 import '../Constant/app_size.dart';
 import '../Constant/colors.dart';
 import '../Network/api_const.dart';
-import 'service_type.dart';
+import 'services.dart';
 
-class PostListScreen extends StatefulWidget {
-  const PostListScreen({super.key});
+class ServiceType extends StatefulWidget {
+  const ServiceType({super.key});
 
   @override
-  _PostListScreenState createState() => _PostListScreenState();
+  _ServiceTypeState createState() => _ServiceTypeState();
 }
 
-class _PostListScreenState extends State<PostListScreen> {
+class _ServiceTypeState extends State<ServiceType> {
   List<dynamic> _posts = [];
 
   @override
@@ -39,9 +39,9 @@ class _PostListScreenState extends State<PostListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('Service'),
-      // ),
+      appBar: AppBar(
+        title: const Text('Service'),
+      ),
       body: ListView.separated(
         itemCount: _posts.length,
         itemBuilder: (context, index) {
@@ -50,9 +50,8 @@ class _PostListScreenState extends State<PostListScreen> {
             // color: Color.fromARGB(255, 237, 234, 255),
             child: GestureDetector(
               onTap: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) {
-                  return const ServiceType();
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                  return const HomePage();
                 }));
               },
               child: Column(
@@ -81,8 +80,7 @@ class _PostListScreenState extends State<PostListScreen> {
                                 child: Text(
                                   post['type'],
                                   style: const TextStyle(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.w600),
+                                      fontSize: 22, fontWeight: FontWeight.w600),
                                 ),
                               ),
                               const SizedBox(
@@ -94,22 +92,22 @@ class _PostListScreenState extends State<PostListScreen> {
                               ),
                               const SizedBox(
                                 height: 10,
+                                
                               ),
-                              Container(
-                                  margin: const EdgeInsets.only(
-                                      left: AppSize.s30 * 7,
-                                      bottom: AppSize.s20),
-                                  height: 30,
-                                  decoration: BoxDecoration(
-                                      color: Colors.green,
-                                      borderRadius: BorderRadius.circular(10)),
-                                  child: TextButton(
-                                      onPressed: () {},
-                                      child: const Text(
-                                        "Book Now",
-                                        style:
-                                            TextStyle(color: backgroundWhite),
-                                      ))),
+                                  Container(margin: EdgeInsets.only(left: AppSize.s30*7,bottom: AppSize.s20),
+                                      height: 30,
+                                      
+                                      decoration: BoxDecoration(
+                                          color: Colors.green,
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      child: TextButton(
+                                          onPressed: () {},
+                                          child: const Text(
+                                            "Book Now",
+                                            style:
+                                                TextStyle(color: backgroundWhite),
+                                          ))),
                             ],
                           ),
                         )
@@ -132,3 +130,8 @@ class _PostListScreenState extends State<PostListScreen> {
     );
   }
 }
+
+
+
+
+

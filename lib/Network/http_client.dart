@@ -1,9 +1,12 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class HomeServiceHttpClient {
+  final client = http.Client();
+
   Future get({required String url}) async {
     try {
       return await http.get(
@@ -20,8 +23,8 @@ class HomeServiceHttpClient {
     required Map<String, dynamic> body,
   }) async {
     try {
-      print("http called");
-      final response = await http.post(
+      debugPrint("http called");
+      final response = await client.post(
         Uri.parse(url),
         body: jsonEncode(body),
         headers: header(),
@@ -35,12 +38,10 @@ class HomeServiceHttpClient {
       if (response.statusCode == 409) {
         throw Exception(jsonDecode(response.body)['message']);
       }
-      throw Exception("error occured");
+      throw Exception("error occured ${response.reasonPhrase}");
     } on Exception {
-      print("exception occured");
+      debugPrint("exception occured");
       rethrow;
-    } catch (e) {
-      print("error is $e");
     }
   }
 

@@ -16,11 +16,13 @@ class SignUpProvider with ChangeNotifier {
   Future<void> signUp({
     required String email,
     required String password,
+    required String name,
   }) async {
     try {
       await _authService.signUp(
         email: email,
         password: password,
+        name:name,
       );
 
       apiResponse = ApiResponse.success(null);

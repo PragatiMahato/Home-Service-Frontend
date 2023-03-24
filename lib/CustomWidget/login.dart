@@ -1,6 +1,10 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:fyp/Network/api_response.dart';
+import 'package:fyp/Provider/login_provider.dart';
+import 'package:fyp/Screen/services.dart';
+import 'package:provider/provider.dart';
 
 import '../Constant/colors.dart';
 import '../Screen/foget_pw.dart';
@@ -26,21 +30,61 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   bool passwordObsecured = true;
-  final _formKey = GlobalKey<FormState>();
-  late final TextEditingController _emailcontroller;
-  late final TextEditingController _passwordcontroller;
+  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+
+  late final TextEditingController _emailController;
+  late final TextEditingController _passwordController;
+
+  bool hidePassword = true;
+  bool isLoggedIn = false;
+
+  late final LoginProvider loginProvider;
 
   @override
   void initState() {
-    _emailcontroller = TextEditingController();
-    _passwordcontroller = TextEditingController();
     super.initState();
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
+    loginProvider = context.read<LoginProvider>();
+    loginProvider.addListener(loginListner);
+  }
+
+  void loginListner() {
+    if (loginProvider.loginResponse.status == Status.error) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(loginProvider.loginResponse.error.toString())));
+    } else if (loginProvider.loginResponse.status == Status.success) {
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => const HomePage()),
+          (_) => false);
+    }
+  }
+
+  String? validateEmail(String value) {
+    if (value.isEmpty) {
+      return "Email Required";
+    } else if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
+      return "Please Enter a Valid Email";
+    } else {
+      return null;
+    }
+  }
+
+  String? validatePassword(String value) {
+    if (value.isEmpty) {
+      return "Password Required";
+    } else if (value.length < 6) {
+      return "Invalid Email";
+    } else {
+      return null;
+    }
   }
 
   @override
   void dispose() {
-    _emailcontroller.dispose();
-    _passwordcontroller.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    loginProvider.removeListener(loginListner);
     super.dispose();
   }
 
@@ -57,7 +101,7 @@ class _LoginFormState extends State<LoginForm> {
           height: widget.defaultLoginSize,
           child: SingleChildScrollView(
             child: Form(
-              key: _formKey,
+              key: _formkey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -80,17 +124,17 @@ class _LoginFormState extends State<LoginForm> {
                         borderRadius: BorderRadius.circular(30),
                         color: kPrimaryColor.withAlpha(35)),
                     child: TextFormField(
-                      controller: _emailcontroller,
+                      controller: _emailController,
                       cursorColor: kPrimaryColor,
                       decoration: const InputDecoration(
                           hintText: "Email",
                           suffixIcon: Icon(Icons.email, color: kPrimaryColor),
                           border: InputBorder.none),
-                        validator: (value) {
-                         if (value!.isEmpty) {
-                            return "Required email";
-                            }
-                           return null;
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Required email";
+                        }
+                        return null;
                       },
                     ),
                   ),
@@ -104,7 +148,7 @@ class _LoginFormState extends State<LoginForm> {
                         color: kPrimaryColor.withAlpha(35)),
                     child: TextField(
                       obscureText: passwordObsecured,
-                      controller: _passwordcontroller,
+                      controller: _passwordController,
                       cursorColor: kPrimaryColor,
                       decoration: InputDecoration(
                           hintText: "Password",
@@ -140,7 +184,17 @@ class _LoginFormState extends State<LoginForm> {
                   const SizedBox(height: 15),
                   RoundedButton(
                     title: 'LOGIN',
-                    callback: () {},
+                    callback: () async{
+                      // if (_formkey.currentState!.validate()) {
+                      //   debugPrint("validated");
+                        Provider.of<LoginProvider>(context, listen: false)
+                            .login(
+                                email: _emailController.text,
+                                password: _passwordController.text);
+                      // } else {
+                      //   debugPrint("Invalid");
+                      // }
+                    },
                   ),
                   const SizedBox(
                     height: 18,

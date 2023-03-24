@@ -3,13 +3,15 @@ import 'package:provider/provider.dart';
 
 import 'Constant/colors.dart';
 import 'Network/http_client.dart';
+import 'Provider/login_provider.dart';
 import 'Provider/signup_provider.dart';
-import 'Screen/api.dart';
+import 'Screen/services.dart';
 import 'services/authservice.dart';
 
 void main() async {
   final HomeServiceHttpClient httpClient = HomeServiceHttpClient();
   final AuthService authService = AuthService(client: httpClient);
+  Provider.debugCheckInvalidValueType = null;
   runApp(MyApp(authService: authService));
 }
 
@@ -22,7 +24,9 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<SignUpProvider>(
-            create: (context) => SignUpProvider(authService: authService))
+            create: (context) => SignUpProvider(authService: authService)),
+        ChangeNotifierProvider<LoginProvider>(
+            create: (context) => LoginProvider(authService: authService))
       ],
       child: MaterialApp(
           title: 'Flutter Demo',
@@ -32,7 +36,7 @@ class MyApp extends StatelessWidget {
             appBarTheme: const AppBarTheme(color: kPrimaryColor),
           ),
           debugShowCheckedModeBanner: false,
-          home:   MyData(UserId: userid,)),
+          home: HomePage()),
     );
   }
 }

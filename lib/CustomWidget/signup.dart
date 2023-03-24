@@ -51,7 +51,9 @@ class _RegisterFormState extends State<RegisterForm> {
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(signUpProvider.apiResponse.error.toString())));
     } else if (signUpProvider.apiResponse.status == Status.success) {
-      Navigator.of(context).pop();
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+        return LoginScreen();
+      }));
     }
   }
 
@@ -93,82 +95,79 @@ class _RegisterFormState extends State<RegisterForm> {
                     const SizedBox(height: 40),
                     Image.asset('assets/images/login.png'),
                     const SizedBox(height: 40),
-                   Container(
-                  margin: const EdgeInsets.symmetric(vertical: 10),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                  width: size.width * 0.8,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: kPrimaryColor.withAlpha(35)),
-                  child: TextField(
-                    controller: _emailcontroller,
-                    cursorColor: kPrimaryColor,
-                    decoration: const InputDecoration(
-                        hintText: "Full Name",
-                        suffixIcon: Icon(Icons.person, color: kPrimaryColor),
-                        border: InputBorder.none),
-                  ),
-                ),
                     Container(
-                  margin: const EdgeInsets.symmetric(vertical: 10),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                  width: size.width * 0.8,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: kPrimaryColor.withAlpha(35)),
-                  child: TextField(
-                    controller: _emailcontroller,
-                    cursorColor: kPrimaryColor,
-                    decoration: const InputDecoration(
-                        hintText: "Email",
-                        suffixIcon: Icon(Icons.email, color: kPrimaryColor),
-                        border: InputBorder.none),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 10),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                  width: size.width * 0.8,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: kPrimaryColor.withAlpha(35)),
-                  child: TextField(
-                    obscureText: passwordObsecured,
-                    controller: _passwordcontroller,
-                    cursorColor: kPrimaryColor,
-                    decoration:  InputDecoration(
-                        hintText: "Password",
-                        suffixIcon: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  passwordObsecured = !passwordObsecured;
-                                });
-                              },
-                              icon: Icon(passwordObsecured
-                                  ? Icons.visibility_off
-                                  : Icons.visibility,color: kPrimaryColor,)),
-                          
-                        border: InputBorder.none),
-                  ),
-                ),
+                      margin: const EdgeInsets.symmetric(vertical: 10),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 5),
+                      width: size.width * 0.8,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: kPrimaryColor.withAlpha(35)),
+                      child: TextField(
+                        controller: _usernamecontroller,
+                        cursorColor: kPrimaryColor,
+                        decoration: const InputDecoration(
+                            hintText: "Full Name",
+                            suffixIcon:
+                                Icon(Icons.person, color: kPrimaryColor),
+                            border: InputBorder.none),
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 10),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 5),
+                      width: size.width * 0.8,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: kPrimaryColor.withAlpha(35)),
+                      child: TextField(
+                        controller: _emailcontroller,
+                        cursorColor: kPrimaryColor,
+                        decoration: const InputDecoration(
+                            hintText: "Email",
+                            suffixIcon: Icon(Icons.email, color: kPrimaryColor),
+                            border: InputBorder.none),
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 10),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 5),
+                      width: size.width * 0.8,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: kPrimaryColor.withAlpha(35)),
+                      child: TextField(
+                        obscureText: passwordObsecured,
+                        controller: _passwordcontroller,
+                        cursorColor: kPrimaryColor,
+                        decoration: InputDecoration(
+                            hintText: "Password",
+                            suffixIcon: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    passwordObsecured = !passwordObsecured;
+                                  });
+                                },
+                                icon: Icon(
+                                  passwordObsecured
+                                      ? Icons.visibility_off
+                                      : Icons.visibility,
+                                  color: kPrimaryColor,
+                                )),
+                            border: InputBorder.none),
+                      ),
+                    ),
                     const SizedBox(height: 10),
                     RoundedButton(
                       title: 'SIGN UP',
                       callback: () {
-                        context
-                            .read<SignUpProvider>()
-                            .signUp(
+                        context.read<SignUpProvider>().signUp(
                               email: _emailcontroller.text,
                               password: _passwordcontroller.text,
-                            )
-                            .then((value) => Navigator.of(context)
-                                    .pushAndRemoveUntil(
-                                        MaterialPageRoute(builder: (context) {
-                                  return const LoginScreen();
-                                }), (route) => false));
+                              name: _usernamecontroller.text,
+                            );
                       },
                     ),
                     const SizedBox(height: 10),

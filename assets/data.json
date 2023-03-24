@@ -1,0 +1,193 @@
+
+{
+  "services": [
+    {
+      "type": "cleaning",
+      "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
+      "providers": [
+        {
+          "id": 1,
+          "name": "Kitchen Cleaning",
+          "description": "Find the best plumbers in your area for all your plumbing needs",
+          "rating": 4.5,
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
+          "price": "$75"
+        },
+        {
+          "id": 2,
+          "name": "Sofa Cleaning",
+          "description": "Hire a professional cleaning service to keep your home clean and tidy",
+          "rating": 4.2,
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
+          "price": "$75"
+        }
+      ]
+    },
+    {
+      "type": "Plumbing",
+      "description": "Hire a professional cleaning service to keep your home clean and tidy",
+      "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
+      "providers": [
+        {
+          "id": 3,
+          "name": "Pipefitters ",
+          "description": "Hire a professional cleaning service to keep your home clean and tidy",
+          "rating": 4.8,
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
+          "price": "$75"
+        },
+        {
+          "id": 4,
+          "name": "Drainage plumbers",
+          "description": "Hire a professional cleaning service to keep your home clean and tidy",
+          "rating": 4.5,
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
+          "price": "$75"
+        },
+        {
+          "id": 5,
+          "name": "Gas plumbers",
+          "description": "Hire a professional cleaning service to keep your home clean and tidy",
+          "rating": 4.5,
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
+          "price": "$75"
+        }
+      ]
+    },
+    {
+      "type": "Cook",
+      "description": "Get help with all your home repairs and maintenance tasks",
+      "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
+      "providers": [
+        {
+          "id": 6,
+          "name": "Indian Cook",
+          "description": "Get help with all your home repairs and maintenance tasks",
+          "rating": 4.0,
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
+          "price": "$75"
+        },
+        {
+          "id": 7,
+          "name": "Chinese Cook",
+          "rating": 4.2,
+          "description": "Get help with all your home repairs and maintenance tasks",
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
+          "price": "$75"
+        },
+        {
+          "id": 8,
+          "name": "Nepali Cook",
+          "description": "Get help with all your home repairs and maintenance tasks",
+          "rating": 4.2,
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
+          "price": "$75"
+        }
+      ]
+    },
+    {
+      "type": "Repair",
+      "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
+      "providers": [
+        {
+          "id": 9,
+          "name": "Ac Repair",
+          "description": "Get help with all your home repairs and maintenance tasks",
+          "rating": 4.0,
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
+          "price": "$75"
+        },
+        {
+          "id": 10,
+          "name": "Television Repair",
+          "rating": 4.2,
+          "description": "Get help with all your home repairs and maintenance tasks",
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
+          "price": "$75"
+        }
+      ]
+    },
+    {
+      "type": "Laundry",
+      "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
+      "providers": [
+        {
+          "id": 11,
+          "name": "Households",
+          "description": "Get help with all your home repairs and maintenance tasks",
+          "rating": 4.0,
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
+          "price": "$20/kg"
+        },
+        {
+          "id": 12,
+          "name": " Normal Clothes",
+          "description": "Get help with all your home repairs and maintenance tasks",
+          "rating": 4.2,
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
+          "price": "$15/kg"
+        }
+      ]
+    },
+    {
+      "type": "MakeUp",
+      "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
+      "providers": [
+        {
+          "id": 13,
+          "name": "Bridal Makeup",
+          "description": "Get help with all your home repairs and maintenance tasks",
+          "rating": 4.0,
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
+          "price": "$100"
+        },
+        {
+          "id": 14,
+          "name": "Hair Stylist",
+          "description": "Get help with all your home repairs and maintenance tasks",
+          "rating": 4.2,
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
+          "price": "$30"
+        },
+        {
+          "id": 15,
+          "name": "Nail Technician",
+          "description": "Get help with all your home repairs and maintenance tasks",
+          "rating": 4.2,
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
+          "price": "$20"
+        }
+      ]
+    },
+    {
+      "type": "Painter",
+      "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
+      "providers": [
+        {
+          "id": 13,
+          "name": "Wall Putting",
+          "description": "Get help with all your home repairs and maintenance tasks",
+          "rating": 4.0,
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
+          "price": "Rs 130/sqft"
+        },
+        {
+          "id": 14,
+          "name": "Interior Repaints",
+          "description": "Get help with all your home repairs and maintenance tasks",
+          "rating": 4.2,
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
+          "price": "Rs 100/sqft"
+        },
+        {
+          "id": 15,
+          "name": "Enamel Paint",
+          "description": "Get help with all your home repairs and maintenance tasks",
+          "rating": 4.2,
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
+          "price": "Rs 150/sqft"
+        }
+      ]
+    }
+  ]
+}
