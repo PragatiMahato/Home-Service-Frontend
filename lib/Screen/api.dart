@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:fyp/Screen/booking.dart';
 import 'package:http/http.dart' as http;
 
 import '../Constant/app_size.dart';
@@ -50,8 +51,7 @@ class _PostListScreenState extends State<PostListScreen> {
           final post = _posts[index];
           return GestureDetector(
             onTap: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
                 return const ServiceType();
               }));
             },
@@ -81,8 +81,7 @@ class _PostListScreenState extends State<PostListScreen> {
                               child: Text(
                                 post['type'],
                                 style: const TextStyle(
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.w600),
+                                    fontSize: 22, fontWeight: FontWeight.w600),
                               ),
                             ),
                             const SizedBox(
@@ -97,18 +96,21 @@ class _PostListScreenState extends State<PostListScreen> {
                             ),
                             Container(
                                 margin: const EdgeInsets.only(
-                                    left: AppSize.s30 * 7,
-                                    bottom: AppSize.s20),
+                                    left: AppSize.s30 * 7, bottom: AppSize.s20),
                                 height: 30,
                                 decoration: BoxDecoration(
                                     color: Colors.green,
                                     borderRadius: BorderRadius.circular(10)),
                                 child: TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(builder: (context) {
+                                        return const Booking();
+                                      }));
+                                    },
                                     child: const Text(
                                       "Book Now",
-                                      style:
-                                          TextStyle(color: backgroundWhite),
+                                      style: TextStyle(color: backgroundWhite),
                                     ))),
                           ],
                         ),

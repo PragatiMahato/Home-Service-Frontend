@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:motion_tab_bar_v2/motion-tab-bar.dart';
 
 import '../Constant/colors.dart';
+import 'account.dart';
+import 'mybooking_history.dart';
 import 'services.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -40,12 +42,12 @@ class _BottomNavBarState extends State<BottomNavBar>
       bottomNavigationBar: MotionTabBar(
         initialSelectedTab: "Home",
         useSafeArea: true, // default: true, apply safe area wrapper
-        labels: const ["Home", "Search", "Booking", "Profile"],
+        labels: const ["Home", "MyBooking", "Notification", "Account"],
         icons: const [
           Icons.home,
-          Icons.search,
           Icons.calendar_month_rounded,
-          Icons.person
+          Icons.notifications,
+          Icons.account_circle
         ],
         tabSize: 50,
         tabBarHeight: 55,
@@ -75,10 +77,10 @@ class _BottomNavBarState extends State<BottomNavBar>
           const Center(
             child: HomePage(),
           ),
-          const Center(child: HomePage()),
+          const Center(child: MyBookingHistory()),
           const Center(child: HomePage()),
           const Center(
-            // child: ProfileScreen(),
+            child: MyAccount(),
           ),
         ],
       ),

@@ -29,6 +29,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
       body: Column(
         children: [
+          const SizedBox(
+            height: 30,
+          ),
           const ProfileImage(),
           Column(
             children: const [
@@ -62,12 +65,14 @@ class ProfileImage extends StatelessWidget {
     return Stack(
       children: [
         const CircleAvatar(
-          radius: 80,
+          radius: 60,
           backgroundImage: AssetImage("assets/images/pp.png"),
         ),
         Positioned(
-            bottom: 2,
-            right: 20,
+            bottom: 1,
+            right: 1,
+            top: 85,
+            left: 80,
             child: InkWell(
                 onTap: () {
                   showModalBottomSheet(
