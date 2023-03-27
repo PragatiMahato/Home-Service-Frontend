@@ -3,13 +3,15 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:fyp/Constant/app_size.dart';
 import 'package:http/http.dart' as http;
 
 import '../Network/api_const.dart';
 
 class SearchScreen extends StatefulWidget {
-  const SearchScreen({super.key,});
-
+  const SearchScreen({
+    super.key,
+  });
 
   @override
   _SearchScreenState createState() => _SearchScreenState();
@@ -28,8 +30,6 @@ class _SearchScreenState extends State<SearchScreen> {
         _searchResults = results;
       });
     } else {
-      
-      
       throw Exception('Failed to load search results');
     }
   }
@@ -50,9 +50,39 @@ class _SearchScreenState extends State<SearchScreen> {
         itemCount: _searchResults.length,
         itemBuilder: (context, index) {
           final post = _searchResults[index];
-          return ListTile(
-            title: Text(post['service_type']),
-            // subtitle: Text(post['description']),
+          return Container(
+            margin: const EdgeInsets.symmetric(
+                horizontal: AppSize.s20, vertical: AppSize.s20),
+            child: Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.network(
+                    post['image_url'],
+                    height: 70,
+                    width: 100,
+                  ),
+                ),
+                const SizedBox(
+                  width: 20,
+                ),
+                Expanded(
+                    child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      post['service_type'],
+                      style: const TextStyle(
+                          fontSize: 17, fontWeight: FontWeight.w600),
+                    ),
+                    const SizedBox(
+                      height: 3,
+                    ),
+                    Text(post['about']),
+                  ],
+                ))
+              ],
+            ),
           );
         },
       ),

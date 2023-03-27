@@ -6,7 +6,7 @@ import 'Network/http_client.dart';
 import 'Provider/booking_provider.dart';
 import 'Provider/login_provider.dart';
 import 'Provider/signup_provider.dart';
-import 'Screen/account.dart';
+import 'Screen/taskbar.dart';
 import 'services/authservice.dart';
 
 void main() async {
@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
           ),
           debugShowCheckedModeBanner: false,
           // home: Booking(address: '',)),
-          home: const MyAccount()),
+          home: const BottomNavBar()),
     );
   }
 }

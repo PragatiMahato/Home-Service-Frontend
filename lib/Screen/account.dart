@@ -20,6 +20,12 @@ class _MyAccountState extends State<MyAccount> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("My Account"),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(

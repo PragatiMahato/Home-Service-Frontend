@@ -36,7 +36,7 @@ class HelpCenter extends StatelessWidget {
                         borderRadius: BorderRadius.circular(55),
                         child: Image.asset(
                           "assets/images/help.png",
-                          height: 55,
+                          height: 65,
                         ),
                       ),
                     ),
@@ -96,7 +96,7 @@ class HelpCenter extends StatelessWidget {
                 )
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Row(
