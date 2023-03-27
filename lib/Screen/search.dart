@@ -28,6 +28,8 @@ class _SearchScreenState extends State<SearchScreen> {
         _searchResults = results;
       });
     } else {
+      
+      
       throw Exception('Failed to load search results');
     }
   }
@@ -49,8 +51,8 @@ class _SearchScreenState extends State<SearchScreen> {
         itemBuilder: (context, index) {
           final post = _searchResults[index];
           return ListTile(
-            title: Text(post['type']),
-            subtitle: Text(post['description']),
+            title: Text(post['service_type']),
+            // subtitle: Text(post['description']),
           );
         },
       ),

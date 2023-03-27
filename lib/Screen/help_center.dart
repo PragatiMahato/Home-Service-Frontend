@@ -25,25 +25,29 @@ class HelpCenter extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              margin: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
+              margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 15),
               child: Card(
                 color: const Color.fromARGB(255, 233, 240, 255),
                 child: Row(
                   children: [
                     Container(
-                      padding: const EdgeInsets.all(25),
+                      padding: const EdgeInsets.all(20),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(55),
                         child: Image.asset(
-                          "assets/images/pp.png",
-                          height: 65,
+                          "assets/images/help.png",
+                          height: 55,
                         ),
                       ),
                     ),
                     const Expanded(
                         child: Text(
-                      "jkvbd isazhvjkizdasv ihvmnrtt saiodvhzds vihsa vahg ygy",
-                      style: TextStyle(fontSize: 17),
+                      "Contact our support at any time for your queries or any help",
+                      style: TextStyle(
+                          fontSize: 16,
+                          wordSpacing: 1,
+                          letterSpacing: 0.8,
+                          color: textColor),
                     ))
                   ],
                 ),
@@ -51,8 +55,83 @@ class HelpCenter extends StatelessWidget {
             ),
             Container(
                 margin: const EdgeInsets.symmetric(
-                    vertical: AppSize.s30, horizontal: AppSize.s30),
-                child: const Text("Contact Us "))
+                    vertical: AppSize.s20, horizontal: AppSize.s30),
+                child: const Text(
+                  "Contact Us ",
+                  style: TextStyle(
+                    fontSize: 19,
+                    fontWeight: FontWeight.w500,
+                  ),
+                )),
+            Row(
+              children: [
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: AppSize.s30),
+                  height: 40,
+                  width: 40,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      color: Colors.green),
+                  child: const Icon(
+                    Icons.call,
+                    color: backgroundWhite,
+                    size: 26,
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    Text(
+                      "Call",
+                      style: TextStyle(
+                          fontSize: 17,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w700),
+                    ),
+                    SizedBox(
+                      height: 4,
+                    ),
+                    Text("9825854689")
+                  ],
+                )
+              ],
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            Row(
+              children: [
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: AppSize.s30),
+                  height: 40,
+                  width: 40,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      color: Colors.red),
+                  child: const Icon(
+                    Icons.mail,
+                    color: backgroundWhite,
+                    size: 20,
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    Text(
+                      "Email Us",
+                      style: TextStyle(
+                          fontSize: 17,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w700),
+                    ),
+                    SizedBox(
+                      height: 4,
+                    ),
+                    Text("homecare@gail.com")
+                  ],
+                )
+              ],
+            )
           ],
         ),
       ),

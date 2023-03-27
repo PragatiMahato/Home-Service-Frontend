@@ -25,34 +25,35 @@ class _MyBookingHistoryState extends State<MyBookingHistory> {
           itemCount: bookingNotifier.booking.length,
           itemBuilder: (BuildContext context, int index) {
             return Container(
-              margin: EdgeInsets.only(top: 4),
               color: const Color.fromARGB(255, 239, 236, 255),
-              padding: const EdgeInsets.all(AppSize.s20),
+              padding: const EdgeInsets.symmetric(horizontal:AppSize.s20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          bookingNotifier.booking[index].name,
-                          style: const TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          bookingNotifier.booking[index].date,
-                        ),
-                        Text(
-                          bookingNotifier.booking[index].location,
-                        ),
-                        Text(
-                          bookingNotifier.booking[index].total_price,
-                        ),
-                      ]),
+                  Expanded(
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            bookingNotifier.booking[index].name,
+                            style: const TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            bookingNotifier.booking[index].date,
+                          ),
+                          Text(
+                            bookingNotifier.booking[index].location,
+                          ),
+                          Text(
+                            bookingNotifier.booking[index].total_price,
+                          ),
+                        ]),
+                  ),
                   Container(
                     alignment: Alignment.bottomRight,
                     margin: const EdgeInsets.only(top: 0),

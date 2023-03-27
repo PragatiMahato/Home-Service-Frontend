@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:http/http.dart' as http;
@@ -8,7 +10,7 @@ import '../Constant/colors.dart';
 import '../Network/api_const.dart';
 import '../Provider/booking_provider.dart';
 import '../model/booking_models.dart';
-import 'googlemap.dart';
+import 'map.dart';
 import 'mybooking_history.dart';
 import 'services.dart';
 
@@ -18,7 +20,8 @@ import 'services.dart';
 // ];
 
 class Booking extends StatefulWidget {
-  const Booking({super.key});
+  const Booking({super.key, required this.address});
+  final String address;
 
   @override
   State<Booking> createState() => _BookingState();
@@ -29,8 +32,16 @@ class _BookingState extends State<Booking> {
   final _nameController = TextEditingController();
   final _totalPriceController = TextEditingController();
   final _datecontroller = TextEditingController();
-  final _locationController = TextEditingController();
   DateTime? _selectedDate;
+
+
+late TextEditingController _locationController;
+
+  @override
+  void initState() {
+    super.initState();
+    _locationController = TextEditingController(text: widget.address);
+  }
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -57,7 +68,6 @@ class _BookingState extends State<Booking> {
     });
 
     if (response.statusCode == 200) {
-      // Show success message
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Booking successful')),
       );
@@ -69,17 +79,18 @@ class _BookingState extends State<Booking> {
       _locationController.clear();
     } else {
       print(response.statusCode == 309);
-      // Show error message
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Error booking service')),
       );
     }
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 192, 182, 246),
+      backgroundColor: const Color.fromARGB(255, 192, 182, 246),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -231,7 +242,7 @@ class _BookingState extends State<Booking> {
                         child: TextField(
                           controller: _locationController,
                           decoration: InputDecoration(
-                              hintText: 'Location',
+                              hintText: "Set you location",
                               border: InputBorder.none,
                               suffixIcon: IconButton(
                                   onPressed: () {

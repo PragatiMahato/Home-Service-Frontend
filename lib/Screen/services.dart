@@ -3,11 +3,11 @@
 import 'package:flutter/material.dart';
 import 'package:fyp/Constant/app_size.dart';
 import 'package:fyp/Constant/colors.dart';
+import 'package:fyp/Screen/api.dart';
 import 'package:fyp/Screen/navbar.dart';
 
 import '../CustomWidget/category.dart';
 import '../CustomWidget/home_page_header.dart';
-import 'api.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key, this.user_name});
@@ -98,12 +98,6 @@ class HomePage extends StatelessWidget {
   }
 }
 
-// Future<List<ServiceModel>> ReadJsonData() async {
-//   final jsondata = await rootBundle.loadString('jsonfile/api.json');
-//   final list = json.decode(jsondata) as List<dynamic>;
-
-//   return list.map((e) => ServiceModel.fromJson(e)).toList();
-// }
 
 // ignore: camel_case_types
 class Category_card extends StatelessWidget {

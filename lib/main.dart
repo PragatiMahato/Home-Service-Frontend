@@ -6,7 +6,7 @@ import 'Network/http_client.dart';
 import 'Provider/booking_provider.dart';
 import 'Provider/login_provider.dart';
 import 'Provider/signup_provider.dart';
-import 'Screen/help_center.dart';
+import 'Screen/account.dart';
 import 'services/authservice.dart';
 
 void main() async {
@@ -39,7 +39,8 @@ class MyApp extends StatelessWidget {
             appBarTheme: const AppBarTheme(color: kPrimaryColor),
           ),
           debugShowCheckedModeBanner: false,
-          home: const HelpCenter()),
+          // home: Booking(address: '',)),
+          home: const MyAccount()),
     );
   }
 }

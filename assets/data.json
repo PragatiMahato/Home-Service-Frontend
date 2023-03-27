@@ -2,191 +2,245 @@
 {
   "services": [
     {
-      "type": "cleaning",
-      "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
-      "providers": [
+      "service_type": "Cleaning",
+      "icon":"https://www.flaticon.com/free-icon/household_2553629",
+      "about": "Professional lawn care service for your home or office.",
+      "image_url": "https://tse1.mm.bing.net/th?id=OIP.OAPejDWP8TuWNcu5VL9DjQHaFH&pid=Api&P=0",
+      "sub_types": [
         {
-          "id": 1,
-          "name": "Kitchen Cleaning",
-          "description": "Find the best plumbers in your area for all your plumbing needs",
-          "rating": 4.5,
-          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
-          "price": "$75"
+          "id": 101,
+          "name": "Home Cleaning",
+          "price_rate": "$100 - $200",
+          "image": "https://tse4.mm.bing.net/th?id=OIP.jDB7kBlsemTpX3qCAtKOKwHaE8&pid=Api&P=0",
+          "description": "Professional cleaning service for your home.",
+          "Rate":4.5
         },
         {
-          "id": 2,
-          "name": "Sofa Cleaning",
-          "description": "Hire a professional cleaning service to keep your home clean and tidy",
-          "rating": 4.2,
-          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
-          "price": "$75"
+          "id": 102,
+          "name": "Garden Cleaning",
+          "price_rate": "$150 - $250",
+          "image": "https://tse1.mm.bing.net/th?id=OIP.8FmEMQzbBDqbDHXR9LWFrgHaE8&pid=Api&P=0",
+          "description": "Professional cleaning service for your office or workplace.",
+          "Rate":4.5
+        },
+        {
+          "id": 103,
+          "name": "Carpet Cleaning",
+          "price_rate": "$75 - $150",
+          "image": "https://tse4.mm.bing.net/th?id=OIP.faJEwonTH9qpVsIZZaMoigHaE8&pid=Api&P=0",
+          "description": "Professional cleaning service for your carpets.",
+          "Rate":4.5
         }
       ]
     },
     {
-      "type": "Plumbing",
-      "description": "Hire a professional cleaning service to keep your home clean and tidy",
-      "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
-      "providers": [
+      "service_type": "Handyman",
+      "icon":"https://cdn-icons-png.flaticon.com/128/2702/2702300.png",
+      "about": "Professional lawn care service for your home or office.",
+      "image_url":"https://tse4.mm.bing.net/th?id=OIP._gS9EyW8qsIT2C7ljFff5wHaFB&pid=Api&P=0",
+      "sub_types": [
         {
-          "id": 3,
-          "name": "Pipefitters ",
-          "description": "Hire a professional cleaning service to keep your home clean and tidy",
-          "rating": 4.8,
-          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
-          "price": "$75"
+          "id": 201,
+          "name": "Plumbing",
+          "price_rate": "$100 - $300",
+          "image": "https://tse1.mm.bing.net/th?id=OIP.o65OF--f0qV-2-KpSqasxgHaE8&pid=Api&P=0",
+          "description": "Professional plumbing service for your home or office.",
+          "Rate":4.5
         },
         {
-          "id": 4,
-          "name": "Drainage plumbers",
-          "description": "Hire a professional cleaning service to keep your home clean and tidy",
-          "rating": 4.5,
-          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
-          "price": "$75"
+          "id": 202,
+          "name": "Electrical",
+          "price_rate": "$150 - $400",
+          "image": "https://tse1.mm.bing.net/th?id=OIP.0oquEe_QeJYX4-flt072RQHaE8&pid=Api&P=0",
+          "description": "Professional electrical service for your home or office.",
+          "Rate":4.5
         },
         {
-          "id": 5,
-          "name": "Gas plumbers",
-          "description": "Hire a professional cleaning service to keep your home clean and tidy",
-          "rating": 4.5,
-          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
-          "price": "$75"
+          "id": 203,
+          "name": "Carpentry",
+          "price_rate": "$200 - $500",
+          "image": "https://tse2.mm.bing.net/th?id=OIP.HQYNbyRhlGGA84yq4E8EMwHaE7&pid=Api&P=0",
+          "description": "Professional carpentry service for your home or office.",
+          "Rate":4.5
         }
       ]
     },
     {
-      "type": "Cook",
-      "description": "Get help with all your home repairs and maintenance tasks",
-      "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
-      "providers": [
+      "service_type": "Painter",
+      "icon":"https://cdn-icons-png.flaticon.com/128/3671/3671188.png",
+      "about": "Professional lawn care service for your home or office.",
+      "image_url":"https://tse4.mm.bing.net/th?id=OIP.5sMCJZNrUmNYuXp7XfJHtwHaE7&pid=Api&P=0",
+      "sub_types": [
         {
-          "id": 6,
-          "name": "Indian Cook",
-          "description": "Get help with all your home repairs and maintenance tasks",
-          "rating": 4.0,
-          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
-          "price": "$75"
+          "id": 301,
+          "name": "Wall Paint",
+          "price_rate": "$500 - $1000",
+          "image": "https://tse4.mm.bing.net/th?id=OIP.ndbdIdmo3ijJRO5_-51ALgHaE8&pid=Api&P=0",
+          "description": "Professional garden design service for your home.",
+          "Rate":4.5
         },
         {
-          "id": 7,
-          "name": "Chinese Cook",
-          "rating": 4.2,
-          "description": "Get help with all your home repairs and maintenance tasks",
-          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
-          "price": "$75"
-        },
-        {
-          "id": 8,
-          "name": "Nepali Cook",
-          "description": "Get help with all your home repairs and maintenance tasks",
-          "rating": 4.2,
-          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
-          "price": "$75"
-        }
-      ]
-    },
-    {
-      "type": "Repair",
-      "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
-      "providers": [
-        {
-          "id": 9,
-          "name": "Ac Repair",
-          "description": "Get help with all your home repairs and maintenance tasks",
-          "rating": 4.0,
-          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
-          "price": "$75"
-        },
-        {
-          "id": 10,
-          "name": "Television Repair",
-          "rating": 4.2,
-          "description": "Get help with all your home repairs and maintenance tasks",
-          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
-          "price": "$75"
-        }
-      ]
-    },
-    {
-      "type": "Laundry",
-      "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
-      "providers": [
-        {
-          "id": 11,
-          "name": "Households",
-          "description": "Get help with all your home repairs and maintenance tasks",
-          "rating": 4.0,
-          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
-          "price": "$20/kg"
-        },
-        {
-          "id": 12,
-          "name": " Normal Clothes",
-          "description": "Get help with all your home repairs and maintenance tasks",
-          "rating": 4.2,
-          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
-          "price": "$15/kg"
-        }
-      ]
-    },
-    {
-      "type": "MakeUp",
-      "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
-      "providers": [
-        {
-          "id": 13,
-          "name": "Bridal Makeup",
-          "description": "Get help with all your home repairs and maintenance tasks",
-          "rating": 4.0,
-          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
-          "price": "$100"
-        },
-        {
-          "id": 14,
-          "name": "Hair Stylist",
-          "description": "Get help with all your home repairs and maintenance tasks",
-          "rating": 4.2,
-          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
-          "price": "$30"
-        },
-        {
-          "id": 15,
-          "name": "Nail Technician",
-          "description": "Get help with all your home repairs and maintenance tasks",
-          "rating": 4.2,
-          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
-          "price": "$20"
-        }
-      ]
-    },
-    {
-      "type": "Painter",
-      "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
-      "providers": [
-        {
-          "id": 13,
-          "name": "Wall Putting",
-          "description": "Get help with all your home repairs and maintenance tasks",
-          "rating": 4.0,
-          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
-          "price": "Rs 130/sqft"
-        },
-        {
-          "id": 14,
-          "name": "Interior Repaints",
-          "description": "Get help with all your home repairs and maintenance tasks",
-          "rating": 4.2,
-          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
-          "price": "Rs 100/sqft"
-        },
-        {
-          "id": 15,
+          "id": 302,
           "name": "Enamel Paint",
-          "description": "Get help with all your home repairs and maintenance tasks",
-          "rating": 4.2,
-          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPDZ8exbHR05dpPrPwhA_MNrFQ1VX0ho_9kg&usqp=CAU",
-          "price": "Rs 150/sqft"
+          "price_rate": "$50 - $150",
+          "image": "https://tse4.mm.bing.net/th?id=OIP.COX-SW2K-0y9BD-ySBEMLwHaFE&pid=Api&P=0",
+          "description": "Professional lawn care service for your home or office.",
+          "Rate":4.5
+        },
+        {
+          "id": 303,
+          "name": "Wall Putting and Color",
+          "price_rate": "$200 - $500",
+          "image": "https://tse1.mm.bing.net/th?id=OIP.oZ6nVGqmYHvKHACNCvbDfgHaFs&pid=Api&P=0",
+          "description": "Professional tree services for your home or office.",
+          "Rate":4.5
         }
+      ]
+    },
+    {
+      "service_type": "Beautician",
+      "icon":"https://cdn-icons-png.flaticon.com/128/8497/8497219.png",
+      "about": "Professional lawn care service for your home or office.",
+      "image_url":"https://tse3.mm.bing.net/th?id=OIP.dqWu0A6XtzWvlhFA7oTghAHaE8&pid=Api&P=0",
+      "sub_types": [
+        {
+          "id": 401,
+          "name": "Nail Extension",
+          "price_rate": "$500 - $1000",
+          "image": "https://tse2.mm.bing.net/th?id=OIP.QZ4hutnZ1rIlma4RA6QlsQHaD4&pid=Api&P=0",
+          "description": "Professional garden design service for your home.",
+          "Rate":4.5
+        },
+        {
+          "id": 402,
+          "name": "Bridal Makeup",
+          "price_rate": "$50 - $150",
+          "image": "https://www.getyourvenue.com/uploads/allied-service/59/service-main5.jpg",
+          "description": "Professional lawn care service for your home or office.",
+          "Rate":4.5
+        },
+        {
+          "id": 403,
+          "name": "Hair Stylist",
+          "price_rate": "$200 - $500",
+          "image": "https://tse1.mm.bing.net/th?id=OIP.JCXm1hrJewvatrSmPSwctQHaE8&pid=Api&P=0",
+          "description": "Professional tree services for your home or office.",
+          "Rate":4.5
+        }
+      ]
+    },
+    {
+      "service_type": "Laundry",
+      "icon":"https://www.flaticon.com/free-icon/washing-machine_3899253",
+      "about": "Professional lawn care service for your home or office.",
+      "image_url":"https://tse3.mm.bing.net/th?id=OIP.pdR9QbovI_yGhyy6XYgGDQHaFJ&pid=Api&P=0",
+      "sub_types": [
+        {
+          "id": 501,
+          "name": "Household",
+          "price_rate": "$500 - $1000",
+          "image": "https://tse4.mm.bing.net/th?id=OIP.vmMHEbI6FnJ34kBTdcQHDgHaE8&pid=Api&P=0",
+          "description": "Professional garden design service for your home.",
+          "Rate":4.5
+        },
+        {
+          "id": 502,
+          "name": "Normal Clothes",
+          "price_rate": "$50 - $150",
+          "image": "https://tse3.mm.bing.net/th?id=OIP.OflFD7TMuHRDxjIMrwLOqwHaE8&pid=Api&P=0",
+          "description": "Professional lawn care service for your home or office.",
+          "Rate":4.5
+        },
+        {
+          "id": 503,
+          "name": "Blanket",
+          "price_rate": "$200 - $500",
+          "image": "https://tse2.mm.bing.net/th?id=OIP.MOhs3AS-3I5HiQL14LqmogHaEJ&pid=Api&P=0",
+          "description": "Professional tree services for your home or office.",
+          "Rate":4.5
+        }
+      ]
+    },
+    {
+      "service_type": "IT Service",
+      "icon":"https://cdn-icons-png.flaticon.com/128/6802/6802091.png",
+      "about": "Professional lawn care service for your home or office.",
+      "image_url":"https://tse3.mm.bing.net/th?id=OIP.1duBmb7tScUM7DF-E-6GZwHaEJ&pid=Api&P=0",
+      "sub_types": [
+        {
+          "id": 601,
+          "name": "Computer Repair",
+          "price_rate": "$500 - $1000",
+          "image": "https://tse3.mm.bing.net/th?id=OIP.0pwBJiC6cWvDZTiBe6BC3wAAAA&pid=Api&P=0",
+          "description": "Professional garden design service for your home.",
+          "Rate":4.5
+        },
+        {
+          "id": 602,
+          "name": "Laptop Repair",
+          "price_rate": "$50 - $150",
+          "image": "https://tse3.mm.bing.net/th?id=OIP.ScO-TTQO3Z7Ge-weS5bkmgHaE8&pid=Api&P=0",
+          "description": "Professional lawn care service for your home or office.",
+          "Rate":4.5
+        },
+        {
+          "id": 602,
+          "name": "Wifi Router Repair",
+          "price_rate": "$50 - $150",
+          "image": "https://tse1.mm.bing.net/th?id=OIP.OslJTKBkuojEfp8d8EuHEgHaEK&pid=Api&P=0",
+          "description": "Professional lawn care service for your home or office.",
+          "Rate":4.5
+        }
+        
+      ]
+    },
+    {
+      "service_type": "Cook",
+      "icon":"https://www.flaticon.com/free-icon/cooking_1830878",
+      "about": "Professional lawn care service for your home or office.",
+      "image_url":"https://tse4.mm.bing.net/th?id=OIP.NZQpuDwJJeQ_-xPliWsGcwHaE8&pid=Api&P=0",
+      "sub_types": [
+        {
+          "id": 701,
+          "name": "Banquet Chef ",
+          "price_rate": "$500 - $1000",
+          "image": "https://tse2.mm.bing.net/th?id=OIP.scO5lWn2npzYyO3hQgRg8gHaFG&pid=Api&P=0",
+          "description": "A chef who specializes in preparing large-scale meals for banquets, weddings, and other special events.",
+          "Rate":4.5
+        },
+        {
+          "id": 702,
+          "name": "Chinese Cook",
+          "price_rate": "$50 - $150",
+          "image": "https://tse1.mm.bing.net/th?id=OIP.GMn1MDlYQF3asfY9KvXxLgHaE7&pid=Api&P=0",
+          "description": "Professional lawn care service for your home or office.",
+          "Rate":4.5
+        },
+        {
+          "id": 702,
+          "name": "Indian Cook",
+          "price_rate": "$50 - $150",
+          "image": "https://tse1.mm.bing.net/th?id=OIP.baa1DvCDugn2Qy_6N4QG_AHaE7&pid=Api&P=0",
+          "description": "Professional lawn care service for your home or office.",
+          "Rate":4.5
+        },
+        {
+          "id": 702,
+          "name": "Japnese Cook",
+          "price_rate": "$50 - $150",
+          "image": "https://tse2.mm.bing.net/th?id=OIP.BI6uICziNjuzommVE_anVwHaE8&pid=Api&P=0",
+          "description": "Professional lawn care service for your home or office.",
+          "Rate":4.5
+        },
+        {
+          "id": 702,
+          "name": "Korean Cook",
+          "price_rate": "$50 - $150",
+          "image": "https://tse1.mm.bing.net/th?id=OIP.b_YTkUln9PV8BYkPUxYHUAHaE7&pid=Api&P=0",
+          "description": "Professional lawn care service for your home or office.",
+          "Rate":4.5
+        }
+        
       ]
     }
   ]

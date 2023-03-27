@@ -4,12 +4,12 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:fyp/Screen/booking.dart';
+import 'package:fyp/Screen/serviceapi.dart';
 import 'package:http/http.dart' as http;
 
 import '../Constant/app_size.dart';
 import '../Constant/colors.dart';
 import '../Network/api_const.dart';
-import 'service_type.dart';
 
 class PostListScreen extends StatefulWidget {
   const PostListScreen({super.key});
@@ -33,6 +33,7 @@ class _PostListScreenState extends State<PostListScreen> {
     if (response.statusCode == 200) {
       setState(() {
         _posts = json.decode(response.body);
+        // log(_posts.toString());
       });
     } else {
       throw Exception('Failed to fetch posts');
@@ -42,9 +43,6 @@ class _PostListScreenState extends State<PostListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('Service'),
-      // ),
       body: ListView.separated(
         itemCount: _posts.length,
         itemBuilder: (context, index) {
@@ -52,23 +50,25 @@ class _PostListScreenState extends State<PostListScreen> {
           return GestureDetector(
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return const ServiceType();
+                return const MyHomePage();
               }));
             },
             child: Column(
               children: [
                 Padding(
                   padding: const EdgeInsets.only(
-                    left: AppSize.s20,
-                  ),
+                      left: AppSize.s20, ),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Image.asset(
-                        "assets/images/ac.png",
-                        height: 100,
-                        width: 100,
+                      SizedBox(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(5),
+                          child: Image.network(
+                            post['image_url'],
+                            height: 70,
+                          ),
+                        ),
                       ),
                       Expanded(
                         child: Column(
@@ -76,23 +76,25 @@ class _PostListScreenState extends State<PostListScreen> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(
-                                top: AppSize.s30,
-                              ),
+                                  top: 10, left: AppSize.s20),
                               child: Text(
-                                post['type'],
+                                post['service_type'],
                                 style: const TextStyle(
-                                    fontSize: 22, fontWeight: FontWeight.w600),
+                                    fontSize: 18, fontWeight: FontWeight.w600),
                               ),
                             ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: AppSize.s10, left: AppSize.s20),
+                              child: Text(
+                                post['about'],
+                                style: const TextStyle(
+                                    fontSize: 15, fontWeight: FontWeight.w500,color: textColor),
+                              ),
+                            ),
+                          
                             const SizedBox(
                               height: 5,
-                            ),
-                            Text(
-                              post['description'],
-                              style: const TextStyle(fontSize: 16),
-                            ),
-                            const SizedBox(
-                              height: 10,
                             ),
                             Container(
                                 margin: const EdgeInsets.only(
@@ -105,7 +107,7 @@ class _PostListScreenState extends State<PostListScreen> {
                                     onPressed: () {
                                       Navigator.of(context).push(
                                           MaterialPageRoute(builder: (context) {
-                                        return const Booking();
+                                        return const Booking(address: 'address',);
                                       }));
                                     },
                                     child: const Text(

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../Constant/app_size.dart';
 import '../Constant/colors.dart';
+import 'feedback.dart';
+import 'help_center.dart';
 import 'login.dart';
 import 'profile.dart';
 
@@ -113,7 +115,7 @@ class _MyAccountState extends State<MyAccount> {
                     onTap: () {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (context) {
-                        return const ProfileScreen();
+                        return const HelpCenter();
                       }));
                     },
                     child: Row(
@@ -141,7 +143,7 @@ class _MyAccountState extends State<MyAccount> {
                     onTap: () {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (context) {
-                        return const ProfileScreen();
+                        return const FeedbackScreen();
                       }));
                     },
                     child: Row(
