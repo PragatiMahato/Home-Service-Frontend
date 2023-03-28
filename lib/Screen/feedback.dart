@@ -1,11 +1,15 @@
-// ignore_for_file: implementation_imports
+// ignore_for_file: implementation_imports, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:fyp/Constant/app_size.dart';
 import 'package:fyp/Constant/colors.dart';
+import 'package:http/http.dart' as http;
+
+import '../Network/api_const.dart';
 
 class FeedbackScreen extends StatefulWidget {
-  const FeedbackScreen({super.key});
+  const FeedbackScreen({super.key, required this.userId});
+  final String userId;
 
   @override
   State<FeedbackScreen> createState() => _FeedbackScreenState();
@@ -13,6 +17,29 @@ class FeedbackScreen extends StatefulWidget {
 
 class _FeedbackScreenState extends State<FeedbackScreen> {
   final _messageController = TextEditingController();
+
+  void _submitFeedback() async {
+    final response = await http.post(
+      Uri.parse('${ApiConst.baseUrl}userFeedback/${widget.userId}/feedback'),
+      body: {'feedback': _messageController.text},
+    );
+
+    if (response.statusCode == 201) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Feedback submitted successfully'),
+        ),
+      );
+      _messageController.clear();
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Failed to submit feedback'),
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,9 +61,9 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
             const Text(
               "Send us your feedback!",
               style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black),
+                  fontSize: 23,
+                  fontWeight: FontWeight.w700,
+                  color: kPrimaryColor),
             ),
             const SizedBox(
               height: 50,
@@ -48,26 +75,27 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                   style: TextStyle(fontSize: 16),
                 )),
             Container(
-              height: 120,
-              color: Color.fromARGB(255, 227, 227, 227),
+              height: 160,
+              color: Color.fromARGB(255, 235, 235, 235),
               margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 40),
               padding: const EdgeInsets.only(top: 10, left: 7, right: 7),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text(
+                children: [
+                  const Text(
                     "Describe your exprience",
                     style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                         color: kPrimaryColor),
                   ),
-                  SizedBox(
-                    height: 37,
+                  const SizedBox(
+                    height: 74,
                   ),
                   TextField(
+                    controller: _messageController,
                     maxLines: null,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       border: UnderlineInputBorder(
                         borderSide: BorderSide(
                           color: kPrimaryColor,
@@ -93,6 +121,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
               child: TextButton(
                   onPressed: () {
                     Navigator.pop(context);
+                    _submitFeedback();
                   },
                   child: const Text(
                     "Submit",

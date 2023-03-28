@@ -149,7 +149,7 @@ class _MyAccountState extends State<MyAccount> {
                     onTap: () {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (context) {
-                        return const FeedbackScreen();
+                        return const FeedbackScreen(userId: '6408722c78393a6fb6ab76fe',);
                       }));
                     },
                     child: Row(
