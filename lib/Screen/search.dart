@@ -50,38 +50,51 @@ class _SearchScreenState extends State<SearchScreen> {
         itemCount: _searchResults.length,
         itemBuilder: (context, index) {
           final post = _searchResults[index];
-          return Container(
-            margin: const EdgeInsets.symmetric(
-                horizontal: AppSize.s20, vertical: AppSize.s20),
-            child: Row(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: Image.network(
-                    post['image_url'],
-                    height: 70,
-                    width: 100,
+          return GestureDetector(
+            onDoubleTap: () {
+// Navigator.push(
+//   context,
+//   MaterialPageRoute(
+//     builder: (context) => SubTypesPage(
+//       post['subtypes'].map((subType) => SubType.fromJson(subType)).toList(),
+//       serviceType: ServiceType.fromJson(post),
+//     ),
+//   ),
+// );
+            },
+            child: Container(
+              margin: const EdgeInsets.symmetric(
+                  horizontal: AppSize.s20, vertical: AppSize.s20),
+              child: Row(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: Image.network(
+                      post['image_url'],
+                      height: 70,
+                      width: 100,
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  width: 20,
-                ),
-                Expanded(
-                    child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      post['service_type'],
-                      style: const TextStyle(
-                          fontSize: 17, fontWeight: FontWeight.w600),
-                    ),
-                    const SizedBox(
-                      height: 3,
-                    ),
-                    Text(post['about']),
-                  ],
-                ))
-              ],
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  Expanded(
+                      child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        post['service_type'],
+                        style: const TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.w600),
+                      ),
+                      const SizedBox(
+                        height: 3,
+                      ),
+                      Text(post['about']),
+                    ],
+                  ))
+                ],
+              ),
             ),
           );
         },

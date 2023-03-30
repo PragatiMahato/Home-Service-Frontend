@@ -1,7 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:fyp/Screen/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -110,34 +109,20 @@ late TextEditingController _locationController;
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(
+                    children: const[
+                       SizedBox(
                         height: 30,
                       ),
-                      const Text(
+                       Text(
                         "House Cleaning",
                         style: TextStyle(
                             fontSize: 22, fontWeight: FontWeight.w700),
                       ),
-                      const Text("Rs.200/hr"),
-                      const SizedBox(
+                       Text("Rs.200/hr"),
+                       SizedBox(
                         height: 20,
                       ),
-                      RatingBar.builder(
-                        initialRating: 2,
-                        minRating: 1,
-                        direction: Axis.horizontal,
-                        itemCount: 5,
-                        itemBuilder: (context, _) => Transform.scale(
-                          scale: 0.6,
-                          child: const Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                          ),
-                        ),
-                        onRatingUpdate: (rating) =>
-                            debugPrint(rating.toString()),
-                      ),
+                     
                     ],
                   ),
                   Image.asset(

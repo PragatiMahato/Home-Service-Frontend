@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:fyp/Constant/app_size.dart';
+import 'package:fyp/Screen/rating.dart';
 import 'package:fyp/Screen/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -15,7 +16,6 @@ import '../model/booking_models.dart';
 import '../model/service_modal.dart';
 import 'map.dart';
 import 'mybooking_history.dart';
-
 
 class ServiceTypesPage extends StatefulWidget {
   const ServiceTypesPage({super.key});
@@ -162,7 +162,10 @@ class SubTypesPage extends StatelessWidget {
           return GestureDetector(
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return SubTypeDetailsPage(subType: subTypes[index], address: '',);
+                return SubTypeDetailsPage(
+                  subType: subTypes[index],
+                  address: '',
+                );
               }));
             },
             child: Column(
@@ -242,7 +245,9 @@ class SubTypeDetailsPage extends StatefulWidget {
   final SubType subType;
   final String address;
 
-  const SubTypeDetailsPage({Key? key, required this.subType, required this.address}) : super(key: key);
+  const SubTypeDetailsPage(
+      {Key? key, required this.subType, required this.address})
+      : super(key: key);
 
   @override
   State<SubTypeDetailsPage> createState() => _SubTypeDetailsPageState();
@@ -304,6 +309,7 @@ class _SubTypeDetailsPageState extends State<SubTypeDetailsPage> {
       );
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -340,10 +346,11 @@ class _SubTypeDetailsPageState extends State<SubTypeDetailsPage> {
                   Text(
                     widget.subType.description,
                     style: const TextStyle(
-                      fontSize: 18,
+                      fontSize: 17,
                       color: Colors.grey,
                     ),
                   ),
+                  const RatingScreen(serviceId: '6408722c78393a6fb6ab76fe'),
                   const SizedBox(height: 13),
                   Text(
                     'Price : ${widget.subType.price_rate}',
@@ -469,7 +476,7 @@ class _SubTypeDetailsPageState extends State<SubTypeDetailsPage> {
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children:  [
+                            children: [
                               const Text(
                                 "Total Price",
                                 style: TextStyle(
@@ -478,7 +485,6 @@ class _SubTypeDetailsPageState extends State<SubTypeDetailsPage> {
                                     fontWeight: FontWeight.w600),
                               ),
                               Text(widget.subType.price_rate),
-
                             ],
                           )),
                       Container(

@@ -1,9 +1,9 @@
 class Usermodel {
   String email;
   String password;
-  String? name;
+  String name;
 
-  Usermodel({required this.email, required this.password,  this.name});
+  Usermodel({required this.email, required this.password, required this.name});
 
   factory Usermodel.fromJson(Map<String, dynamic> map) {
     return Usermodel(

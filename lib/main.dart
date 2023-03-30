@@ -6,7 +6,7 @@ import 'Network/http_client.dart';
 import 'Provider/booking_provider.dart';
 import 'Provider/login_provider.dart';
 import 'Provider/signup_provider.dart';
-import 'Screen/account.dart';
+import 'Screen/services.dart';
 import 'services/authservice.dart';
 
 void main() async {
@@ -32,16 +32,17 @@ class MyApp extends StatelessWidget {
               create: (context) => BookingNotifier())
         ],
         child: MaterialApp(
-            title: 'Flutter Demo',
-            themeMode: ThemeMode.system,
-            theme: ThemeData(
-              primarySwatch: Colors.purple,
-              appBarTheme: const AppBarTheme(color: kPrimaryColor),
-            ),
-            debugShowCheckedModeBanner: false,
-            // home: Booking(address: '',)),
-            // home:  const FeedbackScreen(userId: '6408722c78393a6fb6ab76fe',)
-            home: MyAccount(),
-            ));
+          title: 'Flutter Demo',
+          themeMode: ThemeMode.system,
+          theme: ThemeData(
+            primarySwatch: Colors.purple,
+            appBarTheme: const AppBarTheme(color: kPrimaryColor),
+          ),
+          debugShowCheckedModeBanner: false,
+          // home: Booking(address: '',)),
+          // home:  const FeedbackScreen(userId: '6408722c78393a6fb6ab76fe',)
+          // home:  RatingScreen(serviceId: '6421c4e17af5ab7923f3867e',),
+          home: HomePage(),
+        ));
   }
 }

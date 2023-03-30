@@ -29,7 +29,7 @@ class _SearchBoxState extends State<SearchBox> {
           ),
           enabledBorder: InputBorder.none,
           focusedBorder: InputBorder.none),
-      onSubmitted: (String keyword) {
+      onSubmitted: (String){
         Navigator.of(context).push(MaterialPageRoute(builder: (context) {
           return const SearchScreen();
         }));
