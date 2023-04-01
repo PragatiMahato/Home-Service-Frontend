@@ -1,15 +1,13 @@
-// ignore_for_file: non_constant_identifier_names
-
 class ServiceType {
   final String about;
-  final String? icon;
+  // final String icon;
   final String image_url;
   final String service_type;
   final List<SubType> subTypes;
 
   ServiceType(
       {required this.about,
-       this.icon,
+      // required this.icon,
       required this.image_url,
       required this.service_type,
       required this.subTypes});
@@ -20,7 +18,7 @@ class ServiceType {
       subTypesList.add(SubType.fromJson(subType));
     }
     return ServiceType(
-      icon: json['icons'],
+      // icon: json['icons'],
       image_url: json['image_url'],
       about: json['about'],
       service_type: json['service_type'],

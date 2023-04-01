@@ -12,7 +12,7 @@ class LoginProvider with ChangeNotifier {
 
   late final AuthService _authService;
 
-  ApiResponse<UserLoginModel> loginResponse = ApiResponse.loading();
+  ApiResponse<Usermodel> loginResponse = ApiResponse.loading();
 
   Future<void> login({
     required String email,

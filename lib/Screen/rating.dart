@@ -1,72 +1,98 @@
 // ignore_for_file: library_private_types_in_public_api
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:http/http.dart' as http;
 
-import '../Constant/colors.dart';
 import '../Network/api_const.dart';
 
-class RatingScreen extends StatelessWidget {
-  final String serviceId;
+class Rating extends StatefulWidget {
+  const Rating({super.key});
 
-  const RatingScreen({super.key, required this.serviceId});
+  @override
+  _RatingState createState() => _RatingState();
+}
 
-  final double _initialRating = 0.0;
+class _RatingState extends State<Rating> {
+  int _rating = 0;
+
+  Future<void> _submitRating() async {
+    const serviceId = '6419780b5db89c94d11ab232'; // Replace with your service ID
+    final url = Uri.parse('${ApiConst.baseUrl}services/$serviceId/ratings');
+
+    try {
+      final response = await http.post(
+        url,
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({'rating': _rating}),
+      );
+
+      if (response.statusCode == 201) {
+        // Rating successfully submitted
+        print('Rating submitted successfully');
+      } else {
+        // Rating submission failed
+        print('Failed to submit rating. Status code: ${response.statusCode}');
+      }
+    } catch (error) {
+      // An error occurred while submitting the rating
+      print('An error occurred while submitting the rating: $error');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 4),
-      child: Row(
-        // crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Rate our Service'),
+      ),
+      body: Column(
         children: [
-          RatingBar.builder(
-            initialRating: 1,
-            minRating: 1,
-            direction: Axis.horizontal,
-            allowHalfRating: true,
-            itemCount: 5,
-            itemBuilder: (context, _) => Transform.scale(
-              scale: 0.65,
-              child: const Icon(
-                Icons.star,
-                color: Colors.amber,
-              ),
+          const Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Text(
+              'Please rate our service:',
+              style: TextStyle(fontSize: 20.0),
             ),
-            onRatingUpdate: (rating) => debugPrint(rating.toString()),
           ),
-          const SizedBox(height: 16),
-          TextButton(
-            onPressed: () {
-              postRating(serviceId, _initialRating);
-            },
-            child: const Text(
-              ' Rate us',
-              style: TextStyle(color: kPrimaryColor),
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton(
+                iconSize: 48.0,
+                icon: const Icon(Icons.star_border),
+                onPressed: () => setState(() => _rating = 1),
+              ),
+              IconButton(
+                iconSize: 48.0,
+                icon: const Icon(Icons.star_border),
+                onPressed: () => setState(() => _rating = 2),
+              ),
+              IconButton(
+                iconSize: 48.0,
+                icon: const Icon(Icons.star_border),
+                onPressed: () => setState(() => _rating = 3),
+              ),
+              IconButton(
+                iconSize: 48.0,
+                icon: const Icon(Icons.star_border),
+                onPressed: () => setState(() => _rating = 4),
+              ),
+              IconButton(
+                iconSize: 48.0,
+                icon: const Icon(Icons.star_border),
+                onPressed: () => setState(() => _rating = 5),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16.0),
+          ElevatedButton(
+            onPressed: _submitRating,
+            child: const Text('Submit Rating'),
           ),
         ],
       ),
     );
-  }
-
-  Future<void> postRating(String serviceId, double rating) async {
-    final url = Uri.parse('${ApiConst.baseUrl}services/$serviceId/ratings');
-    try {
-      final response = await http.post(
-        url,
-        body: {'rating': rating.toString()},
-      );
-
-      if (response.statusCode == 201) {
-        print('Rating submitted successfully');
-      } else {
-        print('Failed to submit rating. Status code: ${response.statusCode}');
-      }
-    } catch (error) {
-      print('An error occurred while submitting the rating: $error');
-    }
   }
 }

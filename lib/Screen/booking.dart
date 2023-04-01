@@ -1,35 +1,41 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:fyp/Screen/services.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 import '../Constant/app_size.dart';
 import '../Constant/colors.dart';
 import '../Network/api_const.dart';
-import '../model/service_modal.dart';
+import '../Provider/booking_provider.dart';
+import '../model/booking_models.dart';
 import 'map.dart';
 import 'mybooking_history.dart';
-import 'rating.dart';
-import 'services.dart';
 
-class SubTypeDetailsPage extends StatefulWidget {
-  final SubType subType;
+// const List<String> list = <String>[
+//   'Esewa',
+//   'Khalti',
+// ];
+
+class Booking extends StatefulWidget {
+  const Booking({super.key, required this.address});
   final String address;
 
-  const SubTypeDetailsPage(
-      {Key? key, required this.subType, required this.address})
-      : super(key: key);
-
   @override
-  State<SubTypeDetailsPage> createState() => _SubTypeDetailsPageState();
+  State<Booking> createState() => _BookingState();
 }
 
-class _SubTypeDetailsPageState extends State<SubTypeDetailsPage> {
+class _BookingState extends State<Booking> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _totalPriceController = TextEditingController();
   final _datecontroller = TextEditingController();
   DateTime? _selectedDate;
 
-  late TextEditingController _locationController;
+
+late TextEditingController _locationController;
 
   @override
   void initState() {
@@ -41,8 +47,8 @@ class _SubTypeDetailsPageState extends State<SubTypeDetailsPage> {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime.now(),
-      lastDate: DateTime(2200),
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
     );
     if (picked != null && picked != _selectedDate) {
       setState(() {
@@ -79,55 +85,65 @@ class _SubTypeDetailsPageState extends State<SubTypeDetailsPage> {
     }
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.subType.name),
-      ),
+      backgroundColor: const Color.fromARGB(255, 192, 182, 246),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              margin: const EdgeInsets.only(top: 1),
-              height: 200,
-              width: double.infinity,
-              child: Image.network(
-                widget.subType.image,
-                height: 150,
-                fit: BoxFit.cover,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
+              padding: const EdgeInsets.only(top: 60),
+              height: AppSize.getScreenHeight(context) * 0.27,
+              child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Text(
-                    widget.subType.name,
-                    style: const TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  IconButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      icon: const Icon(Icons.arrow_back_ios_new)),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      const Text(
+                        "House Cleaning",
+                        style: TextStyle(
+                            fontSize: 22, fontWeight: FontWeight.w700),
+                      ),
+                      const Text("Rs.200/hr"),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      RatingBar.builder(
+                        initialRating: 2,
+                        minRating: 1,
+                        direction: Axis.horizontal,
+                        itemCount: 5,
+                        itemBuilder: (context, _) => Transform.scale(
+                          scale: 0.6,
+                          child: const Icon(
+                            Icons.star,
+                            color: Colors.amber,
+                          ),
+                        ),
+                        onRatingUpdate: (rating) =>
+                            debugPrint(rating.toString()),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 8),
-                  Text(
-                    widget.subType.description,
-                    style: const TextStyle(
-                      fontSize: 17,
-                      color: Colors.grey,
-                    ),
-                  ),
-                  const RatingScreen(serviceId: '6408722c78393a6fb6ab76fe'),
-                  const SizedBox(height: 13),
-                  Text(
-                    'Price : ${widget.subType.price_rate}',
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: kPrimaryColor,
-                    ),
+                  Image.asset(
+                    "assets/images/cleaning.png",
+                    height: 155,
+                    fit: BoxFit.cover,
                   ),
                 ],
               ),
@@ -208,7 +224,7 @@ class _SubTypeDetailsPageState extends State<SubTypeDetailsPage> {
                               top: 30, left: 30, right: 30),
                           padding: const EdgeInsets.only(bottom: 8),
                           child: const Text(
-                            "Location",
+                            "Receiver Name",
                             style: TextStyle(
                                 color: kPrimaryColor,
                                 fontSize: 19,
@@ -245,15 +261,15 @@ class _SubTypeDetailsPageState extends State<SubTypeDetailsPage> {
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text(
+                            children: const [
+                              Text(
                                 "Total Price",
                                 style: TextStyle(
                                     color: kPrimaryColor,
                                     fontSize: 19,
                                     fontWeight: FontWeight.w600),
                               ),
-                              Text(widget.subType.price_rate),
+                              Text("Rs.200"),
                             ],
                           )),
                       Container(
@@ -269,7 +285,7 @@ class _SubTypeDetailsPageState extends State<SubTypeDetailsPage> {
                           child: TextButton(
                               onPressed: () {},
                               child: const Text(
-                                "Make Payayment With Khalti",
+                                "Make Payayment",
                                 style: TextStyle(
                                     color: kPrimaryColor, fontSize: 18),
                               ))),
@@ -290,10 +306,20 @@ class _SubTypeDetailsPageState extends State<SubTypeDetailsPage> {
                                           Navigator.of(context).push(
                                               MaterialPageRoute(
                                                   builder: (context) {
-                                            return  MyBookingHistory();
+                                            return const MyBookingHistory();
                                           })));
                                     }
-                                
+                                    BookingDetails bookingDetails =
+                                        BookingDetails(
+                                      name: _nameController.text,
+                                      location: _locationController.text,
+                                      total_price: _totalPriceController.text,
+                                      id: DateTime.now().microsecondsSinceEpoch,
+                                      date: _datecontroller.text,
+                                    );
+                                    Provider.of<BookingNotifier>(context,
+                                            listen: false)
+                                        .addNote(bookingDetails);
                                   },
                                   child: const Text(
                                     "Confirm Booking",
@@ -326,6 +352,8 @@ class _SubTypeDetailsPageState extends State<SubTypeDetailsPage> {
           ],
         ),
       ),
+
+     
     );
   }
 }

@@ -39,50 +39,51 @@ class _SliderScreenState extends State<SliderScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      scrollDirection: Axis.horizontal,
-      itemCount: _posts.length,
-      itemBuilder: (context, index) {
-        final post = _posts[index];
-        return GestureDetector(
-          onTap: () {
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => SubTypesPage(post.subTypes, serviceType: post)),
-            // );
-          },
-          child: Container(
-            height: 30,
-            margin: const EdgeInsets.symmetric(horizontal: 15),
-            padding: const EdgeInsets.symmetric(
-              horizontal: 8,
+    return Scaffold(
+      backgroundColor: backgroundWhite,
+      body: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: _posts.length,
+        itemBuilder: (context, index) {
+          final post = _posts[index];
+          return GestureDetector(
+            onTap: () {
+              // Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+              //   return const ServiceType();
+              // }));
+            },
+            child: Container(
+              height: 50,
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(13),
+                  color: const Color.fromARGB(255, 232, 225, 255)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Image.network(
+                    post['image_url'],
+                    height: 35,
+                  ),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  Text(
+                    post['service_type'],
+                    style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                        color: kTextColor),
+                  ),
+                ],
+              ),
             ),
-            decoration: BoxDecoration(
-                border: Border.all(color: kPrimaryColor, width: 2.5),
-                borderRadius: BorderRadius.circular(13),
-                color: const Color.fromARGB(255, 255, 255, 255)),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Image.network(
-                  post['icon'],
-                  height: 40,
-                ),
-                const SizedBox(
-                  width: 15,
-                ),
-                Text(
-                  post['service_type'],
-                  style: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                      color: kTextColor),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }
+
+
+
