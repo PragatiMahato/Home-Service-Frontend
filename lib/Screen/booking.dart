@@ -1,41 +1,35 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:fyp/Screen/services.dart';
 import 'package:http/http.dart' as http;
-import 'package:provider/provider.dart';
 
 import '../Constant/app_size.dart';
 import '../Constant/colors.dart';
 import '../Network/api_const.dart';
-import '../Provider/booking_provider.dart';
-import '../model/booking_models.dart';
+import '../model/service_modal.dart';
 import 'map.dart';
 import 'mybooking_history.dart';
+import 'rating.dart';
+import 'services.dart';
 
-// const List<String> list = <String>[
-//   'Esewa',
-//   'Khalti',
-// ];
-
-class Booking extends StatefulWidget {
-  const Booking({super.key, required this.address});
+class SubTypeDetailsPage extends StatefulWidget {
+  final SubType subType;
   final String address;
 
+  const SubTypeDetailsPage(
+      {Key? key, required this.subType, required this.address})
+      : super(key: key);
+
   @override
-  State<Booking> createState() => _BookingState();
+  State<SubTypeDetailsPage> createState() => _SubTypeDetailsPageState();
 }
 
-class _BookingState extends State<Booking> {
+class _SubTypeDetailsPageState extends State<SubTypeDetailsPage> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _totalPriceController = TextEditingController();
   final _datecontroller = TextEditingController();
   DateTime? _selectedDate;
 
-
-late TextEditingController _locationController;
+  late TextEditingController _locationController;
 
   @override
   void initState() {
@@ -47,8 +41,8 @@ late TextEditingController _locationController;
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(1900),
-      lastDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2200),
     );
     if (picked != null && picked != _selectedDate) {
       setState(() {
@@ -85,65 +79,55 @@ late TextEditingController _locationController;
     }
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 192, 182, 246),
+      appBar: AppBar(
+        title: Text(widget.subType.name),
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              padding: const EdgeInsets.only(top: 60),
-              height: AppSize.getScreenHeight(context) * 0.27,
-              child: Row(
+              margin: const EdgeInsets.only(top: 1),
+              height: 200,
+              width: double.infinity,
+              child: Image.network(
+                widget.subType.image,
+                height: 150,
+                fit: BoxFit.cover,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  IconButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      icon: const Icon(Icons.arrow_back_ios_new)),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      const Text(
-                        "House Cleaning",
-                        style: TextStyle(
-                            fontSize: 22, fontWeight: FontWeight.w700),
-                      ),
-                      const Text("Rs.200/hr"),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      RatingBar.builder(
-                        initialRating: 2,
-                        minRating: 1,
-                        direction: Axis.horizontal,
-                        itemCount: 5,
-                        itemBuilder: (context, _) => Transform.scale(
-                          scale: 0.6,
-                          child: const Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                          ),
-                        ),
-                        onRatingUpdate: (rating) =>
-                            debugPrint(rating.toString()),
-                      ),
-                    ],
+                  Text(
+                    widget.subType.name,
+                    style: const TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                  Image.asset(
-                    "assets/images/cleaning.png",
-                    height: 155,
-                    fit: BoxFit.cover,
+                  const SizedBox(height: 8),
+                  Text(
+                    widget.subType.description,
+                    style: const TextStyle(
+                      fontSize: 17,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  const RatingScreen(serviceId: '6408722c78393a6fb6ab76fe'),
+                  const SizedBox(height: 13),
+                  Text(
+                    'Price : ${widget.subType.price_rate}',
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: kPrimaryColor,
+                    ),
                   ),
                 ],
               ),
@@ -224,7 +208,7 @@ late TextEditingController _locationController;
                               top: 30, left: 30, right: 30),
                           padding: const EdgeInsets.only(bottom: 8),
                           child: const Text(
-                            "Receiver Name",
+                            "Location",
                             style: TextStyle(
                                 color: kPrimaryColor,
                                 fontSize: 19,
@@ -261,15 +245,15 @@ late TextEditingController _locationController;
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
-                              Text(
+                            children: [
+                              const Text(
                                 "Total Price",
                                 style: TextStyle(
                                     color: kPrimaryColor,
                                     fontSize: 19,
                                     fontWeight: FontWeight.w600),
                               ),
-                              Text("Rs.200"),
+                              Text(widget.subType.price_rate),
                             ],
                           )),
                       Container(
@@ -285,7 +269,7 @@ late TextEditingController _locationController;
                           child: TextButton(
                               onPressed: () {},
                               child: const Text(
-                                "Make Payayment",
+                                "Make Payayment With Khalti",
                                 style: TextStyle(
                                     color: kPrimaryColor, fontSize: 18),
                               ))),
@@ -306,20 +290,10 @@ late TextEditingController _locationController;
                                           Navigator.of(context).push(
                                               MaterialPageRoute(
                                                   builder: (context) {
-                                            return const MyBookingHistory();
+                                            return  MyBookingHistory();
                                           })));
                                     }
-                                    BookingDetails bookingDetails =
-                                        BookingDetails(
-                                      name: _nameController.text,
-                                      location: _locationController.text,
-                                      total_price: _totalPriceController.text,
-                                      id: DateTime.now().microsecondsSinceEpoch,
-                                      date: _datecontroller.text,
-                                    );
-                                    Provider.of<BookingNotifier>(context,
-                                            listen: false)
-                                        .addNote(bookingDetails);
+                                
                                   },
                                   child: const Text(
                                     "Confirm Booking",
@@ -352,8 +326,6 @@ late TextEditingController _locationController;
           ],
         ),
       ),
-
-     
     );
   }
 }

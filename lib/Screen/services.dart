@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fyp/Constant/app_size.dart';
 import 'package:fyp/Constant/colors.dart';
 import 'package:fyp/Screen/navbar.dart';
+import 'package:fyp/Screen/slider.dart';
 
 import '../CustomWidget/category.dart';
 import '../CustomWidget/home_page_header.dart';
@@ -36,40 +37,12 @@ class HomePage extends StatelessWidget {
                     Category(
                       text: 'Our Services',
                       buttonText: 'More',
-                      press: () {},
+                      press: () {
+                        // Navigator.of(context).push(MaterialPageRoute(builder: (context){return SubTypesPage(subTypes, serviceType: serviceType)}))
+                      },
                     ),
                     const SizedBox(height: 20),
-                    SizedBox(
-                        height: 80,
-                        child: ListView(
-                          scrollDirection: Axis.horizontal,
-                          children: const [
-                            Category_card(
-                              categoryImg: "assets/images/paint.png",
-                              categoryText: "Painter",
-                            ),
-                            Category_card(
-                              categoryImg: "assets/images/garden.png",
-                              categoryText: "Gardener",
-                            ),
-                            Category_card(
-                              categoryImg: "assets/images/cooking.png",
-                              categoryText: "Cook",
-                            ),
-                            Category_card(
-                              categoryImg: "assets/images/plumber.png",
-                              categoryText: "Plumber",
-                            ),
-                            Category_card(
-                              categoryImg: "assets/images/repair.png",
-                              categoryText: "Repaier",
-                            ),
-                            Category_card(
-                              categoryImg: "assets/images/broom.png",
-                              categoryText: "Cleaner",
-                            )
-                          ],
-                        )),
+                    SizedBox(height: 66, child: SliderScreen()),
                     const SizedBox(height: 45),
                     Container(
                       padding: const EdgeInsets.only(left: 18),
@@ -98,52 +71,51 @@ class HomePage extends StatelessWidget {
   }
 }
 
-
 // ignore: camel_case_types
-class Category_card extends StatelessWidget {
-  const Category_card({
-    super.key,
-    required this.categoryImg,
-    required this.categoryText,
-  });
-  final String categoryImg;
-  final String categoryText;
+// class Category_card extends StatelessWidget {
+//   const Category_card({
+//     super.key,
+//     required this.categoryImg,
+//     required this.categoryText,
+//   });
+//   final String categoryImg;
+//   final String categoryText;
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 18),
-      child: GestureDetector(
-        onTap: () {
-          // Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-          //   return const HomePage();
-          // }));
-        },
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(13),
-              color: const Color.fromARGB(255, 232, 225, 255)),
-          child: Row(
-            children: [
-              Image.asset(
-                categoryImg,
-                height: 35,
-              ),
-              const SizedBox(
-                width: 15,
-              ),
-              Text(
-                categoryText,
-                style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
-                    color: kTextColor),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Padding(
+//       padding: const EdgeInsets.only(left: 18),
+//       child: GestureDetector(
+//         onTap: () {
+//           // Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+//           //   return const HomePage();
+//           // }));
+//         },
+//         child: Container(
+//           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
+//           decoration: BoxDecoration(
+//               borderRadius: BorderRadius.circular(13),
+//               color: const Color.fromARGB(255, 232, 225, 255)),
+//           child: Row(
+//             children: [
+//               Image.asset(
+//                 categoryImg,
+//                 height: 35,
+//               ),
+//               const SizedBox(
+//                 width: 15,
+//               ),
+//               Text(
+//                 categoryText,
+//                 style: const TextStyle(
+//                     fontSize: 15,
+//                     fontWeight: FontWeight.w600,
+//                     color: kTextColor),
+//               ),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }

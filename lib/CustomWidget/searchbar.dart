@@ -14,7 +14,7 @@ class SearchBox extends StatefulWidget {
 
 class _SearchBoxState extends State<SearchBox> {
   final _searchController = TextEditingController();
-  
+
   @override
   Widget build(BuildContext context) {
     return TextField(
@@ -29,9 +29,9 @@ class _SearchBoxState extends State<SearchBox> {
           ),
           enabledBorder: InputBorder.none,
           focusedBorder: InputBorder.none),
-      onSubmitted: (String keyword) {
+      onSubmitted: (String) {
         Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-          return const SearchScreen();
+          return const SearchPage();
         }));
       },
     );

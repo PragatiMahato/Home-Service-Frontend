@@ -3,6 +3,7 @@
 import 'package:fyp/Network/api_const.dart';
 
 import '../Network/http_client.dart';
+import '../model/service_modal.dart';
 import '../model/usermodel.dart';
 
 class AuthService {
@@ -12,7 +13,7 @@ class AuthService {
     _client = client;
   }
 
-  Future<Usermodel> login(
+  Future<UserLoginModel> login(
       {required String email, required String password}) async {
     final response = await _client.post(url: "${ApiConst.baseUrl}logIn", body: {
       'email': email,
@@ -20,7 +21,7 @@ class AuthService {
     });
     // print(response);
 
-    return Usermodel.fromJson((response as Map<String, dynamic>)['user']);
+    return UserLoginModel.fromJson((response as Map<String, dynamic>)['user']);
   }
 
   Future signUp(
@@ -33,7 +34,14 @@ class AuthService {
       'password': password,
       'name': name,
     });
+  }
 
-    // print("resposne is $response");
+  Future<List<ServiceType>> searchPosts({required String keyword}) async {
+    final response = await _client.get(
+        url: '${ApiConst.baseUrl}searchByType?keyword=$keyword');
+
+    return (response as List<dynamic>)
+        .map((e) => ServiceType.fromJson(e as Map<String, dynamic>))
+        .toList();
   }
 }

@@ -9,11 +9,23 @@ class HomeServiceHttpClient {
 
   Future get({required String url}) async {
     try {
-      return await http.get(
+      debugPrint("http called$url");
+      final response = await client.get(
         Uri.parse(url),
         headers: header(),
       );
-    } on Exception {
+
+      log("Status code ${response.statusCode}");
+
+      if (response.statusCode == 200) {
+        return jsonDecode(response.body);
+      }
+      if (response.statusCode == 409) {
+        throw Exception(jsonDecode(response.body)['message']);
+      }
+      throw Exception("error occured ${response.reasonPhrase}");
+    } on Exception catch (e) {
+      debugPrint("exception occured$e");
       rethrow;
     }
   }

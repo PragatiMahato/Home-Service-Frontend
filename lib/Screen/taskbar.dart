@@ -24,7 +24,7 @@ class _BottomNavBarState extends State<BottomNavBar>
   void initState() {
     super.initState();
     _tabController = TabController(
-      initialIndex: 1,
+      initialIndex: 0,
       length: 4,
       vsync: this,
     );
@@ -49,7 +49,7 @@ class _BottomNavBarState extends State<BottomNavBar>
           Icons.notifications,
           Icons.account_circle
         ],
-        tabSize: 50,
+        tabSize: 40,
         tabBarHeight: 55,
         textStyle: const TextStyle(
           fontSize: 14,
@@ -57,8 +57,8 @@ class _BottomNavBarState extends State<BottomNavBar>
           fontWeight: FontWeight.w500,
         ),
         tabIconColor: kPrimaryColor,
-        tabIconSize: 33.0,
-        tabIconSelectedSize: 30.0,
+        tabIconSize: 30.0,
+        tabIconSelectedSize: 27.0,
         tabSelectedColor: kPrimaryColor,
         tabIconSelectedColor: Colors.white,
         tabBarColor: const Color.fromARGB(255, 213, 213, 213),
@@ -77,8 +77,8 @@ class _BottomNavBarState extends State<BottomNavBar>
           const Center(
             child: HomePage(),
           ),
-          const Center(child: MyBookingHistory()),
-          const Center(child: HomePage()),
+           Center(child: MyBookingHistory()),
+           const Center(child: HomePage()),
           const Center(
             child: MyAccount(),
           ),
