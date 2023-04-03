@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api, unused_local_variable, avoid_print
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -6,7 +8,7 @@ import 'package:http/http.dart' as http;
 class VerifyOtpPage extends StatefulWidget {
   final String phone;
 
-  VerifyOtpPage({required this.phone});
+  const VerifyOtpPage({super.key, required this.phone});
 
   @override
   _VerifyOtpPageState createState() => _VerifyOtpPageState();
@@ -54,7 +56,7 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Verify OTP')),
+      appBar: AppBar(title: const Text('Verify OTP')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -63,9 +65,9 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
             TextField(
               controller: _otpController,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(labelText: 'OTP'),
+              decoration: const InputDecoration(labelText: 'OTP'),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed:(){
 _isLoading ? null : _verifyOtp;
@@ -76,10 +78,10 @@ _isLoading ? null : _verifyOtp;
               } ,
               child: Text(_isLoading ? 'Verifying...' : 'Verify'),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Text(
               _message,
-              style: TextStyle(color: Colors.red),
+              style: const TextStyle(color: Colors.red),
             ),
           ],
         ),

@@ -42,7 +42,7 @@ class HomePage extends StatelessWidget {
                       },
                     ),
                     const SizedBox(height: 20),
-                    SizedBox(height: 66, child: SliderScreen()),
+                    const SizedBox(height: 66, child: SliderScreen()),
                     const SizedBox(height: 45),
                     Container(
                       padding: const EdgeInsets.only(left: 18),

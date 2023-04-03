@@ -1,4 +1,7 @@
+// ignore_for_file: use_build_context_synchronously, avoid_print
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
 import '../Constant/app_size.dart';
@@ -164,7 +167,17 @@ class _SubTypeDetailsPageState extends State<SubTypeDetailsPage> {
                         ),
                         margin: const EdgeInsets.only(left: 30, right: 30),
                         padding: AppSize.globalSymetricpadding * 0.2,
-                        child: TextField(
+                        child: TextFormField(
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter your name';
+                            }
+                            if (!RegExp(r'^[a-zA-Z]+$').hasMatch(value)) {
+                              return 'Please enter a valid name';
+                            }
+                            return null;
+                          },
                           controller: _nameController,
                           decoration: const InputDecoration(
                             hintText: 'Type Name',
@@ -193,7 +206,18 @@ class _SubTypeDetailsPageState extends State<SubTypeDetailsPage> {
                         ),
                         margin: const EdgeInsets.only(left: 30, right: 30),
                         padding: AppSize.globalSymetricpadding * 0.2,
-                        child: TextField(
+                        child: TextFormField(
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          keyboardType: TextInputType.number,
+                          inputFormatters: <TextInputFormatter>[
+                            FilteringTextInputFormatter.digitsOnly
+                          ],
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Dtae must be in number';
+                            }
+                            return null;
+                          },
                           controller: _datecontroller,
                           onTap: () => _selectDate(context),
                           decoration: const InputDecoration(
@@ -223,17 +247,32 @@ class _SubTypeDetailsPageState extends State<SubTypeDetailsPage> {
                         ),
                         margin: const EdgeInsets.only(left: 30, right: 30),
                         padding: AppSize.globalSymetricpadding * 0.2,
-                        child: TextField(
+                        child: TextFormField(
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please set your location';
+                            }
+                            return null;
+                          },
                           controller: _locationController,
                           decoration: InputDecoration(
                               hintText: "Set you location",
                               border: InputBorder.none,
                               suffixIcon: IconButton(
                                   onPressed: () {
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(builder: (context) {
-                                      return const MapSample();
-                                    }));
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const MapSample()),
+                                    ).then((address) {
+                                      if (address != null) {
+                                        setState(() {
+                                          _locationController.text = address;
+                                        });
+                                      }
+                                    });
                                   },
                                   icon: const Icon(Icons.location_on))),
                         ),
@@ -284,16 +323,20 @@ class _SubTypeDetailsPageState extends State<SubTypeDetailsPage> {
                                   borderRadius: BorderRadius.circular(10)),
                               child: TextButton(
                                   onPressed: () {
-                                    if (_formKey.currentState?.validate() ==
-                                        true) {
+                                    if (_formKey.currentState!.validate()) {
                                       _submitForm().then((value) =>
                                           Navigator.of(context).push(
                                               MaterialPageRoute(
                                                   builder: (context) {
-                                            return  MyBookingHistory();
+                                            return MyBookingHistory(
+                                              subType: widget.subType,
+                                              priceRate:
+                                                  widget.subType.price_rate,
+                                            );
                                           })));
+                                    } else {
+                                      return;
                                     }
-                                
                                   },
                                   child: const Text(
                                     "Confirm Booking",

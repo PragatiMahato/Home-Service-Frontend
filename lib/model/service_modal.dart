@@ -1,10 +1,10 @@
 // ignore_for_file: non_constant_identifier_names
 
 class ServiceType {
-  final String about;
+  final String? about;
   final String? icon;
-  final String image_url;
-  final String service_type;
+  final String? image_url;
+  final String? service_type;
   final List<SubType> subTypes;
 
   ServiceType(

@@ -60,7 +60,7 @@ class _ServiceTypesScreenState extends State<ServiceTypesScreen> {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(5),
                                 child: Image.network(
-                                  getService.image_url,
+                                  getService.image_url.toString(),
                                   height: 70,
                                 ),
                               ),
@@ -73,7 +73,7 @@ class _ServiceTypesScreenState extends State<ServiceTypesScreen> {
                                     padding: const EdgeInsets.only(
                                         left: AppSize.s30),
                                     child: Text(
-                                      getService.service_type,
+                                      getService.service_type.toString(),
                                       style: const TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.w600),
@@ -83,7 +83,7 @@ class _ServiceTypesScreenState extends State<ServiceTypesScreen> {
                                     padding: const EdgeInsets.only(
                                         top: AppSize.s10, left: AppSize.s30),
                                     child: Text(
-                                      getService.about,
+                                      getService.about.toString(),
                                       style: const TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.w500,

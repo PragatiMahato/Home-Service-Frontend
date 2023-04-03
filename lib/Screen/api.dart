@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names, library_private_types_in_public_api
+// ignore_for_file: non_constant_identifier_names, library_private_types_in_public_api, avoid_print
 
 import 'dart:convert';
 
@@ -82,7 +82,7 @@ class _ServiceTypesPageState extends State<ServiceTypesPage> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(5),
                           child: Image.network(
-                            serviceTypes[index].image_url,
+                            serviceTypes[index].image_url.toString(),
                             height: 70,
                           ),
                         ),
@@ -94,7 +94,7 @@ class _ServiceTypesPageState extends State<ServiceTypesPage> {
                             Padding(
                               padding: const EdgeInsets.only(left: AppSize.s30),
                               child: Text(
-                                serviceTypes[index].service_type,
+                                serviceTypes[index].service_type.toString(),
                                 style: const TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.w600),
                               ),
@@ -103,7 +103,7 @@ class _ServiceTypesPageState extends State<ServiceTypesPage> {
                               padding: const EdgeInsets.only(
                                   top: AppSize.s10, left: AppSize.s30),
                               child: Text(
-                                serviceTypes[index].about,
+                                serviceTypes[index].about.toString(),
                                 style: const TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.w500,
@@ -135,13 +135,14 @@ class SubTypesPage extends StatelessWidget {
   final List<SubType> subTypes;
   final ServiceType serviceType;
 
-  const SubTypesPage(this.subTypes, {super.key, required this.serviceType});
+
+  const SubTypesPage(this.subTypes, {super.key, required this.serviceType, });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(serviceType.service_type),
+        title: Text(serviceType.service_type.toString()),
       ),
       body: ListView.separated(
         separatorBuilder: (BuildContext context, int index) {

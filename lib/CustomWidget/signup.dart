@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:fyp/Screen/login.dart';
 import 'package:provider/provider.dart';
@@ -30,6 +31,8 @@ class RegisterForm extends StatefulWidget {
 class _RegisterFormState extends State<RegisterForm> {
   final _formkey = GlobalKey<FormState>();
   bool passwordObsecured = true;
+  late String _email;
+  late String _password;
   late final TextEditingController _emailcontroller;
   late final TextEditingController _usernamecontroller;
   late final TextEditingController _passwordcontroller;
@@ -103,9 +106,19 @@ class _RegisterFormState extends State<RegisterForm> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
                           color: kPrimaryColor.withAlpha(35)),
-                      child: TextField(
+                      child: TextFormField(
                         controller: _usernamecontroller,
                         cursorColor: kPrimaryColor,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter your name';
+                          }
+                          if (!RegExp(r'^[a-zA-Z]+$').hasMatch(value)) {
+                            return 'Please enter a valid name';
+                          }
+                          return null;
+                        },
                         decoration: const InputDecoration(
                             hintText: "Full Name",
                             suffixIcon:
@@ -121,9 +134,22 @@ class _RegisterFormState extends State<RegisterForm> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
                           color: kPrimaryColor.withAlpha(35)),
-                      child: TextField(
+                      child: TextFormField(
                         controller: _emailcontroller,
                         cursorColor: kPrimaryColor,
+                        keyboardType: TextInputType.emailAddress,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter your email address';
+                          } else if (!EmailValidator.validate(value)) {
+                            return 'Please enter a valid email address';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) {
+                          _email = value!;
+                        },
                         decoration: const InputDecoration(
                             hintText: "Email",
                             suffixIcon: Icon(Icons.email, color: kPrimaryColor),
@@ -138,10 +164,22 @@ class _RegisterFormState extends State<RegisterForm> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
                           color: kPrimaryColor.withAlpha(35)),
-                      child: TextField(
+                      child: TextFormField(
                         obscureText: passwordObsecured,
                         controller: _passwordcontroller,
                         cursorColor: kPrimaryColor,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter a password';
+                          } else if (value.length < 6) {
+                            return 'Password must be at least 6 characters';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) {
+                          _password = value!;
+                        },
                         decoration: InputDecoration(
                             hintText: "Password",
                             suffixIcon: IconButton(
@@ -163,11 +201,15 @@ class _RegisterFormState extends State<RegisterForm> {
                     RoundedButton(
                       title: 'SIGN UP',
                       callback: () {
-                        context.read<SignUpProvider>().signUp(
-                              email: _emailcontroller.text,
-                              password: _passwordcontroller.text,
-                              name: _usernamecontroller.text,
-                            );
+                        if (_formkey.currentState!.validate()) {
+                          context.read<SignUpProvider>().signUp(
+                                email: _emailcontroller.text,
+                                password: _passwordcontroller.text,
+                                name: _usernamecontroller.text,
+                              );
+                        } else {
+                          return;
+                        }
                       },
                     ),
                     const SizedBox(height: 10),

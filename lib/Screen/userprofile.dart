@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously, unused_field
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -10,7 +12,7 @@ import 'map.dart';
 import 'profilepage.dart';
 
 class UserProfilePage extends StatefulWidget {
-  UserProfilePage({Key? key}) : super(key: key);
+  const UserProfilePage({Key? key}) : super(key: key);
 
   @override
   _UserProfilePageState createState() => _UserProfilePageState();
@@ -22,7 +24,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
   final _phoneController = TextEditingController();
   final _addressController = TextEditingController();
 
-  List<UserProfile> _userProfiles = [];
+  final List<UserProfile> _userProfiles = [];
 
   Future<void> _postUserProfile() async {
     if (_formKey.currentState!.validate()) {
@@ -125,7 +127,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                                     return const UserProfileScreen();
                                   })));
                             },
-                            child: Text("Add"))
+                            child: const Text("Add"))
                       ])))
         ]));
   }

@@ -1,11 +1,12 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
-import 'package:fyp/Constant/app_size.dart';
 import 'package:provider/provider.dart';
 
+import '../Constant/app_size.dart';
 import '../Network/api_response.dart';
 import '../Provider/searchprovider.dart';
+import 'api.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({
@@ -18,7 +19,6 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   final TextEditingController _searchController = TextEditingController();
-  List<dynamic> _searchResults = [];
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,17 @@ class _SearchPageState extends State<SearchPage> {
               itemBuilder: (context, index) {
                 final post = searchResults[index];
                 return GestureDetector(
-                  onDoubleTap: () {},
+                  onDoubleTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SubTypesPage(
+                          post.subTypes,
+                          serviceType: post,
+                        ),
+                      ),
+                    );
+                  },
                   child: Container(
                     margin: const EdgeInsets.symmetric(
                       horizontal: AppSize.s20,
@@ -52,7 +62,7 @@ class _SearchPageState extends State<SearchPage> {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(8),
                           child: Image.network(
-                            post.image_url,
+                            post.image_url.toString(),
                             height: 70,
                             width: 100,
                           ),
@@ -65,7 +75,7 @@ class _SearchPageState extends State<SearchPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                post.service_type,
+                                post.service_type.toString(),
                                 style: const TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.w600,
@@ -74,7 +84,7 @@ class _SearchPageState extends State<SearchPage> {
                               const SizedBox(
                                 height: 3,
                               ),
-                              Text(post.about),
+                              Text(post.about.toString()),
                             ],
                           ),
                         )

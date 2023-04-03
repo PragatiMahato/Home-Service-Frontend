@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:motion_tab_bar_v2/motion-tab-bar.dart';
 
 import '../Constant/colors.dart';
+import '../model/service_modal.dart';
 import 'account.dart';
 import 'mybooking_history.dart';
 import 'services.dart';
 
 class BottomNavBar extends StatefulWidget {
-  const BottomNavBar({Key? key, this.title}) : super(key: key);
+  const BottomNavBar({Key? key, this.title, required this.subType}) : super(key: key);
 
   final String? title;
+    final SubType subType;
 
   @override
   // ignore: library_private_types_in_public_api
@@ -77,7 +79,7 @@ class _BottomNavBarState extends State<BottomNavBar>
           const Center(
             child: HomePage(),
           ),
-           Center(child: MyBookingHistory()),
+            Center(child: MyBookingHistory(subType: widget.subType, priceRate: '',)),
            const Center(child: HomePage()),
           const Center(
             child: MyAccount(),

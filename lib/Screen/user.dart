@@ -68,8 +68,8 @@ class _UserscreenState extends State<Userscreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(user['name'].toString()),
-                    Text(user['email']),
-                    Text(user['password']),
+                    Text(user['email'].toString()),
+                    Text(user['password'].toString()),
                     Text(user['createdAt'].toString())
                   ],
                 ),

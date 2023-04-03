@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -5,11 +7,16 @@ import 'package:http/http.dart' as http;
 
 import '../Constant/app_size.dart';
 import '../Network/api_const.dart';
+import '../model/service_modal.dart';
 
 class MyBookingHistory extends StatefulWidget {
-  MyBookingHistory({
-    Key? key,
+  const MyBookingHistory(  {
+    Key? key, required this.subType, required this.priceRate, 
   }) : super(key: key);
+
+final SubType subType;
+  final String priceRate;
+  
 
   @override
   _MyBookingHistoryState createState() => _MyBookingHistoryState();
@@ -85,7 +92,7 @@ class _MyBookingHistoryState extends State<MyBookingHistory> {
                         ),
                         Text(history['location']),
                         Text(
-                          history['total_price'].toString(),
+                          widget.priceRate
                         ),
                       ]),
                 ),

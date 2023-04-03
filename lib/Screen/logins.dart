@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, library_private_types_in_public_api, unused_local_variable
 
 import 'dart:convert';
 
@@ -9,6 +9,8 @@ import '../Network/api_const.dart';
 import 'services.dart';
 
 class Logins extends StatefulWidget {
+  const Logins({super.key});
+
   @override
   _LoginsState createState() => _LoginsState();
 }
@@ -36,20 +38,20 @@ class _LoginsState extends State<Logins> {
       final userData = jsonDecode(response.body);
       // Navigate to the next screen and pass the user data
       Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-        return HomePage();
+        return const HomePage();
       }));
     } else if (response.statusCode == 401) {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text('Error'),
-          content: Text('Invalid email or password'),
+          title: const Text('Error'),
+          content: const Text('Invalid email or password'),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         ),
@@ -58,14 +60,14 @@ class _LoginsState extends State<Logins> {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text('Error'),
-          content: Text('An error occurred'),
+          title: const Text('Error'),
+          content: const Text('An error occurred'),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         ),
@@ -81,10 +83,10 @@ class _LoginsState extends State<Logins> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: const Text('Login'),
       ),
       body: _isLoading
-          ? Center(
+          ? const Center(
               child: CircularProgressIndicator(),
             )
           : SingleChildScrollView(
@@ -97,7 +99,7 @@ class _LoginsState extends State<Logins> {
                     children: [
                       TextFormField(
                         controller: _emailController,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: 'Email',
                         ),
                         validator: (value) {
@@ -107,10 +109,10 @@ class _LoginsState extends State<Logins> {
                           return null;
                         },
                       ),
-                      SizedBox(height: 16.0),
+                      const SizedBox(height: 16.0),
                       TextFormField(
                         controller: _passwordController,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: 'Password',
                         ),
                         obscureText: true,
@@ -121,14 +123,14 @@ class _LoginsState extends State<Logins> {
                           return null;
                         },
                       ),
-                      SizedBox(height: 16.0),
+                      const SizedBox(height: 16.0),
                       ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             _login();
                           }
                         },
-                        child: Text('Login'),
+                        child: const Text('Login'),
                       ),
                     ],
                   ),

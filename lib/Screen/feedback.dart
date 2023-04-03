@@ -76,7 +76,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 )),
             Container(
               height: 160,
-              color: Color.fromARGB(255, 235, 235, 235),
+              color: const Color.fromARGB(255, 235, 235, 235),
               margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 40),
               padding: const EdgeInsets.only(top: 10, left: 7, right: 7),
               child: Column(

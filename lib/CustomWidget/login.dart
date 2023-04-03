@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:fyp/Network/api_response.dart';
 import 'package:fyp/Provider/login_provider.dart';
@@ -34,6 +35,8 @@ class _LoginFormState extends State<LoginForm> {
 
   late final TextEditingController _emailController;
   late final TextEditingController _passwordController;
+  late String _email;
+  late String _password;
 
   bool hidePassword = true;
   bool isLoggedIn = false;
@@ -57,26 +60,6 @@ class _LoginFormState extends State<LoginForm> {
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) => const HomePage()),
           (_) => false);
-    }
-  }
-
-  String? validateEmail(String value) {
-    if (value.isEmpty) {
-      return "Email Required";
-    } else if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
-      return "Please Enter a Valid Email";
-    } else {
-      return null;
-    }
-  }
-
-  String? validatePassword(String value) {
-    if (value.isEmpty) {
-      return "Password Required";
-    } else if (value.length < 6) {
-      return "Invalid Email";
-    } else {
-      return null;
     }
   }
 
@@ -126,16 +109,22 @@ class _LoginFormState extends State<LoginForm> {
                     child: TextFormField(
                       controller: _emailController,
                       cursorColor: kPrimaryColor,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please enter your email address';
+                        } else if (!EmailValidator.validate(value)) {
+                          return 'Please enter a valid email address';
+                        }
+                        return null;
+                      },
+                      onSaved: (value) {
+                        _email = value!;
+                      },
                       decoration: const InputDecoration(
                           hintText: "Email",
                           suffixIcon: Icon(Icons.email, color: kPrimaryColor),
                           border: InputBorder.none),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Required email";
-                        }
-                        return null;
-                      },
                     ),
                   ),
                   Container(
@@ -146,10 +135,22 @@ class _LoginFormState extends State<LoginForm> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
                         color: kPrimaryColor.withAlpha(35)),
-                    child: TextField(
+                    child: TextFormField(
                       obscureText: passwordObsecured,
                       controller: _passwordController,
                       cursorColor: kPrimaryColor,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please enter a password';
+                        } else if (value.length < 6) {
+                          return 'Password must be at least 6 characters';
+                        }
+                        return null;
+                      },
+                      onSaved: (value) {
+                        _password = value!;
+                      },
                       decoration: InputDecoration(
                           hintText: "Password",
                           suffixIcon: IconButton(
@@ -184,16 +185,16 @@ class _LoginFormState extends State<LoginForm> {
                   const SizedBox(height: 15),
                   RoundedButton(
                     title: 'LOGIN',
-                    callback: () async{
-                      // if (_formkey.currentState!.validate()) {
-                      //   debugPrint("validated");
+                    callback: () async {
+                      if (_formkey.currentState!.validate()) {
                         Provider.of<LoginProvider>(context, listen: false)
                             .login(
                                 email: _emailController.text,
                                 password: _passwordController.text);
-                      // } else {
-                      //   debugPrint("Invalid");
-                      // }
+                      }
+                      else {
+                          return;
+                        }
                     },
                   ),
                   const SizedBox(
