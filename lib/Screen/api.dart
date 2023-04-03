@@ -128,15 +128,15 @@ class _ServiceTypesPageState extends State<ServiceTypesPage> {
   }
 }
 
-
-
-
 class SubTypesPage extends StatelessWidget {
   final List<SubType> subTypes;
   final ServiceType serviceType;
 
-
-  const SubTypesPage(this.subTypes, {super.key, required this.serviceType, });
+  const SubTypesPage(
+    this.subTypes, {
+    super.key,
+    required this.serviceType,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -160,7 +160,7 @@ class SubTypesPage extends StatelessWidget {
           return GestureDetector(
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return SubTypeDetailsPage(
+                return BookingPage(
                   subType: subTypes[index],
                   address: '',
                 );
@@ -238,6 +238,3 @@ class SubTypesPage extends StatelessWidget {
     );
   }
 }
-
-
-

@@ -13,19 +13,18 @@ import 'mybooking_history.dart';
 import 'rating.dart';
 import 'services.dart';
 
-class SubTypeDetailsPage extends StatefulWidget {
+class BookingPage extends StatefulWidget {
   final SubType subType;
   final String address;
 
-  const SubTypeDetailsPage(
-      {Key? key, required this.subType, required this.address})
+  const BookingPage({Key? key, required this.subType, required this.address})
       : super(key: key);
 
   @override
-  State<SubTypeDetailsPage> createState() => _SubTypeDetailsPageState();
+  State<BookingPage> createState() => _BookingPageState();
 }
 
-class _SubTypeDetailsPageState extends State<SubTypeDetailsPage> {
+class _BookingPageState extends State<BookingPage> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _totalPriceController = TextEditingController();
