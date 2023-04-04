@@ -18,6 +18,12 @@ class FeedbackScreen extends StatefulWidget {
 class _FeedbackScreenState extends State<FeedbackScreen> {
   final _messageController = TextEditingController();
 
+  @override
+  void dispose() {
+    _messageController.dispose();
+    super.dispose();
+  }
+
   void _submitFeedback() async {
     final response = await http.post(
       Uri.parse('${ApiConst.baseUrl}userFeedback/${widget.userId}/feedback'),
@@ -25,12 +31,8 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
     );
 
     if (response.statusCode == 201) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Feedback submitted successfully'),
-        ),
-      );
-      _messageController.clear();
+      print("ufzsgaef");
+      // _messageController.clear();
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -39,6 +41,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
       );
     }
   }
+
 
   @override
   Widget build(BuildContext context) {

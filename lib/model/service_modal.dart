@@ -9,8 +9,8 @@ class ServiceType {
 
   ServiceType(
       {required this.about,
-       this.icon,
-      required this.image_url,
+      this.icon,
+      this.image_url,
       required this.service_type,
       required this.subTypes});
 

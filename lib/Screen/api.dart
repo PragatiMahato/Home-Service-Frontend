@@ -12,7 +12,7 @@ import '../model/service_modal.dart';
 import 'booking.dart';
 
 class ServiceTypesPage extends StatefulWidget {
-  const ServiceTypesPage({super.key});
+  const ServiceTypesPage({Key? key});
 
   @override
   _ServiceTypesPageState createState() => _ServiceTypesPageState();
@@ -82,8 +82,11 @@ class _ServiceTypesPageState extends State<ServiceTypesPage> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(5),
                           child: Image.network(
-                            serviceTypes[index].image_url.toString(),
-                            height: 70,
+                            serviceTypes[index].image_url?.startsWith('http') == true
+                                ? serviceTypes[index].image_url!
+                                : 'http://192.168.101.4:3000'+ serviceTypes[index].image_url!,
+                            height: 120,
+                            fit: BoxFit.contain,
                           ),
                         ),
                       ),
@@ -127,6 +130,7 @@ class _ServiceTypesPageState extends State<ServiceTypesPage> {
     );
   }
 }
+
 
 class SubTypesPage extends StatelessWidget {
   final List<SubType> subTypes;
