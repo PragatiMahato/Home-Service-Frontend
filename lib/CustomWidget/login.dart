@@ -4,27 +4,29 @@ import 'dart:convert';
 
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:fyp/model/service_modal.dart';
 import 'package:http/http.dart' as http;
 
 import '../Constant/colors.dart';
 import '../Network/api_const.dart';
 import '../Screen/foget_pw.dart';
-import '../Screen/homepage.dart';
+import '../Screen/taskbar.dart';
 import 'button.dart';
 
 class LoginForm extends StatefulWidget {
-  const LoginForm({
+   LoginForm({
     Key? key,
     required this.isLogin,
     required this.animationDuration,
     required this.size,
-    required this.defaultLoginSize,
+    required this.defaultLoginSize, required SubType subType, 
   }) : super(key: key);
 
   final bool isLogin;
   final Duration animationDuration;
   final Size size;
   final double defaultLoginSize;
+  // final SubType subType;
 
   @override
   State<LoginForm> createState() => _LoginFormState();
@@ -32,52 +34,16 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   bool passwordObsecured = true;
-  // final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
-
-  // late final TextEditingController _emailController;
-  // late final TextEditingController _passwordController;
   late String _email;
   late String _password;
-
-  // bool hidePassword = true;
-  // bool isLoggedIn = false;
-
-  // late final LoginProvider loginProvider;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _emailController = TextEditingController();
-  //   _passwordController = TextEditingController();
-  //   loginProvider = context.read<LoginProvider>();
-  //   loginProvider.addListener(loginListner);
-  // }
-
-  // void loginListner() {
-  //   if (loginProvider.loginResponse.status == Status.error) {
-  //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-  //         content: Text(loginProvider.loginResponse.error.toString())));
-  //   } else if (loginProvider.loginResponse.status == Status.success) {
-  //     Navigator.of(context).pushAndRemoveUntil(
-  //         MaterialPageRoute(builder: (context) => const HomePage()),
-  //         (_) => false);
-  //   }
-  // }
-
-  // @override
-  // void dispose() {
-  //   _emailController.dispose();
-  //   _passwordController.dispose();
-  //   loginProvider.removeListener(loginListner);
-  //   super.dispose();
-  // }
-
-
 
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _isLoading = false;
+  final SubType subType =
+      SubType(image: '', name: '', description: '', price_rate: '');
+
 
   Future<void> _login() async {
     setState(() {
@@ -96,7 +62,9 @@ class _LoginFormState extends State<LoginForm> {
       final userData = jsonDecode(response.body);
       // Navigate to the next screen and pass the user data
       Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-        return const HomePage();
+        return  BottomNavBar(
+          subType: subType,
+        );
       }));
     } else if (response.statusCode == 401) {
       showDialog(
@@ -262,9 +230,9 @@ class _LoginFormState extends State<LoginForm> {
                       //     return;
                       //   }
 
-                        if (_formKey.currentState!.validate()) {
-                            _login();
-                          }
+                      if (_formKey.currentState!.validate()) {
+                        _login();
+                      }
                     },
                   ),
                   const SizedBox(

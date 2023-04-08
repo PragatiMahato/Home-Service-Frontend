@@ -1,8 +1,11 @@
 // ignore_for_file: deprecated_member_use
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Constant/app_size.dart';
 import '../Constant/colors.dart';
@@ -15,6 +18,35 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  String _nickname = '';
+  Future<void> _editNickname() async {
+    final result = await showDialog(
+      context: context,
+      builder: (context) {
+        final controller = TextEditingController(text: _nickname);
+        return AlertDialog(
+          title: const Text('Edit Nickname'),
+          content: TextField(controller: controller),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(controller.text);
+              },
+              child: const Text('Save'),
+            ),
+          ],
+        );
+      },
+    );
+    if (result != null) {
+      setState(() {
+        _nickname = result;
+      });
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('nickname', result);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,19 +66,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           const ProfileImage(),
           Column(
-            children: const [
+            children: [
               ProfileRow(
-                name: 'Name',
+                name: 'NickName$_nickname',
                 picon: Icon(Icons.person),
+                onpress: () {
+                  _editNickname();
+                },
               ),
-              ProfileRow(
-                name: 'Phone',
-                picon: Icon(Icons.call),
-              ),
-              ProfileRow(
-                name: 'Address',
-                picon: Icon(Icons.location_on),
-              )
+              // ProfileRow(
+              //   name: 'Phone',
+              //   picon: Icon(Icons.call),
+              // ),
+              // ProfileRow(
+              //   name: 'Address',
+              //   picon: Icon(Icons.location_on),
+              // )
             ],
           ),
         ],
@@ -55,18 +90,71 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 }
 
-class ProfileImage extends StatelessWidget {
+class ProfileImage extends StatefulWidget {
   const ProfileImage({
     super.key,
   });
 
   @override
+  State<ProfileImage> createState() => _ProfileImageState();
+}
+
+class _ProfileImageState extends State<ProfileImage> {
+  late String _imagePath = '';
+  String _nickname = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _loadPreferences();
+  }
+
+  Future<void> _loadPreferences() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _nickname = prefs.getString('nickname') ?? 'Guest';
+      _imagePath = prefs.getString('imagePath') ?? '';
+    });
+  }
+
+  Future<void> _editNickname() async {
+    final result = await showDialog(
+      context: context,
+      builder: (context) {
+        final controller = TextEditingController(text: _nickname);
+        return AlertDialog(
+          title: const Text('Edit Nickname'),
+          content: TextField(controller: controller),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(controller.text);
+              },
+              child: const Text('Save'),
+            ),
+          ],
+        );
+      },
+    );
+    if (result != null) {
+      setState(() {
+        _nickname = result;
+      });
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('nickname', result);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        const CircleAvatar(
+        CircleAvatar(
           radius: 60,
-          backgroundImage: AssetImage("assets/images/pp.png"),
+          backgroundImage: _imagePath.isNotEmpty
+              ? FileImage(File(_imagePath))
+              : const AssetImage('assets/images/pp.png')
+                  as ImageProvider<Object>,
         ),
         Positioned(
             bottom: 1,
@@ -97,8 +185,19 @@ class BottomSheet extends StatefulWidget {
 }
 
 class _BottomSheetState extends State<BottomSheet> {
-  late PickedFile imageFile;
-  final ImagePicker _picker = ImagePicker();
+  late String _imagePath = '';
+  Future<void> _selectImage() async {
+    final pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        _imagePath = pickedFile.path;
+      });
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('imagePath', pickedFile.path);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -119,7 +218,7 @@ class _BottomSheetState extends State<BottomSheet> {
             children: [
               TextButton.icon(
                   onPressed: () {
-                    takePhoto(ImageSource.camera);
+                    // takePhoto(ImageSource.camera);
                   },
                   icon: const Icon(Icons.camera),
                   label: const Text("Camera")),
@@ -128,22 +227,15 @@ class _BottomSheetState extends State<BottomSheet> {
               ),
               TextButton.icon(
                   onPressed: () {
-                    takePhoto(ImageSource.gallery);
+                    _selectImage();
                   },
-                  icon: const Icon(Icons.image),
-                  label: const Text("from Gallery"))
+                  icon: Icon(Icons.image),
+                  label: Text("Gallary")),
             ],
           ),
         )
       ]),
     );
-  }
-
-  void takePhoto(ImageSource source) async {
-    final pickedFile = await _picker.getImage(source: source);
-    setState(() {
-      imageFile = pickedFile!;
-    });
   }
 }
 
@@ -152,11 +244,11 @@ class ProfileRow extends StatelessWidget {
     super.key,
     required this.name,
     required this.picon,
-    this.onpress,
+    required this.onpress,
   });
   final String name;
   final Icon picon;
-  final Callback? onpress;
+  final Callback onpress;
 
   @override
   Widget build(BuildContext context) {

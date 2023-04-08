@@ -6,6 +6,7 @@ import '../Constant/colors.dart';
 import '../CustomWidget/button.dart';
 import '../CustomWidget/login.dart';
 import '../CustomWidget/signup.dart';
+import '../model/service_modal.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -19,6 +20,8 @@ class _LoginScreenState extends State<LoginScreen>
   bool isLogin = true;
   late Animation<double> containerSize;
   AnimationController? animationController;
+    final SubType subType =
+      SubType(image: '', name: '', description: '', price_rate: '');
   Duration animationDuration = const Duration(milliseconds: 270);
 
   @override
@@ -85,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen>
               isLogin: isLogin,
               animationDuration: animationDuration,
               size: size,
-              defaultLoginSize: defaultLoginSize),
+              defaultLoginSize: defaultLoginSize, subType: subType,),
 
           // // Register Container
           AnimatedBuilder(

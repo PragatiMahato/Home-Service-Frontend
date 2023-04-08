@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 import '../Constant/app_size.dart';
 import '../Constant/colors.dart';
+import '../Network/api_const.dart';
 import 'feedback.dart';
 import 'help_center.dart';
 import 'login.dart';
-import 'profile.dart';
 
 class MyAccount extends StatefulWidget {
   const MyAccount({super.key});
@@ -15,6 +16,22 @@ class MyAccount extends StatefulWidget {
 }
 
 class _MyAccountState extends State<MyAccount> {
+  // Function to call the logout API
+  Future<void> logout() async {
+    try {
+      final response = await http.post(Uri.parse('${ApiConst.baseUrl}/logout'));
+
+      if (response.statusCode == 200) {
+        print('Logout successful');
+      } else {
+        throw Exception('Failed to logout');
+      }
+    } catch (error) {
+      print('Error during logout: $error');
+      throw Exception('Failed to logout');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,10 +62,10 @@ class _MyAccountState extends State<MyAccount> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.of(context)
-                          .push(MaterialPageRoute(builder: (context) {
-                        return const ProfileScreen();
-                      }));
+                      // Navigator.of(context)
+                      //     .push(MaterialPageRoute(builder: (context) {
+                      //   return  UserProfile();
+                      // }));
                     },
                     child: Row(
                       children: const [
@@ -71,31 +88,31 @@ class _MyAccountState extends State<MyAccount> {
                   const SizedBox(
                     height: 20,
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context)
-                          .push(MaterialPageRoute(builder: (context) {
-                        return const ProfileScreen();
-                      }));
-                    },
-                    child: Row(
-                      children: const [
-                        Icon(
-                          Icons.map,
-                          size: 33,
-                          color: kPrimaryColor,
-                        ),
-                        SizedBox(
-                          width: 30,
-                        ),
-                        Text(
-                          "Address",
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w400),
-                        ),
-                      ],
-                    ),
-                  ),
+                  // GestureDetector(
+                  //   onTap: () {
+                  //     Navigator.of(context)
+                  //         .push(MaterialPageRoute(builder: (context) {
+                  //       return const UserProfile();
+                  //     }));
+                  //   },
+                  //   child: Row(
+                  //     children: const [
+                  //       Icon(
+                  //         Icons.map,
+                  //         size: 33,
+                  //         color: kPrimaryColor,
+                  //       ),
+                  //       SizedBox(
+                  //         width: 30,
+                  //       ),
+                  //       Text(
+                  //         "Address",
+                  //         style: TextStyle(
+                  //             fontSize: 18, fontWeight: FontWeight.w400),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                 ],
               ),
             ),
@@ -216,10 +233,7 @@ class _MyAccountState extends State<MyAccount> {
                                 TextButton(
                                   child: const Text('Logout'),
                                   onPressed: () {
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(builder: (context) {
-                                      return const LoginScreen();
-                                    }));
+                                    logout();
                                     // deleteUser(user['_id']);
                                   },
                                 ),

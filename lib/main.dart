@@ -7,7 +7,7 @@ import 'Provider/getservice_provider.dart';
 import 'Provider/login_provider.dart';
 import 'Provider/searchprovider.dart';
 import 'Provider/signup_provider.dart';
-import 'Screen/login.dart';
+import 'Screen/profilepage.dart';
 import 'model/service_modal.dart';
 import 'services/authservice.dart';
 import 'services/getservice.dart';
@@ -65,6 +65,6 @@ class MyApp extends StatelessWidget {
             // home: BottomNavBar(
             //   subType: subType,
             // )));
-            home: LoginScreen()));
+            home: UserProfile()));
   }
 }
