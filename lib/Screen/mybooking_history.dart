@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:fyp/Constant/colors.dart';
 import 'package:http/http.dart' as http;
 
 import '../Constant/app_size.dart';
@@ -10,13 +11,12 @@ import '../Network/api_const.dart';
 import '../model/service_modal.dart';
 
 class MyBookingHistory extends StatefulWidget {
-  const MyBookingHistory(  {
-    Key? key, required this.subType, required this.priceRate, 
+  const MyBookingHistory({
+    Key? key,
+    required this.subType,
   }) : super(key: key);
 
-final SubType subType;
-  final String priceRate;
-  
+  final SubType subType;
 
   @override
   _MyBookingHistoryState createState() => _MyBookingHistoryState();
@@ -27,8 +27,9 @@ class _MyBookingHistoryState extends State<MyBookingHistory> {
 
   Future<void> fetchData() async {
     final response =
-        await http.get(Uri.parse('${ApiConst.baseUrl}bookedServices'));
-
+        await http.get(Uri.parse('${ApiConst.baseUrl}getbookings'));
+    print(response.body);
+    print(response.statusCode);
     if (response.statusCode == 200) {
       setState(() {
         data = jsonDecode(response.body);
@@ -38,13 +39,13 @@ class _MyBookingHistoryState extends State<MyBookingHistory> {
     }
   }
 
-  Future<void> deleteUser(String name) async {
+  Future<void> deleteUser(String id) async {
     final response =
-        await http.delete(Uri.parse('${ApiConst.baseUrl}bookedServices/$name'));
+        await http.delete(Uri.parse('${ApiConst.baseUrl}deletebooking/$id'));
     if (response.statusCode == 200) {
-      // setState(() {
-      //   data.removeWhere((item) => item['name'] == name);
-      // });
+      setState(() {
+        data.removeWhere((user) => user['_id'] == id);
+      });
     } else {
       throw Exception('Failed to delete user');
     }
@@ -80,27 +81,72 @@ class _MyBookingHistoryState extends State<MyBookingHistory> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          history['name'],
+                          history['name'].toString(),
                           style: const TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600),
                         ),
                         const SizedBox(
-                          height: 10,
+                          height: 5,
+                        ),
+                        Text(
+                          widget.subType.name,
+                          style: const TextStyle(
+                              color: textColor,
+                              fontSize: 17,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        const SizedBox(
+                          height: 7,
                         ),
                         Text(
                           history['date'].toString(),
                         ),
-                        Text(history['location']),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Text(history['location'].toString()),
+                        const SizedBox(
+                          height: 5,
+                        ),
                         Text(
-                          widget.priceRate
+                          widget.subType.price_rate,
+                          style: const TextStyle(
+                            color: textColor,
+                            fontSize: 16,
+                          ),
                         ),
                       ]),
                 ),
-                TextButton(
-                  child: const Text('Delete'),
+                IconButton(
+                  icon: const Icon(Icons.delete),
                   onPressed: () {
-                    Navigator.of(context).pop();
-                    deleteUser(history['name']);
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text('Delete User'),
+                          content: const Text(
+                              'Are you sure you want to delete this user?'),
+                          actions: [
+                            TextButton(
+                              child: const Text('Cancel'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                            TextButton(
+                              child: const Text('Delete'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                                deleteUser(history['_id']);
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
                   },
                 ),
               ],

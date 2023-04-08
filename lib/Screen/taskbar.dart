@@ -4,14 +4,15 @@ import 'package:motion_tab_bar_v2/motion-tab-bar.dart';
 import '../Constant/colors.dart';
 import '../model/service_modal.dart';
 import 'account.dart';
+import 'homepage.dart';
 import 'mybooking_history.dart';
-import 'services.dart';
 
 class BottomNavBar extends StatefulWidget {
-  const BottomNavBar({Key? key, this.title, required this.subType}) : super(key: key);
+  const BottomNavBar({Key? key, this.title, required this.subType})
+      : super(key: key);
 
   final String? title;
-    final SubType subType;
+  final SubType subType;
 
   @override
   // ignore: library_private_types_in_public_api
@@ -21,10 +22,12 @@ class BottomNavBar extends StatefulWidget {
 class _BottomNavBarState extends State<BottomNavBar>
     with TickerProviderStateMixin {
   TabController? _tabController;
+  late final SubType subType;
 
   @override
   void initState() {
     super.initState();
+    subType = widget.subType;
     _tabController = TabController(
       initialIndex: 0,
       length: 4,
@@ -79,8 +82,10 @@ class _BottomNavBarState extends State<BottomNavBar>
           const Center(
             child: HomePage(),
           ),
-            Center(child: MyBookingHistory(subType: widget.subType, priceRate: '',)),
-           const Center(child: HomePage()),
+          Center(  child: MyBookingHistory(
+            subType: subType,)),
+          const Center(
+              child: HomePage()),
           const Center(
             child: MyAccount(),
           ),

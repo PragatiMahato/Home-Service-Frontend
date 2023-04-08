@@ -17,6 +17,7 @@ class FeedbackScreen extends StatefulWidget {
 
 class _FeedbackScreenState extends State<FeedbackScreen> {
   final _messageController = TextEditingController();
+  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -24,14 +25,14 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
     super.dispose();
   }
 
-  void _submitFeedback() async {
+  Future _submitFeedback() async {
     final response = await http.post(
       Uri.parse('${ApiConst.baseUrl}userFeedback/${widget.userId}/feedback'),
       body: {'feedback': _messageController.text},
     );
 
     if (response.statusCode == 201) {
-      print("ufzsgaef");
+      debugPrint("ufzsgaef");
       // _messageController.clear();
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -41,7 +42,6 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
       );
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -78,39 +78,50 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                   style: TextStyle(fontSize: 16),
                 )),
             Container(
-              height: 160,
+              height: 190,
               color: const Color.fromARGB(255, 235, 235, 235),
               margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 40),
               padding: const EdgeInsets.only(top: 10, left: 7, right: 7),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "Describe your exprience",
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: kPrimaryColor),
-                  ),
-                  const SizedBox(
-                    height: 74,
-                  ),
-                  TextField(
-                    controller: _messageController,
-                    maxLines: null,
-                    decoration: const InputDecoration(
-                      border: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: kPrimaryColor,
-                        ),
-                      ),
-                      hintText: 'Enter your text here',
-                      hintStyle: TextStyle(
-                          fontSize: 15, color: Color.fromARGB(255, 51, 51, 51)),
-                      contentPadding: EdgeInsets.only(bottom: 8.0),
+              child: Form(
+                key: _formkey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "Describe your exprience",
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: kPrimaryColor),
                     ),
-                  ),
-                ],
+                    const SizedBox(
+                      height: 63,
+                    ),
+                    TextFormField(
+                      controller: _messageController,
+                      maxLines: null,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please give your feedback';
+                        } else {
+                          return null;
+                        }
+                      },
+                      decoration: const InputDecoration(
+                        border: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: kPrimaryColor,
+                          ),
+                        ),
+                        hintText: 'Enter your text here',
+                        hintStyle: TextStyle(
+                            fontSize: 15,
+                            color: Color.fromARGB(255, 51, 51, 51)),
+                        contentPadding: EdgeInsets.only(bottom: 8.0),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             const SizedBox(
@@ -123,8 +134,11 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                   borderRadius: BorderRadius.circular(6), color: kPrimaryColor),
               child: TextButton(
                   onPressed: () {
-                    Navigator.pop(context);
-                    _submitFeedback();
+                    if (_formkey.currentState!.validate()) {
+                      _submitFeedback().then((value) => Navigator.pop(context));
+                    } else {
+                      return;
+                    }
                   },
                   child: const Text(
                     "Submit",

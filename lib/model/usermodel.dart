@@ -3,8 +3,7 @@ class Usermodel {
   String password;
   String? name;
 
-
-  Usermodel({required this.email, required this.password,  this.name});
+  Usermodel({required this.email, required this.password, this.name});
 
   factory Usermodel.fromJson(Map<String, dynamic> map) {
     return Usermodel(
@@ -16,11 +15,15 @@ class UserLoginModel {
   String email;
   String password;
 
-
-  UserLoginModel({required this.email, required this.password, });
+  UserLoginModel({
+    required this.email,
+    required this.password,
+  });
 
   factory UserLoginModel.fromJson(Map<String, dynamic> map) {
     return UserLoginModel(
-        email: map['email'], password: map['password'], );
+      email: map['email'],
+      password: map['password'],
+    );
   }
 }

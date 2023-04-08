@@ -15,7 +15,7 @@ class AuthService {
 
   Future<UserLoginModel> login(
       {required String email, required String password}) async {
-    final response = await _client.post(url: "${ApiConst.baseUrl}logIn", body: {
+    final response = await _client.post(url: "${ApiConst.baseUrl}login", body: {
       'email': email,
       'password': password,
     });
@@ -27,9 +27,10 @@ class AuthService {
   Future signUp(
       {required String email,
       required String password,
-      required String name}) async {
+      required String name
+      }) async {
     final response =
-        await _client.post(url: "${ApiConst.baseUrl}signUp", body: {
+        await _client.post(url: "${ApiConst.baseUrl}signup", body: {
       'email': email,
       'password': password,
       'name': name,

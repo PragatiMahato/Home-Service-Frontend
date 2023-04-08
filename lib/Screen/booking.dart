@@ -8,16 +8,17 @@ import '../Constant/app_size.dart';
 import '../Constant/colors.dart';
 import '../Network/api_const.dart';
 import '../model/service_modal.dart';
+import 'homepage.dart';
 import 'map.dart';
 import 'mybooking_history.dart';
 import 'rating.dart';
-import 'services.dart';
 
 class BookingPage extends StatefulWidget {
   final SubType subType;
   final String address;
+  final ServiceType serviceType;
 
-  const BookingPage({Key? key, required this.subType, required this.address})
+  const BookingPage({Key? key, required this.subType, required this.address, required this.serviceType})
       : super(key: key);
 
   @override
@@ -27,7 +28,6 @@ class BookingPage extends StatefulWidget {
 class _BookingPageState extends State<BookingPage> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
-  final _totalPriceController = TextEditingController();
   final _datecontroller = TextEditingController();
   DateTime? _selectedDate;
 
@@ -58,7 +58,6 @@ class _BookingPageState extends State<BookingPage> {
     const url = '${ApiConst.baseUrl}bookService';
     final response = await http.post(Uri.parse(url), body: {
       'name': _nameController.text,
-      'total_price': _totalPriceController.text,
       'date': _datecontroller.text,
       'location': _locationController.text,
     });
@@ -70,7 +69,7 @@ class _BookingPageState extends State<BookingPage> {
 
       // Clear form fields
       _nameController.clear();
-      _totalPriceController.clear();
+      // _totalPriceController.clear();
       _datecontroller.clear();
       _locationController.clear();
     } else {
@@ -121,7 +120,7 @@ class _BookingPageState extends State<BookingPage> {
                       color: Colors.grey,
                     ),
                   ),
-                  const RatingScreen(serviceId: '6408722c78393a6fb6ab76fe'),
+                  RatingScreen(serviceId: '6408722c78393a6fb6ab76fe'),
                   const SizedBox(height: 13),
                   Text(
                     'Price : ${widget.subType.price_rate}',
@@ -328,9 +327,9 @@ class _BookingPageState extends State<BookingPage> {
                                               MaterialPageRoute(
                                                   builder: (context) {
                                             return MyBookingHistory(
-                                              subType: widget.subType,
-                                              priceRate:
-                                                  widget.subType.price_rate,
+                                              subType: widget.subType, 
+                                              
+                                              // serviceType: widget.serviceType,
                                             );
                                           })));
                                     } else {

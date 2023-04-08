@@ -1,5 +1,3 @@
-// ignore_for_file: library_private_types_in_public_api, avoid_print
-
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:http/http.dart' as http;
@@ -10,16 +8,15 @@ import '../Network/api_const.dart';
 class RatingScreen extends StatelessWidget {
   final String serviceId;
 
-  const RatingScreen({super.key, required this.serviceId});
+   RatingScreen({Key? key, required this.serviceId}) : super(key: key);
 
-  final double _initialRating = 0.0;
+  double _rating = 0.0;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 4),
       child: Row(
-        // crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           RatingBar.builder(
@@ -28,22 +25,19 @@ class RatingScreen extends StatelessWidget {
             direction: Axis.horizontal,
             allowHalfRating: true,
             itemCount: 5,
-            itemBuilder: (context, _) => Transform.scale(
-              scale: 0.65,
-              child: const Icon(
-                Icons.star,
-                color: Colors.amber,
-              ),
+            itemBuilder: (context, _) => const Icon(
+              Icons.star,
+              color: Colors.amber,
             ),
-            onRatingUpdate: (rating) => debugPrint(rating.toString()),
+            onRatingUpdate: (rating) => _rating = rating,
           ),
-          const SizedBox(height: 16),
+          const SizedBox(width: 16),
           TextButton(
             onPressed: () {
-              postRating(serviceId, _initialRating);
+              postRating(serviceId, _rating);
             },
             child: const Text(
-              ' Rate us',
+              'Rate us',
               style: TextStyle(color: kPrimaryColor),
             ),
           ),

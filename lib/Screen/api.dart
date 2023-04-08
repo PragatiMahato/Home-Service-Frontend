@@ -22,7 +22,7 @@ class _ServiceTypesPageState extends State<ServiceTypesPage> {
   List<ServiceType> serviceTypes = [];
 
   Future<void> getServiceTypes() async {
-    var response = await http.get(Uri.parse('${ApiConst.baseUrl}posts'));
+    var response = await http.get(Uri.parse('${ApiConst.baseUrl}getposts'));
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);
       List<ServiceType> serviceTypesList = [];
@@ -45,17 +45,9 @@ class _ServiceTypesPageState extends State<ServiceTypesPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView.separated(
-        separatorBuilder: (BuildContext context, int index) {
-          return Divider(
-            height: 1,
-            thickness: 1,
-            color: Colors.grey[300],
-          );
-        },
-        itemCount: serviceTypes.length,
-        itemBuilder: (BuildContext context, int index) {
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (BuildContext context, int index) {
           return GestureDetector(
             onTap: () {
               Navigator.push(
@@ -82,10 +74,12 @@ class _ServiceTypesPageState extends State<ServiceTypesPage> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(5),
                           child: Image.network(
-                            serviceTypes[index].image_url?.startsWith('http') == true
+                            serviceTypes[index].image_url?.startsWith('http') ==
+                                    true
                                 ? serviceTypes[index].image_url!
-                                : 'http://192.168.101.4:3000'+ serviceTypes[index].image_url!,
-                            height: 120,
+                                : 'http://192.168.101.4:3000' +
+                                    serviceTypes[index].image_url!,
+                            height: 90,
                             fit: BoxFit.contain,
                           ),
                         ),
@@ -126,11 +120,11 @@ class _ServiceTypesPageState extends State<ServiceTypesPage> {
             ),
           );
         },
+        childCount: serviceTypes.length,
       ),
     );
   }
 }
-
 
 class SubTypesPage extends StatelessWidget {
   final List<SubType> subTypes;
@@ -166,7 +160,7 @@ class SubTypesPage extends StatelessWidget {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) {
                 return BookingPage(
                   subType: subTypes[index],
-                  address: '',
+                  address: '', serviceType: serviceType,
                 );
               }));
             },
@@ -242,3 +236,8 @@ class SubTypesPage extends StatelessWidget {
     );
   }
 }
+
+
+
+
+

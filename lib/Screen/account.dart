@@ -149,7 +149,9 @@ class _MyAccountState extends State<MyAccount> {
                     onTap: () {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (context) {
-                        return const FeedbackScreen(userId: '6408722c78393a6fb6ab76fe',);
+                        return const FeedbackScreen(
+                          userId: '6408722c78393a6fb6ab76fe',
+                        );
                       }));
                     },
                     child: Row(
@@ -189,16 +191,48 @@ class _MyAccountState extends State<MyAccount> {
                   }));
                 },
                 child: Row(
-                  children: const [
-                    Icon(
-                      Icons.logout,
-                      size: 32,
-                      color: kPrimaryColor,
+                  children: [
+                    IconButton(
+                      icon: const Icon(
+                        Icons.logout,
+                        color: kPrimaryColor,
+                        size: 30,
+                      ),
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: const Text('Logout '),
+                              content: const Text(
+                                  'Are you sure you want to logout?'),
+                              actions: [
+                                TextButton(
+                                  child: const Text('Cancel'),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                                TextButton(
+                                  child: const Text('Logout'),
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(builder: (context) {
+                                      return const LoginScreen();
+                                    }));
+                                    // deleteUser(user['_id']);
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 30,
                     ),
-                    Text(
+                    const Text(
                       "Logout",
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
