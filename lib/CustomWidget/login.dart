@@ -4,11 +4,11 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:fyp/Network/api_response.dart';
 import 'package:fyp/Provider/login_provider.dart';
-import 'package:fyp/Screen/homepage.dart';
 import 'package:fyp/model/service_modal.dart';
 import 'package:provider/provider.dart';
 
 import '../Constant/colors.dart';
+import '../Screen/taskbar.dart';
 import 'button.dart';
 
 class LoginForm extends StatefulWidget {
@@ -18,13 +18,14 @@ class LoginForm extends StatefulWidget {
     required this.animationDuration,
     required this.size,
     required this.defaultLoginSize,
-    required SubType subType,
+    required this.subType,
   }) : super(key: key);
 
   final bool isLogin;
   final Duration animationDuration;
   final Size size;
   final double defaultLoginSize;
+  final SubType subType;
 
   @override
   State<LoginForm> createState() => _LoginFormState();
@@ -38,6 +39,8 @@ class _LoginFormState extends State<LoginForm> {
   late final TextEditingController _passwordController;
   late String _email;
   late String _password;
+  final SubType subType =
+      SubType(image: '', name: '', description: '', price_rate: '', id: '');
 
   bool hidePassword = true;
   bool isLoggedIn = false;
@@ -50,6 +53,7 @@ class _LoginFormState extends State<LoginForm> {
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
     loginProvider = context.read<LoginProvider>();
+
     loginProvider.addListener(loginListner);
   }
 
@@ -59,7 +63,10 @@ class _LoginFormState extends State<LoginForm> {
           content: Text(loginProvider.loginResponse.error.toString())));
     } else if (loginProvider.loginResponse.status == Status.success) {
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => const HomePage()),
+          MaterialPageRoute(
+              builder: (context) => BottomNavBar(
+                    subType: subType,
+                  )),
           (_) => false);
     }
   }

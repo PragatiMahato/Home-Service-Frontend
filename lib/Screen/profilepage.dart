@@ -2,9 +2,14 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Constant/app_size.dart';
+import '../Constant/colors.dart';
+import '../Network/api_response.dart';
+import '../Provider/login_provider.dart';
+import 'map.dart';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({Key? key}) : super(key: key);
@@ -143,127 +148,156 @@ class _UserProfileState extends State<UserProfile> {
           },
         ),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            const SizedBox(
-              height: 30,
-            ),
-            SizedBox(height: 100,width: 100,
-              child: CircleAvatar(
-                radius: 50,
-                backgroundImage: _imagePath.isNotEmpty
-                    ? FileImage(File(_imagePath))
-                    : const AssetImage('assets/images/pp.png')
-                        as ImageProvider<Object>,
-              ),
-            ),
-            Positioned(
-                bottom: 1,
-                right: 1,
-                top: 85,
-                left: 80,
-                child: InkWell(
-                  onDoubleTap: _selectImage,
-                  child: const Icon(Icons.camera_alt),
-                )),
-            const SizedBox(height: 16),
-            Container(
-              margin: AppSize.globalSymetricmargin,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
+      body: Consumer<LoginProvider>(builder: (context, value, child) {
+        if (value.loginResponse.status == Status.success) {
+          final users = value.loginResponse.data!;
+
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 30,
+                ),
+                Stack(children: [
+                  Container(
+                    height: 100,
+                    width: 100,
+                    child: CircleAvatar(
+                      radius: 50,
+                      backgroundImage: _imagePath.isNotEmpty
+                          ? FileImage(File(_imagePath))
+                          : const AssetImage('assets/images/pp.png')
+                              as ImageProvider<Object>,
+                    ),
+                  ),
+                  Positioned(
+                      bottom: 1,
+                      right: 1,
+                      top: 85,
+                      left: 80,
+                      child: InkWell(
+                        onDoubleTap: _selectImage,
+                        child: const Icon(Icons.camera_alt),
+                      ))
+                ]),
+                Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Text(
+                    users.email,
+                    style: const TextStyle(
+                        fontSize: 15,
+                        color: kPrimaryColor,
+                        fontWeight: FontWeight.w500),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Container(
+                  margin: AppSize.globalSymetricmargin,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Icon(Icons.person),
-                      Column(
+                      Row(
                         children: [
-                          Padding(
-                            padding: AppSize.globalSymetricpadding,
-                            child: Text(
-                              _nickname,
-                              style: const TextStyle(fontSize: 18),
-                            ),
+                          const Icon(Icons.person),
+                          Column(
+                            children: [
+                              Padding(
+                                padding: AppSize.globalSymetricpadding,
+                                child: Text(
+                                  ' $_nickname',
+                                  style: const TextStyle(fontSize: 18),
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
+                      IconButton(
+                          onPressed: _editNickname,
+                          icon: const Icon(
+                            Icons.edit,
+                            color: Colors.black,
+                          ))
                     ],
                   ),
-                  IconButton(
-                      onPressed: _editNickname,
-                      icon: const Icon(
-                        Icons.edit,
-                        color: Colors.black,
-                      ))
-                ],
-              ),
-            ),
-            const Divider(),
-            Container(
-              margin: AppSize.globalSymetricmargin,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
+                ),
+                const Divider(),
+                Container(
+                  margin: AppSize.globalSymetricmargin,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Icon(Icons.call),
-                      Column(
+                      Row(
                         children: [
-                          Padding(
-                            padding: AppSize.globalSymetricpadding,
-                            child: Text(
-                              ' $_phone',
-                              style: const TextStyle(fontSize: 18),
-                            ),
+                          const Icon(Icons.call),
+                          Column(
+                            children: [
+                              Padding(
+                                padding: AppSize.globalSymetricpadding,
+                                child: Text(
+                                  ' $_phone',
+                                  style: const TextStyle(fontSize: 18),
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
+                      IconButton(
+                          onPressed: _editphone,
+                          icon: const Icon(
+                            Icons.edit,
+                            color: Colors.black,
+                          ))
                     ],
                   ),
-                  IconButton(
-                      onPressed: _editphone,
-                      icon: const Icon(
-                        Icons.edit,
-                        color: Colors.black,
-                      ))
-                ],
-              ),
-            ),
-            const Divider(),
-            Container(
-              margin: AppSize.globalSymetricmargin,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
+                ),
+                const Divider(),
+                Container(
+                  margin: AppSize.globalSymetricmargin,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Icon(Icons.location_on),
-                      Column(
+                      Row(
                         children: [
-                          Padding(
-                            padding: AppSize.globalSymetricpadding,
-                            child: Text(
-                              ' $_address',
-                              style: const TextStyle(fontSize: 18),
-                            ),
+                          IconButton(
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .push(MaterialPageRoute(builder: (context) {
+                                  return MapSample();
+                                }));
+                              },
+                              icon: const Icon(Icons.location_on)),
+                          Column(
+                            children: [
+                              Padding(
+                                padding: AppSize.globalSymetricpadding,
+                                child: Text(
+                                  ' $_address',
+                                  style: const TextStyle(fontSize: 18),
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
+                      IconButton(
+                          onPressed: _editAddress,
+                          icon: const Icon(
+                            Icons.edit,
+                            color: Colors.black,
+                          ))
                     ],
                   ),
-                  IconButton(
-                      onPressed: _editAddress,
-                      icon: const Icon(
-                        Icons.edit,
-                        color: Colors.black,
-                      ))
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
+                )
+              ],
+            ),
+          );
+        }
+
+        return const SizedBox();
+      }),
     );
   }
 }

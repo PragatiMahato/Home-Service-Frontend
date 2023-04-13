@@ -3,12 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:fyp/Constant/app_size.dart';
 import 'package:fyp/Constant/colors.dart';
+import 'package:fyp/Provider/login_provider.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 import '../Network/api_const.dart';
 
 class FeedbackScreen extends StatefulWidget {
-  const FeedbackScreen({super.key, required this.userId});
+  const FeedbackScreen({Key? key, required this.userId});
   final String userId;
 
   @override
@@ -25,20 +27,23 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
     super.dispose();
   }
 
-  Future _submitFeedback() async {
-    final response = await http.post(
-      Uri.parse('${ApiConst.baseUrl}userFeedback/${widget.userId}/feedback'),
-      body: {'feedback': _messageController.text},
-    );
+  Future<void> _submitFeedback() async {
+    const url = '${ApiConst.baseUrl}feedback';
+    final response = await http.post(Uri.parse(url), body: {
+      'userId': context.read<LoginProvider>().loginResponse.data!.id,
+      'feedback': _messageController.text,
+    });
 
-    if (response.statusCode == 201) {
-      debugPrint("ufzsgaef");
-      // _messageController.clear();
-    } else {
+    if (response.statusCode == 200) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Failed to submit feedback'),
-        ),
+        const SnackBar(content: Text('Feedback added successfully')),
+      );
+
+      _messageController.clear();
+    } else {
+      print(response.statusCode);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Error adding feedback')),
       );
     }
   }
@@ -47,7 +52,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(" Feedback"),
+        title: const Text("Feedback"),
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_back_ios,
@@ -74,7 +79,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
             Container(
                 margin: const EdgeInsets.only(right: AppSize.s30 * 5.2),
                 child: const Text(
-                  "How was you experience?",
+                  "How was your experience?",
                   style: TextStyle(fontSize: 16),
                 )),
             Container(
@@ -88,7 +93,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      "Describe your exprience",
+                      "Describe your experience",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
@@ -114,10 +119,17 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                           ),
                         ),
                         hintText: 'Enter your text here',
-                        hintStyle: TextStyle(
-                            fontSize: 15,
-                            color: Color.fromARGB(255, 51, 51, 51)),
-                        contentPadding: EdgeInsets.only(bottom: 8.0),
+                        hintStyle: TextStyle(fontSize: 16, color: Colors.grey),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.grey,
+                          ),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: kPrimaryColor,
+                          ),
+                        ),
                       ),
                     ),
                   ],
@@ -125,28 +137,27 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
               ),
             ),
             const SizedBox(
-              height: 40,
-            ),
-            Container(
               height: 50,
-              width: 340,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(6), color: kPrimaryColor),
-              child: TextButton(
-                  onPressed: () {
-                    if (_formkey.currentState!.validate()) {
-                      _submitFeedback().then((value) {
-                        return Navigator.pop(context);
-                      });
-                    } else {
-                      return;
-                    }
-                  },
-                  child: const Text(
-                    "Submit",
-                    style: TextStyle(fontSize: 18, color: backgroundWhite),
-                  )),
-            )
+            ),
+            ElevatedButton(
+              onPressed: () {
+                if (_formkey.currentState != null && _formkey.currentState!.validate()) {
+          _submitFeedback();
+        }
+              },
+              style: ElevatedButton.styleFrom(
+                primary: kPrimaryColor,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+              ),
+              child: const Text(
+                "Submit",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+              ),
+            ),
           ],
         ),
       ),

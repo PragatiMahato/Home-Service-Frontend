@@ -90,7 +90,7 @@ class _BookingPageState extends State<BookingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.subType.id),
+        title: Text(widget.subType.name),
       ),
       body: SingleChildScrollView(
         child: Column(

@@ -73,10 +73,22 @@ class _SliderScreenState extends State<SliderScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                Image.network(
-                    post.icon.toString(),
-                    height: 40,
-                  ),
+                  post.icon != null
+                      ? Image.network(
+                          post.icon.toString(),
+                          height: 40,
+                        )
+                      : Container(
+                          height: 40,
+                          width: 60,
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey, width: 1)),
+                          child: Center(child: Text("No Image")),
+                        ),
+                  // Image.network(
+                  //     post.icon.toString(),
+                  //     height: 40,
+                  //   ),
                   const SizedBox(
                     width: 15,
                   ),

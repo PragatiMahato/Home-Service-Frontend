@@ -1,3 +1,3 @@
 class ApiConst {
-  static const baseUrl = 'http://192.168.1.57:3000/';
+  static const baseUrl = 'http://192.168.101.3:3000/';
 }

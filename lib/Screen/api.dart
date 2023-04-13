@@ -77,7 +77,7 @@ class _ServiceTypesPageState extends State<ServiceTypesPage> {
                             serviceTypes[index].image_url?.startsWith('http') ==
                                     true
                                 ? serviceTypes[index].image_url!
-                                : 'http://192.168.1.57:3000' +
+                                : 'http://192.168.101.3:3000' +
                                     serviceTypes[index].image_url!,
                             height: 90,
                             fit: BoxFit.contain,

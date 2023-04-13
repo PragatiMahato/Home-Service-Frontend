@@ -45,7 +45,7 @@ class _MyBookingHistoryState extends State<MyBookingHistory> {
 
   Future<void> deleteUser(String id) async {
     final response =
-        await http.delete(Uri.parse('${ApiConst.baseUrl}deletebooking/$id'));
+        await http.delete(Uri.parse('${ApiConst.baseUrl}booking/$id'));
     if (response.statusCode == 200) {
       setState(() {
         data.removeWhere((user) => user['_id'] == id);
@@ -84,6 +84,16 @@ class _MyBookingHistoryState extends State<MyBookingHistory> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Text(
+                          history['user']['name'].toString(),
+                          style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              color: Color.fromARGB(255, 31, 31, 31)),
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
                         Text(
                           history['date'].toString(),
                         ),
