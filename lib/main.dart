@@ -7,7 +7,7 @@ import 'Provider/getservice_provider.dart';
 import 'Provider/login_provider.dart';
 import 'Provider/searchprovider.dart';
 import 'Provider/signup_provider.dart';
-import 'Screen/profilepage.dart';
+import 'Screen/taskbar.dart';
 import 'model/service_modal.dart';
 import 'services/authservice.dart';
 import 'services/getservice.dart';
@@ -17,7 +17,7 @@ void main() async {
   final AuthService authService = AuthService(client: httpClient);
   final GetService getService = GetService(client: httpClient);
   final SubType subType =
-      SubType(image: '', name: '', description: '', price_rate: '');
+      SubType(image: '', name: '', description: '', price_rate: '', id: '');
   Provider.debugCheckInvalidValueType = null;
   runApp(MyApp(
     authService: authService,
@@ -62,9 +62,9 @@ class MyApp extends StatelessWidget {
             //   userId: '6408722c78393a6fb6ab76fe',
             // )));
             // home:  RatingScreen(serviceId: '6421c4e17af5ab7923f3867e',),
-            // home: BottomNavBar(
-            //   subType: subType,
-            // )));
-            home: UserProfile()));
+            home: BottomNavBar(
+              subType: subType,
+            )));
+    // home: SplashScreen()));
   }
 }

@@ -6,6 +6,7 @@ import '../model/service_modal.dart';
 import 'account.dart';
 import 'homepage.dart';
 import 'mybooking_history.dart';
+import 'notification.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key, this.title, required this.subType})
@@ -66,7 +67,7 @@ class _BottomNavBarState extends State<BottomNavBar>
         tabIconSelectedSize: 27.0,
         tabSelectedColor: kPrimaryColor,
         tabIconSelectedColor: Colors.white,
-        tabBarColor: const Color.fromARGB(255, 213, 213, 213),
+        tabBarColor: const Color.fromARGB(255, 234, 234, 234),
         onTabItemSelected: (int value) {
           setState(() {
             _tabController!.index = value;
@@ -82,10 +83,11 @@ class _BottomNavBarState extends State<BottomNavBar>
           const Center(
             child: HomePage(),
           ),
-          Center(  child: MyBookingHistory(
-            subType: subType,)),
-          const Center(
-              child: HomePage()),
+          Center(
+              child: MyBookingHistory(
+            subType: subType,
+          )),
+          const Center(child: NotificationScreen()),
           const Center(
             child: MyAccount(),
           ),

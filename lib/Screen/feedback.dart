@@ -135,7 +135,9 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
               child: TextButton(
                   onPressed: () {
                     if (_formkey.currentState!.validate()) {
-                      _submitFeedback().then((value) => Navigator.pop(context));
+                      _submitFeedback().then((value) {
+                        return Navigator.pop(context);
+                      });
                     } else {
                       return;
                     }

@@ -1,32 +1,30 @@
-// ignore_for_file: use_build_context_synchronously, unused_field
-
-import 'dart:convert';
+// ignore_for_file: use_build_context_synchronously
 
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:fyp/Network/api_response.dart';
+import 'package:fyp/Provider/login_provider.dart';
+import 'package:fyp/Screen/homepage.dart';
 import 'package:fyp/model/service_modal.dart';
-import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 import '../Constant/colors.dart';
-import '../Network/api_const.dart';
-import '../Screen/foget_pw.dart';
-import '../Screen/taskbar.dart';
 import 'button.dart';
 
 class LoginForm extends StatefulWidget {
-   LoginForm({
+  const LoginForm({
     Key? key,
     required this.isLogin,
     required this.animationDuration,
     required this.size,
-    required this.defaultLoginSize, required SubType subType, 
+    required this.defaultLoginSize,
+    required SubType subType,
   }) : super(key: key);
 
   final bool isLogin;
   final Duration animationDuration;
   final Size size;
   final double defaultLoginSize;
-  // final SubType subType;
 
   @override
   State<LoginForm> createState() => _LoginFormState();
@@ -34,75 +32,44 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   bool passwordObsecured = true;
+  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+
+  late final TextEditingController _emailController;
+  late final TextEditingController _passwordController;
   late String _email;
   late String _password;
 
-  final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-  bool _isLoading = false;
-  final SubType subType =
-      SubType(image: '', name: '', description: '', price_rate: '');
+  bool hidePassword = true;
+  bool isLoggedIn = false;
 
+  late final LoginProvider loginProvider;
 
-  Future<void> _login() async {
-    setState(() {
-      _isLoading = true;
-    });
+  @override
+  void initState() {
+    super.initState();
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
+    loginProvider = context.read<LoginProvider>();
+    loginProvider.addListener(loginListner);
+  }
 
-    final response = await http.post(
-      Uri.parse('${ApiConst.baseUrl}login'),
-      body: {
-        'email': _emailController.text,
-        'password': _passwordController.text,
-      },
-    );
-
-    if (response.statusCode == 200) {
-      final userData = jsonDecode(response.body);
-      // Navigate to the next screen and pass the user data
-      Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-        return  BottomNavBar(
-          subType: subType,
-        );
-      }));
-    } else if (response.statusCode == 401) {
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('Error'),
-          content: const Text('Invalid email or password'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text('OK'),
-            ),
-          ],
-        ),
-      );
-    } else {
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('Error'),
-          content: const Text('An error occurred'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text('OK'),
-            ),
-          ],
-        ),
-      );
+  void loginListner() {
+    if (loginProvider.loginResponse.status == Status.error) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(loginProvider.loginResponse.error.toString())));
+    } else if (loginProvider.loginResponse.status == Status.success) {
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => const HomePage()),
+          (_) => false);
     }
+  }
 
-    setState(() {
-      _isLoading = false;
-    });
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    loginProvider.removeListener(loginListner);
+    super.dispose();
   }
 
   @override
@@ -118,7 +85,7 @@ class _LoginFormState extends State<LoginForm> {
           height: widget.defaultLoginSize,
           child: SingleChildScrollView(
             child: Form(
-              key: _formKey,
+              key: _formkey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -208,8 +175,8 @@ class _LoginFormState extends State<LoginForm> {
                     ),
                     child: TextButton(
                         onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => (const ChangePwScreen())));
+                          // Navigator.of(context).push(MaterialPageRoute(
+                          //     builder: (context) => (const ChangePwScreen())));
                         },
                         child: const Text(
                           "Forget Password?",
@@ -220,18 +187,13 @@ class _LoginFormState extends State<LoginForm> {
                   RoundedButton(
                     title: 'LOGIN',
                     callback: () async {
-                      // if (_formKey.currentState!.validate()) {
-                      //   Provider.of<LoginProvider>(context, listen: false)
-                      //       .login(
-                      //           email: _emailController.text,
-                      //           password: _passwordController.text);
-                      // }
-                      // else {
-                      //     return;
-                      //   }
-
-                      if (_formKey.currentState!.validate()) {
-                        _login();
+                      if (_formkey.currentState!.validate()) {
+                        Provider.of<LoginProvider>(context, listen: false)
+                            .login(
+                                email: _emailController.text,
+                                password: _passwordController.text);
+                      } else {
+                        return;
                       }
                     },
                   ),

@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 class Usermodel {
   String email;
   String password;
@@ -12,16 +14,20 @@ class Usermodel {
 }
 
 class UserLoginModel {
+  String id;
   String email;
   String password;
 
   UserLoginModel({
+    required this.id,
     required this.email,
     required this.password,
   });
 
   factory UserLoginModel.fromJson(Map<String, dynamic> map) {
+    print(map);
     return UserLoginModel(
+      id: map['_id'],
       email: map['email'],
       password: map['password'],
     );

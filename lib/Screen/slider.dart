@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:fyp/model/service_modal.dart';
 import 'package:http/http.dart' as http;
 
 import '../Constant/colors.dart';
@@ -17,25 +18,28 @@ class SliderScreen extends StatefulWidget {
 }
 
 class _SliderScreenState extends State<SliderScreen> {
-  List<dynamic> _posts = [];
+  List<ServiceType> serviceTypes = [];
+
+  Future<void> getServiceTypes() async {
+    var response = await http.get(Uri.parse('${ApiConst.baseUrl}getposts'));
+    if (response.statusCode == 200) {
+      var jsonData = jsonDecode(response.body);
+      List<ServiceType> serviceTypesList = [];
+      for (var serviceType in jsonData) {
+        serviceTypesList.add(ServiceType.fromJson(serviceType));
+      }
+      setState(() {
+        serviceTypes = serviceTypesList;
+      });
+    } else {
+      print('Request failed with status: ${response.statusCode}.');
+    }
+  }
 
   @override
   void initState() {
     super.initState();
-    fetchPosts();
-  }
-
-  Future<void> fetchPosts() async {
-    final response = await http.get(Uri.parse('${ApiConst.baseUrl}getposts'));
-
-    if (response.statusCode == 200) {
-      setState(() {
-        _posts = json.decode(response.body);
-        // log(_posts.toString());
-      });
-    } else {
-      throw Exception('Failed to fetch posts');
-    }
+    getServiceTypes();
   }
 
   @override
@@ -43,9 +47,10 @@ class _SliderScreenState extends State<SliderScreen> {
     return GestureDetector(
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: _posts.length,
+        itemCount: serviceTypes.length,
         itemBuilder: (context, index) {
-          final post = _posts[index];
+          final post = serviceTypes[index];
+          print(post.icon);
           return GestureDetector(
             onTap: () {
               Navigator.push(
@@ -68,15 +73,15 @@ class _SliderScreenState extends State<SliderScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Image.network(
-                    post['icon']!,
+                Image.network(
+                    post.icon.toString(),
                     height: 40,
                   ),
                   const SizedBox(
                     width: 15,
                   ),
                   Text(
-                    post['service_type'],
+                    post.service_type.toString(),
                     style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w600,

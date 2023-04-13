@@ -19,16 +19,15 @@ class AuthService {
       'email': email,
       'password': password,
     });
-    // print(response);
+    print(response);
 
-    return UserLoginModel.fromJson((response as Map<String, dynamic>)['user']);
+    return UserLoginModel.fromJson((response as Map<String, dynamic>));
   }
 
   Future signUp(
       {required String email,
       required String password,
-      required String name
-      }) async {
+      required String name}) async {
     final response =
         await _client.post(url: "${ApiConst.baseUrl}signup", body: {
       'email': email,

@@ -135,9 +135,9 @@ class _UserProfileState extends State<UserProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("User Profile"),
+        title: const Text("User Profile"),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
+          icon: const Icon(Icons.arrow_back_ios),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -150,121 +150,117 @@ class _UserProfileState extends State<UserProfile> {
             const SizedBox(
               height: 30,
             ),
-            Stack(children: [
-              Container(height: 100,width: 100,
-                child: CircleAvatar(
-                  radius: 50,
-                  backgroundImage: _imagePath.isNotEmpty
-                      ? FileImage(File(_imagePath))
-                      : const AssetImage('assets/images/pp.png')
-                          as ImageProvider<Object>,
-                ),
+            SizedBox(height: 100,width: 100,
+              child: CircleAvatar(
+                radius: 50,
+                backgroundImage: _imagePath.isNotEmpty
+                    ? FileImage(File(_imagePath))
+                    : const AssetImage('assets/images/pp.png')
+                        as ImageProvider<Object>,
               ),
-              Positioned(
+            ),
+            Positioned(
                 bottom: 1,
                 right: 1,
                 top: 85,
                 left: 80,
                 child: InkWell(
                   onDoubleTap: _selectImage,
-                  child:  Icon(Icons.camera_alt),
-                )
-              )
-            ]),
+                  child: const Icon(Icons.camera_alt),
+                )),
             const SizedBox(height: 16),
             Container(
-      margin: AppSize.globalSymetricmargin,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              Icon(Icons.person),
-              Column(
+              margin: AppSize.globalSymetricmargin,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-                    padding: AppSize.globalSymetricpadding,
-                    child: Text(
-                      'Nickname: $_nickname',
-                      style: const TextStyle(fontSize: 18),
-                    ),
+                  Row(
+                    children: [
+                      const Icon(Icons.person),
+                      Column(
+                        children: [
+                          Padding(
+                            padding: AppSize.globalSymetricpadding,
+                            child: Text(
+                              _nickname,
+                              style: const TextStyle(fontSize: 18),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
+                  IconButton(
+                      onPressed: _editNickname,
+                      icon: const Icon(
+                        Icons.edit,
+                        color: Colors.black,
+                      ))
                 ],
               ),
-            ],
-          ),
-          IconButton(
-              onPressed: _editNickname,
-              icon: const Icon(
-                Icons.edit,
-                color: Colors.black,
-              ))
-        ],
-      ),
-    ),
-    Divider(),
-     Container(
-      margin: AppSize.globalSymetricmargin,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              Icon(Icons.call),
-              Column(
+            ),
+            const Divider(),
+            Container(
+              margin: AppSize.globalSymetricmargin,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-                    padding: AppSize.globalSymetricpadding,
-                    child: Text(
-                      ' $_phone',
-                      style: const TextStyle(fontSize: 18),
-                    ),
+                  Row(
+                    children: [
+                      const Icon(Icons.call),
+                      Column(
+                        children: [
+                          Padding(
+                            padding: AppSize.globalSymetricpadding,
+                            child: Text(
+                              ' $_phone',
+                              style: const TextStyle(fontSize: 18),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
+                  IconButton(
+                      onPressed: _editphone,
+                      icon: const Icon(
+                        Icons.edit,
+                        color: Colors.black,
+                      ))
                 ],
               ),
-            ],
-          ),
-          IconButton(
-              onPressed: _editphone,
-              icon: const Icon(
-                Icons.edit,
-                color: Colors.black,
-              ))
-        ],
-      ),
-    ),
-    Divider(),
-     Container(
-      margin: AppSize.globalSymetricmargin,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              Icon(Icons.location_on),
-              Column(
+            ),
+            const Divider(),
+            Container(
+              margin: AppSize.globalSymetricmargin,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-                    padding: AppSize.globalSymetricpadding,
-                    child: Text(
-                      ' $_address',
-                      style: const TextStyle(fontSize: 18),
-                    ),
+                  Row(
+                    children: [
+                      const Icon(Icons.location_on),
+                      Column(
+                        children: [
+                          Padding(
+                            padding: AppSize.globalSymetricpadding,
+                            child: Text(
+                              ' $_address',
+                              style: const TextStyle(fontSize: 18),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
+                  IconButton(
+                      onPressed: _editAddress,
+                      icon: const Icon(
+                        Icons.edit,
+                        color: Colors.black,
+                      ))
                 ],
               ),
-            ],
-          ),
-          IconButton(
-              onPressed: _editAddress,
-              icon: const Icon(
-                Icons.edit,
-                color: Colors.black,
-              ))
-        ],
-      ),
-    )
-          
+            )
           ],
         ),
       ),

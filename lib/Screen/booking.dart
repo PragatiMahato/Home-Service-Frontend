@@ -2,7 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fyp/Provider/login_provider.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 import '../Constant/app_size.dart';
 import '../Constant/colors.dart';
@@ -18,8 +20,12 @@ class BookingPage extends StatefulWidget {
   final String address;
   final ServiceType serviceType;
 
-  const BookingPage({Key? key, required this.subType, required this.address, required this.serviceType})
-      : super(key: key);
+  const BookingPage({
+    Key? key,
+    required this.subType,
+    required this.address,
+    required this.serviceType,
+  }) : super(key: key);
 
   @override
   State<BookingPage> createState() => _BookingPageState();
@@ -55,11 +61,12 @@ class _BookingPageState extends State<BookingPage> {
   }
 
   Future<void> _submitForm() async {
-    const url = '${ApiConst.baseUrl}bookService';
+    const url = '${ApiConst.baseUrl}booking';
     final response = await http.post(Uri.parse(url), body: {
-      'name': _nameController.text,
+      'userId': context.read<LoginProvider>().loginResponse.data!.id,
       'date': _datecontroller.text,
       'location': _locationController.text,
+      'subtypeId': widget.subType.id,
     });
 
     if (response.statusCode == 200) {
@@ -67,7 +74,6 @@ class _BookingPageState extends State<BookingPage> {
         const SnackBar(content: Text('Booking successful')),
       );
 
-      // Clear form fields
       _nameController.clear();
       // _totalPriceController.clear();
       _datecontroller.clear();
@@ -84,7 +90,7 @@ class _BookingPageState extends State<BookingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.subType.name),
+        title: Text(widget.subType.id),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -95,7 +101,7 @@ class _BookingPageState extends State<BookingPage> {
               height: 200,
               width: double.infinity,
               child: Image.network(
-                widget.subType.image,
+                widget.subType.image.toString(),
                 height: 150,
                 fit: BoxFit.cover,
               ),
@@ -145,45 +151,6 @@ class _BookingPageState extends State<BookingPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                          margin: const EdgeInsets.only(
-                              top: 40, left: 30, right: 30),
-                          padding: const EdgeInsets.only(bottom: 8),
-                          child: const Text(
-                            "Receiver Name",
-                            style: TextStyle(
-                                color: kPrimaryColor,
-                                fontSize: 19,
-                                fontWeight: FontWeight.w600),
-                          )),
-                      Container(
-                        height: 54,
-                        decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 245, 243, 255),
-                          border: Border.all(color: Colors.transparent),
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        margin: const EdgeInsets.only(left: 30, right: 30),
-                        padding: AppSize.globalSymetricpadding * 0.2,
-                        child: TextFormField(
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please enter your name';
-                            }
-                            if (!RegExp(r'^[a-zA-Z]+$').hasMatch(value)) {
-                              return 'Please enter a valid name';
-                            }
-                            return null;
-                          },
-                          controller: _nameController,
-                          decoration: const InputDecoration(
-                            hintText: 'Type Name',
-                            border: InputBorder.none,
-                            // suffixIcon: Icon(Icons.calendar_month),
-                          ),
-                        ),
-                      ),
                       Container(
                           margin: const EdgeInsets.only(
                               top: 30, left: 30, right: 30),
@@ -327,8 +294,8 @@ class _BookingPageState extends State<BookingPage> {
                                               MaterialPageRoute(
                                                   builder: (context) {
                                             return MyBookingHistory(
-                                              subType: widget.subType, 
-                                              
+                                              subType: widget.subType,
+
                                               // serviceType: widget.serviceType,
                                             );
                                           })));

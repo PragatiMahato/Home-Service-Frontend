@@ -1,10 +1,11 @@
-// ignore_for_file: library_private_types_in_public_api
+// ignore_for_file: library_private_types_in_public_api, avoid_print
 
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:fyp/Constant/colors.dart';
+import 'package:fyp/Provider/login_provider.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 import '../Constant/app_size.dart';
 import '../Network/api_const.dart';
@@ -26,16 +27,19 @@ class _MyBookingHistoryState extends State<MyBookingHistory> {
   List<dynamic> data = [];
 
   Future<void> fetchData() async {
-    final response =
-        await http.get(Uri.parse('${ApiConst.baseUrl}getbookings'));
-    print(response.body);
-    print(response.statusCode);
-    if (response.statusCode == 200) {
-      setState(() {
-        data = jsonDecode(response.body);
-      });
-    } else {
-      throw Exception('Failed to load data');
+    try {
+      final userId = context.read<LoginProvider>().loginResponse.data!.id;
+      final response =
+          await http.get(Uri.parse('${ApiConst.baseUrl}booking/$userId'));
+      debugPrint(response.body);
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        setState(() {
+          data = jsonDecode(response.body)['bookings'];
+        });
+      }
+    } on Exception catch (e) {
+      print('error is: $e');
     }
   }
 
@@ -81,26 +85,6 @@ class _MyBookingHistoryState extends State<MyBookingHistory> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          history['name'].toString(),
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          widget.subType.name,
-                          style: const TextStyle(
-                              color: textColor,
-                              fontSize: 17,
-                              fontWeight: FontWeight.w500),
-                        ),
-                        const SizedBox(
-                          height: 7,
-                        ),
-                        Text(
                           history['date'].toString(),
                         ),
                         const SizedBox(
@@ -110,13 +94,13 @@ class _MyBookingHistoryState extends State<MyBookingHistory> {
                         const SizedBox(
                           height: 5,
                         ),
-                        Text(
-                          widget.subType.price_rate,
-                          style: const TextStyle(
-                            color: textColor,
-                            fontSize: 16,
-                          ),
-                        ),
+                        // Text(
+                        //   widget.subType.price_rate,
+                        //   style: const TextStyle(
+                        //     color: textColor,
+                        //     fontSize: 16,
+                        //   ),
+                        // ),
                       ]),
                 ),
                 IconButton(

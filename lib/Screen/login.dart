@@ -21,7 +21,7 @@ class _LoginScreenState extends State<LoginScreen>
   late Animation<double> containerSize;
   AnimationController? animationController;
     final SubType subType =
-      SubType(image: '', name: '', description: '', price_rate: '');
+      SubType(image: '', name: '', description: '', price_rate: '', id: '');
   Duration animationDuration = const Duration(milliseconds: 270);
 
   @override
@@ -88,7 +88,9 @@ class _LoginScreenState extends State<LoginScreen>
               isLogin: isLogin,
               animationDuration: animationDuration,
               size: size,
-              defaultLoginSize: defaultLoginSize, subType: subType,),
+              defaultLoginSize: defaultLoginSize, 
+              subType: subType,
+              ),
 
           // // Register Container
           AnimatedBuilder(

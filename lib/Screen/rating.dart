@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:http/http.dart' as http;
@@ -55,12 +57,12 @@ class RatingScreen extends StatelessWidget {
       );
 
       if (response.statusCode == 201) {
-        print('Rating submitted successfully');
+        debugPrint('Rating submitted successfully');
       } else {
-        print('Failed to submit rating. Status code: ${response.statusCode}');
+        debugPrint('Failed to submit rating. Status code: ${response.statusCode}');
       }
     } catch (error) {
-      print('An error occurred while submitting the rating: $error');
+      debugPrint('An error occurred while submitting the rating: $error');
     }
   }
 }

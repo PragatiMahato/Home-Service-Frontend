@@ -7,6 +7,7 @@ import '../Network/api_const.dart';
 import 'feedback.dart';
 import 'help_center.dart';
 import 'login.dart';
+import 'profilepage.dart';
 
 class MyAccount extends StatefulWidget {
   const MyAccount({super.key});
@@ -22,12 +23,12 @@ class _MyAccountState extends State<MyAccount> {
       final response = await http.post(Uri.parse('${ApiConst.baseUrl}/logout'));
 
       if (response.statusCode == 200) {
-        print('Logout successful');
+        debugPrint('Logout successful');
       } else {
         throw Exception('Failed to logout');
       }
     } catch (error) {
-      print('Error during logout: $error');
+      debugPrint('Error during logout: $error');
       throw Exception('Failed to logout');
     }
   }
@@ -62,10 +63,10 @@ class _MyAccountState extends State<MyAccount> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      // Navigator.of(context)
-                      //     .push(MaterialPageRoute(builder: (context) {
-                      //   return  UserProfile();
-                      // }));
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (context) {
+                        return const UserProfile();
+                      }));
                     },
                     child: Row(
                       children: const [

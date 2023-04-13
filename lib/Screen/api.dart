@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names, library_private_types_in_public_api, avoid_print
+// ignore_for_file: non_constant_identifier_names, library_private_types_in_public_api, avoid_print, use_key_in_widget_constructors
 
 import 'dart:convert';
 
@@ -77,7 +77,7 @@ class _ServiceTypesPageState extends State<ServiceTypesPage> {
                             serviceTypes[index].image_url?.startsWith('http') ==
                                     true
                                 ? serviceTypes[index].image_url!
-                                : 'http://192.168.101.4:3000' +
+                                : 'http://192.168.1.57:3000' +
                                     serviceTypes[index].image_url!,
                             height: 90,
                             fit: BoxFit.contain,
@@ -160,7 +160,8 @@ class SubTypesPage extends StatelessWidget {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) {
                 return BookingPage(
                   subType: subTypes[index],
-                  address: '', serviceType: serviceType,
+                  address: '',
+                  serviceType: serviceType,
                 );
               }));
             },
@@ -178,10 +179,19 @@ class SubTypesPage extends StatelessWidget {
                       SizedBox(
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(5),
-                          child: Image.network(
-                            subTypes[index].image,
-                            height: 70,
-                          ),
+                          child: subTypes[index].image != null
+                              ? Image.network(
+                                  subTypes[index].image.toString(),
+                                  height: 70,
+                                )
+                              : Container(
+                                  height: 70,
+                                  width: 100,
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.grey, width: 1)),
+                                  child: Center(child: Text("No Image")),
+                                ),
                         ),
                       ),
                       const SizedBox(
@@ -236,8 +246,3 @@ class SubTypesPage extends StatelessWidget {
     );
   }
 }
-
-
-
-
-

@@ -24,7 +24,7 @@ class ServiceType {
     }
     return ServiceType(
       id: json['_id'],
-      icon: json['icons'],
+      icon: json['icon'],
       image_url: json['image_url'],
       about: json['about'],
       service_type: json['service_type'],
@@ -33,16 +33,17 @@ class ServiceType {
   }
 }
 
-
 class SubType {
-  final String image;
-   final String name;
+  final String id;
+  final String? image;
+  final String name;
   final String description;
   // final double Rate;
   final String price_rate;
 
   SubType({
-    required this.image,
+    required this.id,
+    this.image,
     required this.name,
     required this.description,
     // required this.Rate,
@@ -51,6 +52,7 @@ class SubType {
 
   factory SubType.fromJson(Map<String, dynamic> json) {
     return SubType(
+     id: json['_id'],
       // Rate: json['Rate'],
       description: json['description'],
       price_rate: json['price_rate'],

@@ -99,7 +99,7 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
-          ServiceTypesPage()
+          const ServiceTypesPage()
         ],
       ),
     );
