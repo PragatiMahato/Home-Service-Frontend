@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:fyp/Constant/app_size.dart';
 import 'package:http/http.dart' as http;
 
-import '../Constant/colors.dart';
+import '../Constant/app_colors.dart';
 import '../Network/api_const.dart';
 import '../model/service_modal.dart';
 import 'booking.dart';
@@ -77,7 +77,7 @@ class _ServiceTypesPageState extends State<ServiceTypesPage> {
                             serviceTypes[index].image_url?.startsWith('http') ==
                                     true
                                 ? serviceTypes[index].image_url!
-                                : 'http://192.168.101.3:3000' +
+                                : 'http://192.168.101.5:3000' +
                                     serviceTypes[index].image_url!,
                             height: 90,
                             fit: BoxFit.contain,
@@ -190,7 +190,7 @@ class SubTypesPage extends StatelessWidget {
                                   decoration: BoxDecoration(
                                       border: Border.all(
                                           color: Colors.grey, width: 1)),
-                                  child: Center(child: Text("No Image")),
+                                  child: const Center(child: Text("No Image")),
                                 ),
                         ),
                       ),

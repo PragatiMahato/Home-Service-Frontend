@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../Constant/app_size.dart';
 import '../CustomWidget/button.dart';
-import 'login.dart';
+import 'loginscreen.dart';
 
 class LandingScreen extends StatelessWidget {
   static const routeName = "/landingScreen";

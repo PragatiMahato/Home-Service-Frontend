@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, unused_field
 
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
@@ -7,8 +7,8 @@ import 'package:fyp/Provider/login_provider.dart';
 import 'package:fyp/model/service_modal.dart';
 import 'package:provider/provider.dart';
 
-import '../Constant/colors.dart';
-import '../Screen/taskbar.dart';
+import '../Constant/app_colors.dart';
+import '../Screen/bottomnavbar.dart';
 import 'button.dart';
 
 class LoginForm extends StatefulWidget {
@@ -59,8 +59,8 @@ class _LoginFormState extends State<LoginForm> {
 
   void loginListner() {
     if (loginProvider.loginResponse.status == Status.error) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(loginProvider.loginResponse.error.toString())));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Invalid email or password. Try again")));
     } else if (loginProvider.loginResponse.status == Status.success) {
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
@@ -152,7 +152,7 @@ class _LoginFormState extends State<LoginForm> {
                         if (value!.isEmpty) {
                           return 'Please enter a password';
                         } else if (value.length < 6) {
-                          return 'Password must be at least 6 characters';
+                          return 'Password must be at least of 6 characters';
                         }
                         return null;
                       },

@@ -25,6 +25,7 @@ class MyBookingHistory extends StatefulWidget {
 
 class _MyBookingHistoryState extends State<MyBookingHistory> {
   List<dynamic> data = [];
+  SubType? subType;
 
   Future<void> fetchData() async {
     try {
@@ -58,6 +59,7 @@ class _MyBookingHistoryState extends State<MyBookingHistory> {
   @override
   void initState() {
     super.initState();
+    subType = widget.subType;
     fetchData();
   }
 
@@ -85,10 +87,17 @@ class _MyBookingHistoryState extends State<MyBookingHistory> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          history['user']['name'].toString(),
+                          history['user']['_id'].toString(),
                           style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w600,
+                              color: Color.fromARGB(255, 31, 31, 31)),
+                        ),
+                        Text(
+                          history['user']['name'].toString(),
+                          style: const TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w500,
                               color: Color.fromARGB(255, 31, 31, 31)),
                         ),
                         const SizedBox(
@@ -104,13 +113,6 @@ class _MyBookingHistoryState extends State<MyBookingHistory> {
                         const SizedBox(
                           height: 5,
                         ),
-                        // Text(
-                        //   widget.subType.price_rate,
-                        //   style: const TextStyle(
-                        //     color: textColor,
-                        //     fontSize: 16,
-                        //   ),
-                        // ),
                       ]),
                 ),
                 IconButton(

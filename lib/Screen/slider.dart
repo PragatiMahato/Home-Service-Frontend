@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:fyp/model/service_modal.dart';
 import 'package:http/http.dart' as http;
 
-import '../Constant/colors.dart';
+import '../Constant/app_colors.dart';
 import '../Network/api_const.dart';
 import 'api.dart';
 
@@ -32,7 +32,7 @@ class _SliderScreenState extends State<SliderScreen> {
         serviceTypes = serviceTypesList;
       });
     } else {
-      print('Request failed with status: ${response.statusCode}.');
+      debugPrint('Request failed with status: ${response.statusCode}.');
     }
   }
 
@@ -50,7 +50,7 @@ class _SliderScreenState extends State<SliderScreen> {
         itemCount: serviceTypes.length,
         itemBuilder: (context, index) {
           final post = serviceTypes[index];
-          print(post.icon);
+          debugPrint(post.icon);
           return GestureDetector(
             onTap: () {
               Navigator.push(
@@ -83,7 +83,7 @@ class _SliderScreenState extends State<SliderScreen> {
                           width: 60,
                           decoration: BoxDecoration(
                               border: Border.all(color: Colors.grey, width: 1)),
-                          child: Center(child: Text("No Image")),
+                          child: const Center(child: Text("No Image")),
                         ),
                   // Image.network(
                   //     post.icon.toString(),

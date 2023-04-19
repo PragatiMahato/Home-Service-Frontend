@@ -17,16 +17,18 @@ class UserLoginModel {
   String id;
   String email;
   String password;
+  String name;
 
-  UserLoginModel({
-    required this.id,
-    required this.email,
-    required this.password,
-  });
+  UserLoginModel(
+      {required this.id,
+      required this.email,
+      required this.password,
+      required this.name});
 
   factory UserLoginModel.fromJson(Map<String, dynamic> map) {
     print(map);
     return UserLoginModel(
+      name: map['name'],
       id: map['_id'],
       email: map['email'],
       password: map['password'],

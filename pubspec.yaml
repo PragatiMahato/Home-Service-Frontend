@@ -49,6 +49,7 @@ dependencies:
   http: ^0.13.5
   flutter_rating_bar: ^4.0.1
   khalti_flutter: ^2.2.1
+  mockito: ^5.4.0
 
   
 

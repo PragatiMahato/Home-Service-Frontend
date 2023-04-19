@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 
-import '../Constant/colors.dart';
-
+import '../Constant/app_colors.dart';
+import '../Screen/search.dart';
 
 class Category extends StatelessWidget {
   const Category({
     super.key,
-    required this.text, required this.press,   this.buttonText,
+    required this.text,
+    required this.press,
+    this.buttonText,
   });
   final String text;
   final Callback? press;
@@ -27,10 +29,18 @@ class Category extends StatelessWidget {
               color: textColor,
             ),
           ),
-          Container(height: 30,decoration: BoxDecoration(color: kPrimaryColor,borderRadius: BorderRadius.circular(13)),
+          Container(
+            height: 30,
+            decoration: BoxDecoration(
+                color: kPrimaryColor, borderRadius: BorderRadius.circular(13)),
             child: TextButton(
-                onPressed: press,
-                child:  Text(
+                onPressed: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) {
+                    return const SearchPage();
+                  }));
+                },
+                child: Text(
                   buttonText!,
                   style: const TextStyle(
                       color: backgroundWhite,

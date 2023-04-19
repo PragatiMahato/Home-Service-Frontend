@@ -2,10 +2,10 @@
 
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:fyp/Screen/login.dart';
+import 'package:fyp/Screen/loginscreen.dart';
 import 'package:provider/provider.dart';
 
-import '../Constant/colors.dart';
+import '../Constant/app_colors.dart';
 import '../Network/api_response.dart';
 import '../Provider/signup_provider.dart';
 import 'button.dart';
@@ -112,10 +112,20 @@ class _RegisterFormState extends State<RegisterForm> {
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Please enter your name';
+                            return 'Full name is required';
                           }
-                          if (!RegExp(r'^[a-zA-Z]+$').hasMatch(value)) {
-                            return 'Please enter a valid name';
+
+                          // Split the full name into first and last name
+                          List<String> nameParts = value.split(' ');
+                          if (nameParts.length < 2) {
+                            return 'Please enter both first and last name';
+                          }
+
+                          // Validate each part (first and last name)
+                          for (String namePart in nameParts) {
+                            if (!RegExp(r'^[a-zA-Z]+$').hasMatch(namePart)) {
+                              return 'Please enter a valid name';
+                            }
                           }
                           return null;
                         },

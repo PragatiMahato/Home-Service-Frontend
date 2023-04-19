@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import '../Constant/app_colors.dart';
 import '../Constant/app_size.dart';
-import '../Constant/colors.dart';
 import '../Network/api_const.dart';
 import 'feedback.dart';
 import 'help_center.dart';
-import 'login.dart';
+import 'loginscreen.dart';
 import 'profilepage.dart';
 
 class MyAccount extends StatefulWidget {
@@ -89,31 +89,6 @@ class _MyAccountState extends State<MyAccount> {
                   const SizedBox(
                     height: 20,
                   ),
-                  // GestureDetector(
-                  //   onTap: () {
-                  //     Navigator.of(context)
-                  //         .push(MaterialPageRoute(builder: (context) {
-                  //       return const UserProfile();
-                  //     }));
-                  //   },
-                  //   child: Row(
-                  //     children: const [
-                  //       Icon(
-                  //         Icons.map,
-                  //         size: 33,
-                  //         color: kPrimaryColor,
-                  //       ),
-                  //       SizedBox(
-                  //         width: 30,
-                  //       ),
-                  //       Text(
-                  //         "Address",
-                  //         style: TextStyle(
-                  //             fontSize: 18, fontWeight: FontWeight.w400),
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
                 ],
               ),
             ),
@@ -214,16 +189,16 @@ class _MyAccountState extends State<MyAccount> {
                       icon: const Icon(
                         Icons.logout,
                         color: kPrimaryColor,
-                        size: 30,
+                        size: 28,
                       ),
                       onPressed: () {
                         showDialog(
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
-                              title: const Text('Logout '),
+                              title: const Text('Logout'),
                               content: const Text(
-                                  'Are you sure you want to logout?'),
+                                  'Are you sure you want to Logout?'),
                               actions: [
                                 TextButton(
                                   child: const Text('Cancel'),
@@ -235,7 +210,6 @@ class _MyAccountState extends State<MyAccount> {
                                   child: const Text('Logout'),
                                   onPressed: () {
                                     logout();
-                                    // deleteUser(user['_id']);
                                   },
                                 ),
                               ],

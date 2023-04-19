@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -5,8 +7,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../Constant/app_colors.dart';
 import '../Constant/app_size.dart';
-import '../Constant/colors.dart';
 import '../Network/api_response.dart';
 import '../Provider/login_provider.dart';
 import 'map.dart';
@@ -160,7 +162,7 @@ class _UserProfileState extends State<UserProfile> {
                   height: 30,
                 ),
                 Stack(children: [
-                  Container(
+                  SizedBox(
                     height: 100,
                     width: 100,
                     child: CircleAvatar(
@@ -205,7 +207,7 @@ class _UserProfileState extends State<UserProfile> {
                               Padding(
                                 padding: AppSize.globalSymetricpadding,
                                 child: Text(
-                                  ' $_nickname',
+                                  users.name,
                                   style: const TextStyle(fontSize: 18),
                                 ),
                               ),
@@ -255,7 +257,7 @@ class _UserProfileState extends State<UserProfile> {
                 ),
                 const Divider(),
                 Container(
-                  margin: AppSize.globalSymetricmargin,
+                  margin: const EdgeInsets.only(left: 20),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -265,7 +267,7 @@ class _UserProfileState extends State<UserProfile> {
                               onPressed: () {
                                 Navigator.of(context)
                                     .push(MaterialPageRoute(builder: (context) {
-                                  return MapSample();
+                                  return const MapSample();
                                 }));
                               },
                               icon: const Icon(Icons.location_on)),

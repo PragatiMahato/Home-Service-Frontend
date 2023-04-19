@@ -1,16 +1,16 @@
-// ignore_for_file: implementation_imports, use_build_context_synchronously
+// ignore_for_file: implementation_imports, use_build_context_synchronously, avoid_print
 
 import 'package:flutter/material.dart';
 import 'package:fyp/Constant/app_size.dart';
-import 'package:fyp/Constant/colors.dart';
 import 'package:fyp/Provider/login_provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
+import '../Constant/app_colors.dart';
 import '../Network/api_const.dart';
 
 class FeedbackScreen extends StatefulWidget {
-  const FeedbackScreen({Key? key, required this.userId});
+  const FeedbackScreen({super.key, required this.userId});
   final String userId;
 
   @override
@@ -146,7 +146,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
         }
               },
               style: ElevatedButton.styleFrom(
-                primary: kPrimaryColor,
+                backgroundColor: kPrimaryColor,
                 padding:
                     const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                 shape: RoundedRectangleBorder(

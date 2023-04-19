@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../Constant/colors.dart';
+import '../Constant/app_colors.dart';
 import '../CustomWidget/button.dart';
 import '../CustomWidget/login.dart';
 import '../CustomWidget/signup.dart';
